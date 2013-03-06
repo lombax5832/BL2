@@ -137,7 +137,7 @@ public class ItemGun extends Item
 			
 			int dmgPerShot = dmg;
 			
-			if(dmgPerShot >= 4){
+			if(dmgPerShot >= 15){
 				damagePerShotColor = "\u00a76";
 	    	} else if(dmgPerShot >= 1){
 	    		damagePerShotColor = "\u00a72";
