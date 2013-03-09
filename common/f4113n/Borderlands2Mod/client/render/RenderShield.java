@@ -24,7 +24,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import f4113n.Borderlands2Mod.BL2Core;
+import f4113n.Borderlands2Mod.common.BL2Core;
 import f4113n.Borderlands2Mod.common.item.ItemArmorShield;
 
 

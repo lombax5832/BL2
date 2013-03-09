@@ -31,7 +31,7 @@ import f4113n.Borderlands2Mod.common.item.ItemGun;
 import f4113n.Borderlands2Mod.common.item.ItemTemp;
 import f4113n.Borderlands2Mod.common.proxy.BL2Proxy;
 
-@Mod(modid = "BL22", name = "Borderlands 2", version = "1.6 (1.4.6/7)")
+@Mod(modid = "BL2", name = "Borderlands 2", version = "1.5 (1.4.6/7)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, 
 clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandlerClient.class),
 serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
@@ -47,13 +47,12 @@ public class BL2Core implements ITickHandler
     
     public static int shieldrenderid = 0;
 
-    @SidedProxy(clientSide = "f4113n.Borderlands2Mod.client.proxy.BL2Client", serverSide= "f4113n.Borderlands2Mod.common.proxy.BL2Proxy")
+    @SidedProxy(clientSide = "BL2.client.proxy.BL2Client", serverSide= "BL2.common.proxy.BL2Proxy")
     public static BL2Proxy proxy;
-    @SidedProxy(clientSide = "f4113n.Borderlands2Mod.client.handler.NetworkHandlerClient", serverSide = "f4113n.Borderlands2Mod.common.handler.NetworkHandler")
+    @SidedProxy(clientSide = "BL2.client.handler.NetworkHandlerClient", serverSide = "BL2.common.handler.NetworkHandler")
     public static NetworkHandler nethandler;
     
     public static CreativeTabBL2 tabBL2 = new CreativeTabBL2("Borderlands 2");
-	public static int liquidColor = 0x000000;
     
     @Mod.PreInit
     public void preInt(FMLPreInitializationEvent event){
@@ -78,6 +77,7 @@ public class BL2Core implements ITickHandler
         grenade = new ItemGrenade(16004);
         temp = new ItemTemp(16005);
         LanguageRegistry.addName(guns, "Gun");
+        guns.setItemName("stuff");
         //registerHandlers();
         TickRegistry.registerTickHandler(this, Side.SERVER);
         proxy.registerRenderTickHandler();

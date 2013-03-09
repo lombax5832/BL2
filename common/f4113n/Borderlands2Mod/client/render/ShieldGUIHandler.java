@@ -30,12 +30,10 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-import cpw.mods.fml.relauncher.Side;
-import f4113n.Borderlands2Mod.BL2Core;
+import f4113n.Borderlands2Mod.common.BL2Core;
 import f4113n.Borderlands2Mod.common.Reference;
 import f4113n.Borderlands2Mod.common.item.ItemArmorShield;
 import f4113n.Borderlands2Mod.common.item.ItemArmorShield.ShieldAtributes;
-import f4113n.core.Platform;
 
 public class ShieldGUIHandler implements ITickHandler {
 
@@ -63,11 +61,11 @@ public class ShieldGUIHandler implements ITickHandler {
                 }
                 if (player.isDead == false){
 //		            if (player.getCurrentEquippedItem().itemID == BL2Core.guns.shiftedIndex || player.getCurrentEquippedItem().itemID == BL2Core.grenade.shiftedIndex){
-                	if(Platform.getSide() == Side.CLIENT)
-                	{
+
+                	
                 	    MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID, new RenderGunInHand());
                 	    MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID, new RenderGrenadeInHand());
-                	}
+                	
 //		            }
                 }
             }
