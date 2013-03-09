@@ -2,17 +2,27 @@ package BL2.common;
 
 import java.util.EnumSet;
 
+import buildcraft.core.DefaultProps;
+import buildcraft.energy.ItemBucketOil;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 import BL2.client.handler.NetworkHandlerClient;
+import BL2.common.block.BlockEridiumFlowing;
+import BL2.common.block.BlockEridiumStill;
 import BL2.common.entity.EntityBullet;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.handler.IItemTickListener;
 import BL2.common.handler.NetworkHandler;
 import BL2.common.item.ItemArmorShield;
 import BL2.common.item.ItemBandoiler;
+import BL2.common.item.ItemBucketEridium;
 import BL2.common.item.ItemBullets;
 import BL2.common.item.ItemGrenade;
 import BL2.common.item.ItemGun;
@@ -37,13 +47,18 @@ clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, pac
 serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
 public class BL2Core implements ITickHandler
 {
+	public static Block eridiumStill;
+	public static Block eridiumFlowing;
     public static Item guns;
     public static Item bullets;
     public static Item bandoiler;
     public static Item shield;
     public static Item grenade;
     public static Item temp;
+    public static Item bucketEridium;
     public static int gunsId;
+    
+    public static LiquidStack eridiumLiquid;
     
     public static int shieldrenderid = 0;
 
@@ -63,6 +78,7 @@ public class BL2Core implements ITickHandler
     public void init(FMLInitializationEvent event)
     {
     	proxy.registerKeyBinding();
+    	
     	proxy.registerRenderInformation();
     	
     	//LanguageRegistry.addName(new ItemStack(BuildCraftEnergy.engineBlock, 1, 3), "Eridium Engine");
@@ -76,12 +92,34 @@ public class BL2Core implements ITickHandler
         shield = new ItemArmorShield(16003, shieldrenderid, 1).setIconIndex(65);
         grenade = new ItemGrenade(16004);
         temp = new ItemTemp(16005);
+        eridiumStill = new BlockEridiumStill(2457);
+        eridiumFlowing = new BlockEridiumFlowing(2456);
+        
+        
+        GameRegistry.registerBlock(eridiumStill, "eridiumStill");
+        GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
+        
+        bucketEridium = new ItemBucketEridium(16006).setIconIndex(5*16).setItemName("bucketEridium").setContainerItem(Item.bucketEmpty);
+		LanguageRegistry.addName(bucketEridium, "Eridium Bucket");
+		
+        eridiumLiquid = LiquidDictionary.getOrCreateLiquid("Eridium", new LiquidStack(eridiumStill, 1));
+        
+		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
+				bucketEridium), new ItemStack(Item.bucketEmpty)));
+		
+        
+        
+//        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(liquidstack, new ItemStack(bucket, 1, iter), new ItemStack(Item.bucketEmpty)));
+//        LiquidDictionary.getOrCreateLiquid("liquidEridium", null);
+        
         LanguageRegistry.addName(guns, "Gun");
         guns.setItemName("stuff");
         //registerHandlers();
         TickRegistry.registerTickHandler(this, Side.SERVER);
         proxy.registerRenderTickHandler();
 //        MinecraftForge.EVENT_BUS.register(new RenderShield());
+        
+        proxy.initRenderingAndTextures();
         
         GameRegistry.addRecipe(new ItemStack(temp), new Object[]
         		{
