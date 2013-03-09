@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.render;
+package BL2.client.render;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
@@ -7,8 +7,8 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import f4113n.Borderlands2Mod.client.model.ModelGrenadeHeld;
-import f4113n.Borderlands2Mod.client.model.ModelGrenadeInv;
+import BL2.client.model.ModelGrenadeHeld;
+import BL2.client.model.ModelGrenadeInv;
 
 
 public class RenderGrenadeInHand implements IItemRenderer {

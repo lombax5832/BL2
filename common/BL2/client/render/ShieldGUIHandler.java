@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.render;
+package BL2.client.render;
 
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_FLAT;
@@ -27,13 +27,13 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.opengl.GL11;
 
+import BL2.common.BL2Core;
+import BL2.common.Reference;
+import BL2.common.item.ItemArmorShield;
+import BL2.common.item.ItemArmorShield.ShieldAtributes;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
-import f4113n.Borderlands2Mod.common.BL2Core;
-import f4113n.Borderlands2Mod.common.Reference;
-import f4113n.Borderlands2Mod.common.item.ItemArmorShield;
-import f4113n.Borderlands2Mod.common.item.ItemArmorShield.ShieldAtributes;
 
 public class ShieldGUIHandler implements ITickHandler {
 

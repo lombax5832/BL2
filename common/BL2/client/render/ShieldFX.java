@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.render;
+package BL2.client.render;
 
 import java.awt.Color;
 
@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import f4113n.Borderlands2Mod.common.item.ItemArmorShield.Vector;
+import BL2.common.item.ItemArmorShield.Vector;
 
 public class ShieldFX extends EntityFX
 {

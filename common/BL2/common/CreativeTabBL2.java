@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common;
+package BL2.common;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StringTranslate;

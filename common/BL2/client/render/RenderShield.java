@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.render;
+package BL2.client.render;
 
 import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
 import static org.lwjgl.opengl.GL11.GL_FLAT;
@@ -22,10 +22,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.ForgeSubscribe;
+import BL2.common.BL2Core;
+import BL2.common.item.ItemArmorShield;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import f4113n.Borderlands2Mod.common.BL2Core;
-import f4113n.Borderlands2Mod.common.item.ItemArmorShield;
 
 
 

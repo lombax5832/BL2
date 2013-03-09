@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common;
+package BL2.common;
 
 import java.util.EnumSet;
 
@@ -6,6 +6,18 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import BL2.client.handler.NetworkHandlerClient;
+import BL2.common.entity.EntityBullet;
+import BL2.common.entity.EntityGrenade;
+import BL2.common.handler.IItemTickListener;
+import BL2.common.handler.NetworkHandler;
+import BL2.common.item.ItemArmorShield;
+import BL2.common.item.ItemBandoiler;
+import BL2.common.item.ItemBullets;
+import BL2.common.item.ItemGrenade;
+import BL2.common.item.ItemGun;
+import BL2.common.item.ItemTemp;
+import BL2.common.proxy.BL2Proxy;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -18,18 +30,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import f4113n.Borderlands2Mod.client.handler.NetworkHandlerClient;
-import f4113n.Borderlands2Mod.common.entity.EntityBullet;
-import f4113n.Borderlands2Mod.common.entity.EntityGrenade;
-import f4113n.Borderlands2Mod.common.handler.IItemTickListener;
-import f4113n.Borderlands2Mod.common.handler.NetworkHandler;
-import f4113n.Borderlands2Mod.common.item.ItemArmorShield;
-import f4113n.Borderlands2Mod.common.item.ItemBandoiler;
-import f4113n.Borderlands2Mod.common.item.ItemBullets;
-import f4113n.Borderlands2Mod.common.item.ItemGrenade;
-import f4113n.Borderlands2Mod.common.item.ItemGun;
-import f4113n.Borderlands2Mod.common.item.ItemTemp;
-import f4113n.Borderlands2Mod.common.proxy.BL2Proxy;
 
 @Mod(modid = "BL2", name = "Borderlands 2", version = "1.5 (1.4.6/7)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, 

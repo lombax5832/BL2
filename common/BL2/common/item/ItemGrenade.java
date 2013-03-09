@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.item;
+package BL2.common.item;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import f4113n.Borderlands2Mod.common.BL2Core;
-import f4113n.Borderlands2Mod.common.entity.EntityGrenade;
+import BL2.common.BL2Core;
+import BL2.common.entity.EntityGrenade;
 
 public class ItemGrenade extends Item
 {

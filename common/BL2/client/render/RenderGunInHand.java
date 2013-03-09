@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.render;
+package BL2.client.render;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
@@ -7,14 +7,14 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import f4113n.Borderlands2Mod.client.model.ModelAssaultRifle;
-import f4113n.Borderlands2Mod.client.model.ModelAssaultRifleInv;
-import f4113n.Borderlands2Mod.client.model.ModelPistol;
-import f4113n.Borderlands2Mod.client.model.ModelPistolInv;
-import f4113n.Borderlands2Mod.client.model.ModelSMG;
-import f4113n.Borderlands2Mod.client.model.ModelSMGInv;
-import f4113n.Borderlands2Mod.client.model.ModelSniper;
-import f4113n.Borderlands2Mod.client.model.ModelSniperInv;
+import BL2.client.model.ModelAssaultRifle;
+import BL2.client.model.ModelAssaultRifleInv;
+import BL2.client.model.ModelPistol;
+import BL2.client.model.ModelPistolInv;
+import BL2.client.model.ModelSMG;
+import BL2.client.model.ModelSMGInv;
+import BL2.client.model.ModelSniper;
+import BL2.client.model.ModelSniperInv;
 
 
 public class RenderGunInHand implements IItemRenderer {
@@ -117,7 +117,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderSMG(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/SMGModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SMGModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         smgModel.render(0.1F);
@@ -127,7 +127,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderSMGForInventory(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/SMGModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SMGModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         smgInv.render(0.094F);
@@ -137,7 +137,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderSniper(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/SniperModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SniperModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         sniperModel.render(0.1F);
@@ -147,7 +147,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderSniperForInventory(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/SniperModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SniperModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         sniperInv.render(.08F);
@@ -157,7 +157,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderPistol(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/PistolModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/PistolModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         pistolModel.render(0.1F);
@@ -167,7 +167,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderPistolForInventory(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/PistolModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/PistolModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         pistolInv.render(0.1F);
@@ -177,7 +177,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderAssault(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/AssaultRifleModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/AssaultRifleModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         assaultRifleModel.render(0.1F);
@@ -187,7 +187,7 @@ public class RenderGunInHand implements IItemRenderer {
     private void renderAssaultForInventory(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/Guns/AssaultRifleModel.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/Guns/AssaultRifleModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         assaultRifleInv.render(0.07F);

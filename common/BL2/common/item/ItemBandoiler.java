@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.item;
+package BL2.common.item;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import f4113n.Borderlands2Mod.common.BL2Core;
+import BL2.common.BL2Core;
 
 public class ItemBandoiler extends Item
 {
@@ -48,7 +48,7 @@ public class ItemBandoiler extends Item
     }
 
 	public String getTextureFile(){
-		return "/f4113n/Borderlands2Mod/textures/Items.png";
+		return "/BL2/textures/Items.png";
 	}
 
 	 public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)

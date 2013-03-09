@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.handler;
+package BL2.common.handler;
 
 import java.util.EnumSet;
 

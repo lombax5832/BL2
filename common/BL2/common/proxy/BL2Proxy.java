@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.proxy;
+package BL2.common.proxy;
 
 
 public class BL2Proxy {

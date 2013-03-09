@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.render;
+package BL2.client.render;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -6,8 +6,8 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import f4113n.Borderlands2Mod.client.model.ModelGrenade;
-import f4113n.Borderlands2Mod.common.entity.EntityGrenade;
+import BL2.client.model.ModelGrenade;
+import BL2.common.entity.EntityGrenade;
 
 public class RenderGrenade extends Render{
 

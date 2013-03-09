@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.item;
+package BL2.common.item;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import f4113n.Borderlands2Mod.common.BL2Core;
+import BL2.common.BL2Core;
 
 public class ItemTemp extends Item{
 
@@ -34,7 +34,7 @@ public class ItemTemp extends Item{
     }
 	
 	public String getTextureFile(){
-		return "/f4113n/Borderlands2Mod/textures/Items.png";
+		return "/BL2/textures/Items.png";
 	}
 	
 	public boolean isFull3D()

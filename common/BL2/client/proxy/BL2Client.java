@@ -1,30 +1,30 @@
-package f4113n.Borderlands2Mod.client.proxy;
+package BL2.client.proxy;
 
 import net.minecraftforge.client.MinecraftForgeClient;
+import BL2.client.render.RenderBullet;
+import BL2.client.render.RenderGrenade;
+import BL2.client.render.RenderGrenadeInHand;
+import BL2.client.render.RenderGunInHand;
+import BL2.client.render.ShieldGUIHandler;
+import BL2.common.BL2Core;
+import BL2.common.entity.EntityBullet;
+import BL2.common.entity.EntityGrenade;
+import BL2.common.proxy.BL2Proxy;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import f4113n.Borderlands2Mod.client.render.RenderBullet;
-import f4113n.Borderlands2Mod.client.render.RenderGrenade;
-import f4113n.Borderlands2Mod.client.render.RenderGrenadeInHand;
-import f4113n.Borderlands2Mod.client.render.RenderGunInHand;
-import f4113n.Borderlands2Mod.client.render.ShieldGUIHandler;
-import f4113n.Borderlands2Mod.common.BL2Core;
-import f4113n.Borderlands2Mod.common.entity.EntityBullet;
-import f4113n.Borderlands2Mod.common.entity.EntityGrenade;
-import f4113n.Borderlands2Mod.common.proxy.BL2Proxy;
 
 public class BL2Client extends BL2Proxy{
 	
 	@Override
     public void registerRenderInformation()
     {
-            MinecraftForgeClient.preloadTexture("/f4113n/Borderlands2Mod/textures/Items.png");
-            MinecraftForgeClient.preloadTexture("/f4113n/Borderlands2Mod/textures/bullet.png");
-            MinecraftForgeClient.preloadTexture("/f4113n/Borderlands2Mod/textures/Shields.png");
+            MinecraftForgeClient.preloadTexture("/BL2/textures/Items.png");
+            MinecraftForgeClient.preloadTexture("/BL2/textures/bullet.png");
+            MinecraftForgeClient.preloadTexture("/BL2/textures/Shields.png");
             RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
-            BL2Core.shieldrenderid = RenderingRegistry.addNewArmourRendererPrefix("/f4113n/Borderlands2Mod/textures");
+            BL2Core.shieldrenderid = RenderingRegistry.addNewArmourRendererPrefix("/BL2/textures");
             RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderGrenade());
             //MinecraftForge.EVENT_BUS.register(new RenderShield());
     }
@@ -50,6 +50,6 @@ public class BL2Client extends BL2Proxy{
 	
 	public void registerKeyBinding()
 	{
-		KeyBindingRegistry.registerKeyBinding(new f4113n.Borderlands2Mod.client.handler.BL2KeyHandler());
+		KeyBindingRegistry.registerKeyBinding(new BL2.client.handler.BL2KeyHandler());
 	}
 }

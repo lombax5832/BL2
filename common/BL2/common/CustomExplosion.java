@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common;
+package BL2.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;

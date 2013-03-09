@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.item;
+package BL2.common.item;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import f4113n.Borderlands2Mod.common.BL2Core;
-import f4113n.Borderlands2Mod.common.entity.EntityBullet;
+import BL2.common.BL2Core;
+import BL2.common.entity.EntityBullet;
 
 public class ItemGun extends Item
 {
@@ -254,7 +254,7 @@ public class ItemGun extends Item
         		Class.forName("net.minecraft.client.settings.KeyBinding");
         		//client
         		//System.out.println(BL2.client.BL2KeyHandler.reloadKey.pressed);
-	        	if ((atr.bulletsleft <= 1 && atr.reloadticker == 0) || (f4113n.Borderlands2Mod.client.handler.BL2KeyHandler.reloadKey.pressed && !fullAmmo(atr)))
+	        	if ((atr.bulletsleft <= 1 && atr.reloadticker == 0) || (BL2.client.handler.BL2KeyHandler.reloadKey.pressed && !fullAmmo(atr)))
 			    {
 	        		BL2Core.nethandler.sendReloaderPacket();
 					reload(par1ItemStack);
@@ -537,7 +537,7 @@ public class ItemGun extends Item
     
     public String getTextureFile()
     {
-        return "/f4113n/Borderlands2Mod/textures/Items.png";
+        return "/BL2/textures/Items.png";
     }
     
     //pistol = 0, smg = 1, assault rifle = 2, rocket launcher = 3, sniper = 4, shotgun = 5

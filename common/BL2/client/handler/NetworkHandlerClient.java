@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.client.handler;
+package BL2.client.handler;
 
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
@@ -14,11 +14,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.src.ModLoader;
+import BL2.client.render.ShieldFX;
+import BL2.common.entity.EntityGrenade;
+import BL2.common.handler.NetworkHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
-import f4113n.Borderlands2Mod.client.render.ShieldFX;
-import f4113n.Borderlands2Mod.common.entity.EntityGrenade;
-import f4113n.Borderlands2Mod.common.handler.NetworkHandler;
 
 public class NetworkHandlerClient extends NetworkHandler
 {

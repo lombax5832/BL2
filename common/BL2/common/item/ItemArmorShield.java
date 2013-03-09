@@ -1,4 +1,4 @@
-package f4113n.Borderlands2Mod.common.item;
+package BL2.common.item;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.IArmorTextureProvider;
 import net.minecraftforge.common.ISpecialArmor;
-import f4113n.Borderlands2Mod.common.BL2Core;
-import f4113n.Borderlands2Mod.common.handler.IItemTickListener;
+import BL2.common.BL2Core;
+import BL2.common.handler.IItemTickListener;
 
 public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTickListener, IArmorTextureProvider
 {
@@ -333,7 +333,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	
 	public String getTextureFile()
     {
-        return "/f4113n/Borderlands2Mod/textures/Shields.png";
+        return "/BL2/textures/Shields.png";
     }
 	
 	public int getIconFromDamage(int par1)
@@ -345,7 +345,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	public String getArmorTextureFile(ItemStack itemstack) {	
 		int damVal = itemstack.getItemDamage();
 		if (itemstack.itemID == BL2Core.shield.itemID){
-			return "/f4113n/Borderlands2Mod/textures/Armor/shield_"+ damVal +".png";
+			return "/BL2/textures/Armor/shield_"+ damVal +".png";
 		}
 		return null;
 	}
