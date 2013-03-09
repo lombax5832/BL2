@@ -6,10 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
+import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
 import BL2.common.block.BlockEridiumFlowing;
 import BL2.common.block.BlockEridiumStill;
@@ -112,6 +114,8 @@ public class BL2Core implements ITickHandler
 //        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(liquidstack, new ItemStack(bucket, 1, iter), new ItemStack(Item.bucketEmpty)));
 //        LiquidDictionary.getOrCreateLiquid("liquidEridium", null);
         
+		MinecraftForge.EVENT_BUS.register(new EridiumBucketHelper());
+		
         LanguageRegistry.addName(guns, "Gun");
         guns.setItemName("stuff");
         //registerHandlers();
