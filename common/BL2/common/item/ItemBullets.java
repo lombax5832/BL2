@@ -46,7 +46,7 @@ public class ItemBullets extends Item
 
     public String getTextureFile()
     {
-        return "/BL2/textures/Items.png";
+        return "/BL2/textures/items.png";
     }
     
     public boolean isFull3D()

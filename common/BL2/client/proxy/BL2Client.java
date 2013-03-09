@@ -1,8 +1,5 @@
 package BL2.client.proxy;
 
-import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFX;
-import com.pahimar.ee3.client.renderer.texturefx.TextureRedWaterFlowFX;
-
 import net.minecraftforge.client.MinecraftForgeClient;
 import BL2.client.render.RenderBullet;
 import BL2.client.render.RenderGrenade;
@@ -26,7 +23,7 @@ public class BL2Client extends BL2Proxy{
 	@Override
     public void registerRenderInformation()
     {
-            MinecraftForgeClient.preloadTexture("/BL2/textures/Items.png");
+            MinecraftForgeClient.preloadTexture("/BL2/textures/items.png");
             MinecraftForgeClient.preloadTexture("/BL2/textures/blocks.png");
             MinecraftForgeClient.preloadTexture("/BL2/textures/bullet.png");
             MinecraftForgeClient.preloadTexture("/BL2/textures/Shields.png");

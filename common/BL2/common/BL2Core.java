@@ -2,9 +2,6 @@ package BL2.common;
 
 import java.util.EnumSet;
 
-import buildcraft.core.DefaultProps;
-import buildcraft.energy.ItemBucketOil;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -97,7 +94,10 @@ public class BL2Core implements ITickHandler
         
         
         GameRegistry.registerBlock(eridiumStill, "eridiumStill");
+        LanguageRegistry.addName(eridiumStill, "Eridium (Still)");
+        
         GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
+        LanguageRegistry.addName(eridiumFlowing, "Eridium (Flowing)");
         
         bucketEridium = new ItemBucketEridium(16006).setIconIndex(5*16).setItemName("bucketEridium").setContainerItem(Item.bucketEmpty);
 		LanguageRegistry.addName(bucketEridium, "Eridium Bucket");

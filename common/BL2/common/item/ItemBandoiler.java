@@ -48,7 +48,7 @@ public class ItemBandoiler extends Item
     }
 
 	public String getTextureFile(){
-		return "/BL2/textures/Items.png";
+		return "/BL2/textures/items.png";
 	}
 
 	 public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
