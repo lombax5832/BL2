@@ -41,10 +41,9 @@ import f4113n.Borderlands2Mod.liquid.TileLiquidEridium;
 import f4113n.core.FBase;
 import f4113n.core.FCore;
 import f4113n.core.Platform;
-import f4113n.core.liquid.LiquidFX;
 import f4113n.core.liquid.TELiquidBlock;
 
-@Mod(modid = "BL2", name = "Borderlands2Mod", version = "1.4.7", dependencies = "after:FCore")
+@Mod(modid = "BL2", name = "Borderlands2Mod", version = "1.6 (1.4.6/7)", dependencies = "after:FCore")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, 
 clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandlerClient.class),
 serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
@@ -81,8 +80,8 @@ public class BL2Core extends FBase implements ITickHandler
 		{
 			try
 			{
-				Object o = Minecraft.class.getField("renderEngine").get(FMLClientHandler.instance().getClient());
-				o.getClass().getMethod("registerTextureFX", Class.forName("TextureFX")).invoke(o, new LiquidFX(this, 0, 0, 255, 0, 255, 0, 255));
+				//Object o = Minecraft.class.getField("renderEngine").get(FMLClientHandler.instance().getClient());
+				//o.getClass().getMethod("registerTextureFX", Class.forName("TextureFX")).invoke(o, new LiquidFX(this, 0, 0, 255, 0, 255, 0, 255));
 			}catch(Exception ex)
 			{
 				//not client?

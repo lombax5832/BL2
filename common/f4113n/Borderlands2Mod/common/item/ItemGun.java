@@ -85,7 +85,7 @@ public class ItemGun extends Item
     	String gunName = new StringBuilder().append("\u00a76").append(gunNames[par1ItemStack.getItemDamage()]).toString();
 //    	par3List.add(gunNames[par1ItemStack.getItemDamage()]);
     	par3List.add(gunName);
-    	par3List.add(Companies[atr.Company]);
+    	par3List.add("\u00a72" + Companies[atr.Company]);
     	calcDmg(atr, hasAmp, Amp, par3List);
     	par3List.add("DPS: " + getDPS(par1ItemStack, par2EntityPlayer) + " Hearts/second");
 		par3List.add("Ammo: " + getBulletsLeftInfo(par1ItemStack));

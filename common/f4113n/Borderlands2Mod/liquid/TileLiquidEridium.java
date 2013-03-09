@@ -53,4 +53,10 @@ public class TileLiquidEridium extends TEFluid
 	{
 		return "Liquid Eridium";
 	}
+
+	@Override
+	public float getHardness() {
+		// TODO Auto-generated method stub
+		return 100;
+	}
 }
