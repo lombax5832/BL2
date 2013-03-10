@@ -71,7 +71,7 @@ public class BL2Core implements ITickHandler
     
     @Mod.PreInit
     public void preInt(FMLPreInitializationEvent event){
-			
+		
     }
     
     @Mod.Init
@@ -97,7 +97,7 @@ public class BL2Core implements ITickHandler
         
         
         GameRegistry.registerBlock(eridiumStill, "eridiumStill");
-        LanguageRegistry.addName(eridiumStill, "Eridium (Still)");
+        LanguageRegistry.addName(eridiumStill, "Liquid Eridium");
         
         GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
         LanguageRegistry.addName(eridiumFlowing, "Eridium (Flowing)");
