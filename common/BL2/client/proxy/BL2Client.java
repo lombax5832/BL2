@@ -1,6 +1,7 @@
 package BL2.client.proxy;
 
 import net.minecraftforge.client.MinecraftForgeClient;
+import BL2.BL2Core;
 import BL2.client.render.RenderBullet;
 import BL2.client.render.RenderGrenade;
 import BL2.client.render.RenderGrenadeInHand;
@@ -8,7 +9,6 @@ import BL2.client.render.RenderGunInHand;
 import BL2.client.render.ShieldGUIHandler;
 import BL2.client.render.TextureEridiumFX;
 import BL2.client.render.TextureEridiumFlowFX;
-import BL2.common.BL2Core;
 import BL2.common.entity.EntityBullet;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.proxy.BL2Proxy;

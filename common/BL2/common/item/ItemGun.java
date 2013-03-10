@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 import BL2.common.entity.EntityBullet;
 
 public class ItemGun extends Item

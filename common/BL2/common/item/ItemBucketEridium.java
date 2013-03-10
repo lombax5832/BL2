@@ -2,7 +2,7 @@ package BL2.common.item;
 
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 
 public class ItemBucketEridium extends ItemBucket {
 

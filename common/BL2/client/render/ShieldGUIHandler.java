@@ -27,7 +27,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 import org.lwjgl.opengl.GL11;
 
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 import BL2.common.Reference;
 import BL2.common.item.ItemArmorShield;
 import BL2.common.item.ItemArmorShield.ShieldAtributes;

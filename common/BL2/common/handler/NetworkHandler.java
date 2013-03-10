@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.item.ItemGun;
 import cpw.mods.fml.common.network.IPacketHandler;

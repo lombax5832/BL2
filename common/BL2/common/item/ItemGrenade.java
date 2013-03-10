@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 import BL2.common.entity.EntityGrenade;
 
 public class ItemGrenade extends Item
@@ -17,13 +17,14 @@ public class ItemGrenade extends Item
     {
         super(par1);
         maxStackSize = 16;
+        this.setHasSubtypes(true);
         setCreativeTab(BL2Core.tabBL2);
         setIconCoord(12, 0);
     }
 
     public void getSubItems(int i, CreativeTabs tabs, List l)
     {
-		for (int j = 1; j < 5; j++)
+		for (int j = 1; j < 4; j++)
         {
 			ItemStack stack = new ItemStack(this, 1, j);
 	        GrenadeAtributes atr = new GrenadeAtributes(stack);
@@ -64,10 +65,6 @@ public class ItemGrenade extends Item
     		name += "Homing ";
     		changedName = true;
     	}
-    	if(atr.hackySack){
-    		name += "Hacky Sack ";
-    		changedName = true;
-    	}
     	if(changedName == false){
     		name += "Lobbed ";
     	}
@@ -97,7 +94,7 @@ public class ItemGrenade extends Item
         if (!world.isRemote)
         {
         	GrenadeAtributes atr = new GrenadeAtributes(item);
-        	world.spawnEntityInWorld(new EntityGrenade(world, player, atr.sticky, atr.homing, atr.hackySack));
+        	world.spawnEntityInWorld(new EntityGrenade(world, player, atr.sticky, atr.homing));
         }
 
         return item;
@@ -107,7 +104,6 @@ public class ItemGrenade extends Item
     {
 		public boolean sticky;
 		public boolean homing;
-		public boolean hackySack;
 
         public GrenadeAtributes(ItemStack it)
         {
@@ -125,7 +121,6 @@ public class ItemGrenade extends Item
             
             tag.setBoolean("sticky", sticky);
             tag.setBoolean("homing", homing);
-            tag.setBoolean("hackySack", hackySack);
 		    if(newTag)
 	            	it.setTagCompound(tag);
 	        }
@@ -141,7 +136,6 @@ public class ItemGrenade extends Item
 
             sticky = tag.getBoolean("sticky");
             homing = tag.getBoolean("homing");
-            hackySack = tag.getBoolean("hackySack");
         }
     }
 }

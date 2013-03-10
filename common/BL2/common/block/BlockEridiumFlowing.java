@@ -3,7 +3,7 @@ package BL2.common.block;
 import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
 
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 
 public class BlockEridiumFlowing extends BlockFlowing {
 

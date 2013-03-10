@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 
 public class EridiumBucketHelper {
 

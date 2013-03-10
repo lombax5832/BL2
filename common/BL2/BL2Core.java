@@ -1,4 +1,4 @@
-package BL2.common;
+package BL2;
 
 import java.util.EnumSet;
 
@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -14,8 +13,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
-import BL2.client.render.RenderGrenadeInHand;
-import BL2.client.render.RenderGunInHand;
+import BL2.common.CreativeTabBL2;
 import BL2.common.block.BlockEridiumFlowing;
 import BL2.common.block.BlockEridiumStill;
 import BL2.common.entity.EntityBullet;
@@ -151,14 +149,12 @@ public class BL2Core implements ITickHandler
     			return;
     		}
     		
-    		boolean update = false;
     		for(int i = 0; i < 4; i++)
     		{
     			if(ep.inventory.armorInventory[i] != null && ep.inventory.armorInventory[i].getItem() instanceof IItemTickListener)
     			{
 	    			if(((IItemTickListener)ep.inventory.armorInventory[i].getItem()).onTick(ep, ep.inventory.armorInventory[i]))
 	    			{
-	    				update = true;
 	    			}
     			}
     		}

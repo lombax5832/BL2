@@ -3,7 +3,7 @@ package BL2.client.handler;
 import java.util.EnumSet;
 
 import net.minecraft.client.settings.KeyBinding;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
 

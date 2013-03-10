@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.RenderEngine;
 
 import org.lwjgl.opengl.GL11;
 
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 
 import cpw.mods.fml.client.FMLTextureFX;
 

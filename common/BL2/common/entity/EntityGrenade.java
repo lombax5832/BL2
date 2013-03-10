@@ -11,7 +11,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import BL2.common.BL2Core;
+import BL2.BL2Core;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class EntityGrenade extends EntityThrowable
@@ -27,12 +27,12 @@ public class EntityGrenade extends EntityThrowable
         super(world);
     }
 
-    public EntityGrenade(World world, EntityLiving el, boolean isSticky, boolean isHoming, boolean isHacky)
+    public EntityGrenade(World world, EntityLiving el, boolean isSticky, boolean isHoming)
     {
         super(world, el);
         this.sticky = isSticky;
         this.homing = isHoming;
-        this.hackySack = isHacky;
+        this.hackySack = false;
     }
 
     public EntityGrenade(World world, double x, double y, double z)

@@ -32,9 +32,9 @@ public class CustomExplosion
     public double explosionZ;
     public Entity exploder;
     public float explosionSize;
-    public List affectedBlockPositions = new ArrayList();
-    public List field_77281_g = new ArrayList();
-    private Map field_77288_k = new HashMap();
+    public List<ChunkPosition> affectedBlockPositions = new ArrayList<ChunkPosition>();
+    public List<?> field_77281_g = new ArrayList<Object>();
+    private Map<EntityPlayer, Vec3> field_77288_k = new HashMap<EntityPlayer, Vec3>();
 
     public CustomExplosion(World par1World, Entity par2Entity, double par3, double par5, double par7, float par9)
     {
@@ -52,7 +52,7 @@ public class CustomExplosion
     public void doExplosionA()
     {
         float var1 = this.explosionSize;
-        HashSet var2 = new HashSet();
+        HashSet<ChunkPosition> var2 = new HashSet<ChunkPosition>();
         int var3;
         int var4;
         int var5;
@@ -85,7 +85,7 @@ public class CustomExplosion
                             int var22 = MathHelper.floor_double(var15);
                             int var23 = MathHelper.floor_double(var17);
                             int var24 = MathHelper.floor_double(var19);
-                            int var25 = this.worldObj.getBlockId(var22, var23, var24);
+                            this.worldObj.getBlockId(var22, var23, var24);
 
                             if (var14 > 0.0F)
                             {
@@ -109,7 +109,7 @@ public class CustomExplosion
         int var29 = MathHelper.floor_double(this.explosionY + (double)this.explosionSize + 1.0D);
         int var7 = MathHelper.floor_double(this.explosionZ - (double)this.explosionSize - 1.0D);
         int var30 = MathHelper.floor_double(this.explosionZ + (double)this.explosionSize + 1.0D);
-        List var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
+        List<?> var9 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool((double)var3, (double)var5, (double)var7, (double)var4, (double)var29, (double)var30));
         Vec3 var31 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.explosionX, this.explosionY, this.explosionZ);
 
         for (int var11 = 0; var11 < var9.size(); ++var11)
@@ -164,13 +164,11 @@ public class CustomExplosion
             this.worldObj.spawnParticle("largeexplode", this.explosionX, this.explosionY, this.explosionZ, 1.0D, 0.0D, 0.0D);
         }
 
-        Iterator var2;
+        Iterator<ChunkPosition> var2;
         ChunkPosition var3;
         int var4;
         int var5;
         int var6;
-        int var7;
-
         if (this.isSmoking)
         {
             var2 = this.affectedBlockPositions.iterator();
@@ -181,7 +179,7 @@ public class CustomExplosion
                 var4 = var3.x;
                 var5 = var3.y;
                 var6 = var3.z;
-                var7 = this.worldObj.getBlockId(var4, var5, var6);
+                this.worldObj.getBlockId(var4, var5, var6);
 
                 if (par1)
                 {
@@ -208,8 +206,16 @@ public class CustomExplosion
         }
     }
 
-    public Map func_77277_b()
+    public Map<EntityPlayer, Vec3> func_77277_b()
     {
         return this.field_77288_k;
     }
+
+	public Random getExplosionRNG() {
+		return explosionRNG;
+	}
+
+	public void setExplosionRNG(Random explosionRNG) {
+		this.explosionRNG = explosionRNG;
+	}
 }

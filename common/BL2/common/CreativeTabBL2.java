@@ -1,5 +1,6 @@
 package BL2.common;
 
+import BL2.BL2Core;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StringTranslate;
 import cpw.mods.fml.relauncher.Side;
