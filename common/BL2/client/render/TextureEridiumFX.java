@@ -8,20 +8,11 @@ import BL2.BL2Core;
 
 import cpw.mods.fml.client.FMLTextureFX;
 
-/**
- * TextureRedWaterFX
- * 
- * TextureFX for still Red Water
- * 
- * @author pahimar
- * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
- * 
- */
 public class TextureEridiumFX extends FMLTextureFX {
 
     protected float[] red = new float[256];
     protected float[] green = new float[0];
-    protected float[] blue = new float[256];
+    protected float[] blue = new float[200];
     protected float[] alpha = new float[256];
     private int tickCounter = 0;
 
@@ -119,7 +110,7 @@ public class TextureEridiumFX extends FMLTextureFX {
             
             this.imageData[var2 * 4 + 0] = (byte) var5;
             this.imageData[var2 * 4 + 1] = (byte) 0;
-            this.imageData[var2 * 4 + 2] = (byte) var6;
+            this.imageData[var2 * 4 + 2] = (byte) ((byte) var6+50);
             this.imageData[var2 * 4 + 3] = (byte) 255;
         }
     }

@@ -9,6 +9,8 @@ import BL2.client.render.RenderGunInHand;
 import BL2.client.render.ShieldGUIHandler;
 import BL2.client.render.TextureEridiumFX;
 import BL2.client.render.TextureEridiumFlowFX;
+import BL2.client.render.TextureRefinedEridiumFX;
+import BL2.client.render.TextureRefinedEridiumFlowFX;
 import BL2.common.entity.EntityBullet;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.proxy.BL2Proxy;
@@ -37,6 +39,9 @@ public class BL2Client extends BL2Proxy{
     public void initRenderingAndTextures() {
 		FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureEridiumFX());
         FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureEridiumFlowFX());
+        
+        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRefinedEridiumFX());
+        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRefinedEridiumFlowFX());
 	}
 	
 	@Override

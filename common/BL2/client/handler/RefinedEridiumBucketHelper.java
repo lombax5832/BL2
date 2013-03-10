@@ -8,7 +8,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import BL2.BL2Core;
 
-public class EridiumBucketHelper {
+public class RefinedEridiumBucketHelper {
 
 	@ForgeSubscribe
 	public void onBucketFill(FillBucketEvent event) {
@@ -26,12 +26,12 @@ public class EridiumBucketHelper {
 
 		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
 
-		if ((blockID == BL2Core.eridiumStill.blockID || blockID == BL2Core.eridiumFlowing.blockID)
+		if ((blockID == BL2Core.refinedEridiumStill.blockID || blockID == BL2Core.refinedEridiumFlowing.blockID)
 				&& world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 
 			world.setBlockWithNotify(pos.blockX, pos.blockY, pos.blockZ, 0);
 
-			return new ItemStack(BL2Core.bucketEridium);
+			return new ItemStack(BL2Core.bucketRefinedEridium);
 		} else
 			return null;
 

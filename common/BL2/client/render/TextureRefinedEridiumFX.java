@@ -8,18 +8,17 @@ import BL2.BL2Core;
 
 import cpw.mods.fml.client.FMLTextureFX;
 
-public class TextureEridiumFlowFX extends FMLTextureFX {
+public class TextureRefinedEridiumFX extends FMLTextureFX {
 
     protected float[] red = new float[256];
     protected float[] green = new float[0];
-    protected float[] blue = new float[200];
+    protected float[] blue = new float[100];
     protected float[] alpha = new float[256];
     private int tickCounter = 0;
 
-    public TextureEridiumFlowFX() {
+    public TextureRefinedEridiumFX() {
 
-        super(BL2Core.eridiumFlowing.blockIndexInTexture + 1);
-        tileSize = 2;
+        super(BL2Core.refinedEridiumStill.blockIndexInTexture + 1);
         setup();
     }
 
@@ -53,13 +52,13 @@ public class TextureEridiumFlowFX extends FMLTextureFX {
             for (var2 = 0; var2 < tileSizeBase; ++var2) {
                 var3 = 0.0F;
 
-                for (int var4 = var2 - 2; var4 <= var2; ++var4) {
-                    var5 = var1 & tileSizeMask;
-                    var6 = var4 & tileSizeMask;
+                for (int var4 = var1 - 1; var4 <= var1 + 1; ++var4) {
+                    var5 = var4 & tileSizeMask;
+                    var6 = var2 & tileSizeMask;
                     var3 += this.red[var5 + var6 * tileSizeBase];
                 }
 
-                this.green[var1 + var2 * tileSizeBase] = var3 / 3.2F + this.blue[var1 + var2 * tileSizeBase] * 0.8F;
+                this.green[var1 + var2 * tileSizeBase] = var3 / 3.3F + this.blue[var1 + var2 * tileSizeBase] * 0.8F;
             }
         }
 
@@ -71,9 +70,9 @@ public class TextureEridiumFlowFX extends FMLTextureFX {
                     this.blue[var1 + var2 * tileSizeBase] = 0.0F;
                 }
 
-                this.alpha[var1 + var2 * tileSizeBase] -= 0.3F;
+                this.alpha[var1 + var2 * tileSizeBase] -= 0.1F;
 
-                if (Math.random() < 0.2D) {
+                if (Math.random() < 0.05D) {
                     this.alpha[var1 + var2 * tileSizeBase] = 0.5F;
                 }
             }
@@ -84,7 +83,7 @@ public class TextureEridiumFlowFX extends FMLTextureFX {
         this.red = var12;
 
         for (var2 = 0; var2 < tileSizeSquare; ++var2) {
-            var3 = this.red[var2 - this.tickCounter * tileSizeBase & tileSizeSquareMask];
+            var3 = this.red[var2];
 
             if (var3 > 1.0F) {
                 var3 = 1.0F;
@@ -108,10 +107,10 @@ public class TextureEridiumFlowFX extends FMLTextureFX {
                 var6 = var10;
                 var7 = var11;
             }
-
-            this.imageData[var2 * 4 + 0] = (byte) var5;
+            
+            this.imageData[var2 * 4 + 0] = (byte) ((byte) var5);
             this.imageData[var2 * 4 + 1] = (byte) 0;
-            this.imageData[var2 * 4 + 2] = (byte) ((byte) var6-50);
+            this.imageData[var2 * 4 + 2] = (byte) ((byte) var6+50);
             this.imageData[var2 * 4 + 3] = (byte) 255;
         }
     }

@@ -1,20 +1,19 @@
 package BL2.common.block;
 
-import BL2.BL2Core;
-import net.minecraft.block.BlockStationary;
+import net.minecraft.block.BlockFlowing;
 import net.minecraft.block.material.Material;
 
-public class BlockEridiumStill extends BlockStationary {
+import BL2.BL2Core;
 
-    public BlockEridiumStill(int id) {
+public class BlockRefinedEridiumFlowing extends BlockFlowing {
+
+    public BlockRefinedEridiumFlowing(int id) {
 
         super(id, Material.water);
         this.blockHardness = 100F;
         this.setLightOpacity(3);
-        this.setBlockName("eridiumStill");
         this.setCreativeTab(BL2Core.tabBL2);
-        this.disableStats();
-        this.setRequiresSelfNotify();
+        this.setBlockName("RefinedEridiumFlowing");
     }
 
     @Override
