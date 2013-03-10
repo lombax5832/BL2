@@ -6,7 +6,7 @@ public class Reference {
     public static final boolean DEBUG_MODE = false;
 
     /* General Mod related constants */
-    public static final String MOD_ID = "bl2";
+    public static final String MOD_ID = "BL2";
     public static final String MOD_NAME = "Borderlands 2";
     public static final String VERSION = "@VERSION@";
     public static final String CHANNEL_NAME = MOD_ID;

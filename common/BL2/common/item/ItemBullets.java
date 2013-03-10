@@ -25,7 +25,7 @@ public class ItemBullets extends Item
     {
         super(id);
         this.maxStackSize = 64;
-        this.setCreativeTab(BL2Core.tabBL2);
+        this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
     }

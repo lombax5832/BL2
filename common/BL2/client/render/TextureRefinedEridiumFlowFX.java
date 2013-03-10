@@ -109,9 +109,9 @@ public class TextureRefinedEridiumFlowFX extends FMLTextureFX {
                 var7 = var11;
             }
 
-            this.imageData[var2 * 4 + 0] = (byte) ((byte) var5+50);
+            this.imageData[var2 * 4 + 0] = (byte) ((byte) var5+60);
             this.imageData[var2 * 4 + 1] = (byte) 0;
-            this.imageData[var2 * 4 + 2] = (byte) ((byte) var6+50);
+            this.imageData[var2 * 4 + 2] = (byte) ((byte) var6-10);
             this.imageData[var2 * 4 + 3] = (byte) 255;
         }
     }

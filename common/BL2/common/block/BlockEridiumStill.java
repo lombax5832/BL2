@@ -12,7 +12,7 @@ public class BlockEridiumStill extends BlockStationary {
         this.blockHardness = 100F;
         this.setLightOpacity(3);
         this.setBlockName("eridiumStill");
-        this.setCreativeTab(BL2Core.tabBL2);
+        this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
         this.disableStats();
         this.setRequiresSelfNotify();
         this.blockIndexInTexture = (12*16)+13;
