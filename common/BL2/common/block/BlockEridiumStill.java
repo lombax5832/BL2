@@ -15,6 +15,7 @@ public class BlockEridiumStill extends BlockStationary {
         this.setCreativeTab(BL2Core.tabBL2);
         this.disableStats();
         this.setRequiresSelfNotify();
+        this.blockIndexInTexture = (12*16)+13;
     }
 
     @Override

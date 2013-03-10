@@ -14,6 +14,7 @@ public class BlockEridiumFlowing extends BlockFlowing {
         this.setLightOpacity(3);
         this.setCreativeTab(BL2Core.tabBL2);
         this.setBlockName("eridiumFlowing");
+        this.blockIndexInTexture = (12*16)+13;
     }
 
     @Override
