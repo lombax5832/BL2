@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -13,6 +14,8 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
+import BL2.client.render.RenderGrenadeInHand;
+import BL2.client.render.RenderGunInHand;
 import BL2.common.block.BlockEridiumFlowing;
 import BL2.common.block.BlockEridiumStill;
 import BL2.common.entity.EntityBullet;
@@ -40,7 +43,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "BL2", name = "Borderlands 2", version = "1.5 (1.4.6/7)")
+@Mod(modid = "BL2", name = "Borderlands 2", version = "1.7 (1.4.6/7)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, 
 clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandlerClient.class),
 serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
@@ -109,8 +112,8 @@ public class BL2Core implements ITickHandler
 		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
 				bucketEridium), new ItemStack(Item.bucketEmpty)));
 		
-        
-        
+		
+		
 //        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(liquidstack, new ItemStack(bucket, 1, iter), new ItemStack(Item.bucketEmpty)));
 //        LiquidDictionary.getOrCreateLiquid("liquidEridium", null);
         
@@ -121,6 +124,7 @@ public class BL2Core implements ITickHandler
         //registerHandlers();
         TickRegistry.registerTickHandler(this, Side.SERVER);
         proxy.registerRenderTickHandler();
+        proxy.registerItemRenderer();
 //        MinecraftForge.EVENT_BUS.register(new RenderShield());
         
         proxy.initRenderingAndTextures();

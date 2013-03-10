@@ -178,6 +178,11 @@ public class EntityBullet extends Entity implements IProjectile
         }
 
         ++this.ticksInAir;
+
+        System.out.println(this.ticksExisted);
+        if(this.ticksExisted >= 20){
+        	this.setDead();
+        }
         Vec3 var17 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
         Vec3 var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
         MovingObjectPosition var4 = this.worldObj.rayTraceBlocks_do_do(var17, var3, false, true);
@@ -266,6 +271,7 @@ public class EntityBullet extends Entity implements IProjectile
                             if (var25 > 0.0F)
                             {
                                 var4.entityHit.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)var25, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)var25);
+                                
                             }
                         }
                     }
@@ -273,7 +279,7 @@ public class EntityBullet extends Entity implements IProjectile
                 else
                 {
                 	int var21 = 1;
-                	this.worldObj.spawnParticle("crit", this.posX + this.motionX * (double)var21 / 4.0D, this.posY + this.motionY * (double)var21 / 4.0D, this.posZ + this.motionZ * (double)var21 / 4.0D, this.motionX, this.motionY + 0.2D, this.motionZ);
+                	//this.worldObj.spawnParticle("crit", this.posX + this.motionX * (double)var21 / 4.0D, this.posY + this.motionY * (double)var21 / 4.0D, this.posZ + this.motionZ * (double)var21 / 4.0D, this.motionX, this.motionY + 0.2D, this.motionZ);
                     this.motionX *= -0.10000000149011612D;
                     this.motionY *= -0.10000000149011612D;
                     this.motionZ *= -0.10000000149011612D;

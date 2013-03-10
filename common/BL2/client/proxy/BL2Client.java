@@ -40,6 +40,12 @@ public class BL2Client extends BL2Proxy{
 	}
 	
 	@Override
+	public void registerItemRenderer() {
+		MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID, new RenderGunInHand());
+	    MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID, new RenderGrenadeInHand());
+	}
+	
+	@Override
 	public void initItemRenderer(int itemID)
 	{
 	    if (itemID == BL2Core.guns.itemID)

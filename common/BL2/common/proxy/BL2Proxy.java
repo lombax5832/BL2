@@ -31,4 +31,9 @@ public class BL2Proxy {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void registerItemRenderer() {
+		// TODO Auto-generated method stub
+		
+	}
 }
