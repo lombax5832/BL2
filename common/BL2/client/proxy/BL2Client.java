@@ -37,11 +37,13 @@ public class BL2Client extends BL2Proxy{
 	
 	@Override
     public void initRenderingAndTextures() {
-		FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureEridiumFX());
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureEridiumFlowFX());
+		net.minecraft.client.renderer.RenderEngine renderEngine = FMLClientHandler.instance().getClient().renderEngine;
+		
+		renderEngine.registerTextureFX(new TextureEridiumFX());
+		renderEngine.registerTextureFX(new TextureEridiumFlowFX());
         
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRefinedEridiumFX());
-        FMLClientHandler.instance().getClient().renderEngine.registerTextureFX(new TextureRefinedEridiumFlowFX());
+		renderEngine.registerTextureFX(new TextureRefinedEridiumFX());
+		renderEngine.registerTextureFX(new TextureRefinedEridiumFlowFX());
 	}
 	
 	@Override

@@ -28,7 +28,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	{
 		super(id, EnumArmorMaterial.DIAMOND, renderindex, armortype);
 		this.setMaxStackSize(1);
-		this.setCreativeTab(BL2Core.tabBL2);
+		this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
         this.setHasSubtypes(true);
         this.setMaxDamage(100);
 	}

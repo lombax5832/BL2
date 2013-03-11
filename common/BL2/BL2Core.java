@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import buildcraft.api.recipes.RefineryRecipe;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
 import BL2.client.handler.RefinedEridiumBucketHelper;
 import BL2.common.CreativeTabBL2;
+import BL2.common.Reference;
 import BL2.common.block.BlockEridiumFlowing;
 import BL2.common.block.BlockEridiumStill;
 import BL2.common.block.BlockRefinedEridiumFlowing;
@@ -47,7 +49,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "BL2", name = "Borderlands 2", version = "1.7 (1.4.6/7)")
+@Mod(modid = "BL2", name = "Borderlands 2", version = "1.9 (1.4.6/7)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, 
 clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandlerClient.class),
 serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
@@ -77,7 +79,7 @@ public class BL2Core implements ITickHandler
     @SidedProxy(clientSide = "BL2.client.handler.NetworkHandlerClient", serverSide = "BL2.common.handler.NetworkHandler")
     public static NetworkHandler nethandler;
     
-    public static CreativeTabBL2 tabBL2 = new CreativeTabBL2("Borderlands 2");
+//    public static CreativeTabBL2 tabBL2 = new CreativeTabBL2(Reference.MOD_ID);
     
     @Mod.PreInit
     public void preInt(FMLPreInitializationEvent event){
@@ -110,10 +112,10 @@ public class BL2Core implements ITickHandler
         
         // Register Liquid Blocks
         GameRegistry.registerBlock(eridiumStill, "eridiumStill");
-        LanguageRegistry.addName(eridiumStill, "Liquid Eridium");
+        LanguageRegistry.addName(eridiumStill, "Crude Eridium");
         
         GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
-        LanguageRegistry.addName(eridiumFlowing, "Eridium (Flowing)");
+        LanguageRegistry.addName(eridiumFlowing, "Crude Eridium (Flowing)");
         
         GameRegistry.registerBlock(refinedEridiumStill, "refinedEridiumStill");
         LanguageRegistry.addName(refinedEridiumStill, "Refined Eridium");
@@ -123,7 +125,7 @@ public class BL2Core implements ITickHandler
         
         // Liquid Containers
         bucketEridium = new ItemBucketEridium(16006).setIconIndex(5*16).setItemName("bucketEridium").setContainerItem(Item.bucketEmpty);
-		LanguageRegistry.addName(bucketEridium, "Eridium Bucket");
+		LanguageRegistry.addName(bucketEridium, "Crude Eridium Bucket");
 		
 		bucketRefinedEridium = new ItemBucketRefinedEridium(16007).setIconIndex((5*16)+1).setItemName("bucketRefinedEridium").setContainerItem(Item.bucketEmpty);
 		LanguageRegistry.addName(bucketRefinedEridium, "Refined Eridium Bucket");
