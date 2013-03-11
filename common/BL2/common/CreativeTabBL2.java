@@ -1,37 +1,24 @@
 package BL2.common;
 
-import BL2.BL2Core;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.StringTranslate;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.item.ItemStack;
+import BL2.BL2Core;
 
-public final class CreativeTabBL2 extends CreativeTabs
-{
-    
-    public static CreativeTabs tabBL2;
+public class CreativeTabBL2 extends CreativeTabs{
 
-    public CreativeTabBL2(String par2Str)
-    {
-      super(par2Str);
-    }
+	public static final CreativeTabs tabBL2 = new CreativeTabBL2("bl2");
+	
+	public CreativeTabBL2(String label) {
+		super(label);
+	}
 
-    
-
-    /**
-     * the itemID for the item to be displayed on the tab
-     */
-    @SideOnly(Side.CLIENT)
-    public int getTabIconItemIndex()
-    {
-        return BL2Core.temp.itemID;
-    }
-    
-    /**
-     * Gets the translated Label.
-     */
-    public String getTranslatedTabLabel()
-    {
-        return StringTranslate.getInstance().translateKey(this.getTabLabel());
-    }
+	@Override
+    public ItemStack getIconItemStack() {
+		return new ItemStack(BL2Core.temp);
+	}
+	
+	@Override
+    public String getTranslatedTabLabel() {
+		return "Borderlands 2";
+	}
 }

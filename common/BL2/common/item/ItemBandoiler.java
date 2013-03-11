@@ -18,7 +18,7 @@ public class ItemBandoiler extends Item
 	{
 		super(id);
 		this.maxStackSize = 1;
-		this.setCreativeTab(BL2Core.tabBL2);
+		this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(100);
 	}

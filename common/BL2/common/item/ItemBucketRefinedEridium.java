@@ -9,7 +9,7 @@ public class ItemBucketRefinedEridium extends ItemBucket {
 	public ItemBucketRefinedEridium(int i) {
 		super(i, BL2Core.refinedEridiumFlowing.blockID);
 		iconIndex = 0 * 16 + 1;
-		setCreativeTab(BL2Core.tabBL2);
+		setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
 	}
 
 	@Override
