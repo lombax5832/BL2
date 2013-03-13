@@ -40,6 +40,8 @@ public class NetworkHandlerClient extends NetworkHandler
 		}
 	}*/
 	
+	boolean spawnParts = false;
+	
 	public void sendReloaderPacket()
 	{
 		try
@@ -98,7 +100,7 @@ public class NetworkHandlerClient extends NetworkHandler
 
         try
         {
-        	System.out.println(packet.data[0]);
+//        	System.out.println(packet.data[0]);
         	if(packet.data[0] == particlePacketID){
         		//System.out.println("spawned");
             	DataInputStream din = new DataInputStream(in);
@@ -107,7 +109,7 @@ public class NetworkHandlerClient extends NetworkHandler
                 int playerID = din.readInt();
                 int type = din.readInt();
                 double distance = din.readDouble();
-                boolean spawning = din.readBoolean();
+                spawnParts = din.readBoolean();
                 WorldClient world = Minecraft.getMinecraft().theWorld;
                 ItemStack shield = null;
                 ShieldAtributes str = null;
@@ -135,7 +137,7 @@ public class NetworkHandlerClient extends NetworkHandler
                     }
                 }
                 if(true){
-	                if(spawning){
+	                if(spawnParts){
 	                	
 	    				if(player == p)
 		                {
