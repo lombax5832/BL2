@@ -2,10 +2,7 @@ package BL2;
 
 import java.util.EnumSet;
 
-import buildcraft.api.recipes.RefineryRecipe;
-
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,8 +14,6 @@ import net.minecraftforge.liquids.LiquidStack;
 import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
 import BL2.client.handler.RefinedEridiumBucketHelper;
-import BL2.common.CreativeTabBL2;
-import BL2.common.Reference;
 import BL2.common.block.BlockEridiumFlowing;
 import BL2.common.block.BlockEridiumStill;
 import BL2.common.block.BlockRefinedEridiumFlowing;
@@ -36,6 +31,7 @@ import BL2.common.item.ItemGrenade;
 import BL2.common.item.ItemGun;
 import BL2.common.item.ItemTemp;
 import BL2.common.proxy.BL2Proxy;
+import buildcraft.api.recipes.RefineryRecipe;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -49,7 +45,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "BL2", name = "Borderlands 2", version = "1.9 (1.4.6/7)")
+@Mod(modid = "BL2", name = "Borderlands 2", version = "1.11 (1.4.6/7)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, 
 clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandlerClient.class),
 serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
@@ -78,8 +74,6 @@ public class BL2Core implements ITickHandler
     public static BL2Proxy proxy;
     @SidedProxy(clientSide = "BL2.client.handler.NetworkHandlerClient", serverSide = "BL2.common.handler.NetworkHandler")
     public static NetworkHandler nethandler;
-    
-//    public static CreativeTabBL2 tabBL2 = new CreativeTabBL2(Reference.MOD_ID);
     
     @Mod.PreInit
     public void preInt(FMLPreInitializationEvent event){

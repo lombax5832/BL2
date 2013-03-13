@@ -59,7 +59,7 @@ public class RenderGrenadeInHand implements IItemRenderer {
     private void renderGrenade(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/TextureGrenade.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/TextureGrenade.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         grenadeModel.render(.1F);
@@ -69,7 +69,7 @@ public class RenderGrenadeInHand implements IItemRenderer {
     private void renderGrenadeInv(float x, float y, float z) {
 
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/f4113n/Borderlands2Mod/textures/TextureGrenade.png", 0);
+        ForgeHooksClient.bindTexture("/BL2/textures/TextureGrenade.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         grenadeInv.render(.29F);

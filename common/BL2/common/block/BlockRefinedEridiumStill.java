@@ -1,6 +1,5 @@
 package BL2.common.block;
 
-import BL2.BL2Core;
 import net.minecraft.block.BlockStationary;
 import net.minecraft.block.material.Material;
 

@@ -31,26 +31,31 @@ public class ItemGrenade extends Item
 	        if(j == 1){
 	        	atr.homing = false;
 	        	atr.sticky = false;
+
+		        l.add(stack);
+		        atr.save(stack);
 	        }else 
 	        if(j == 2){
 	        	atr.homing = true;
 	        	atr.sticky = false;
+
+		        l.add(stack);
+		        atr.save(stack);
 	        }else
         	if(j == 3){
         		atr.homing = false;
 	        	atr.sticky = true;
+
+		        l.add(stack);
+		        atr.save(stack);
         	}else
         	if(j == 4){
         		atr.homing = true;
 	        	atr.sticky = true;
-        	}else
-//        	if(j == 5){
-//        		atr.homing = false;
-//	        	atr.sticky = false;
-//	        	atr.hackySack = true;
-//        	}
-	        l.add(stack);
-	        atr.save(stack);
+
+		        l.add(stack);
+		        atr.save(stack);
+        	}
         }
     }
     

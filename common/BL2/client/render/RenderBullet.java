@@ -16,7 +16,7 @@ public class RenderBullet extends Render
 {
     public void renderBullet(EntityBullet par1EntityArrow, double par2, double par4, double par6, float par8, float par9)
     {
-        this.loadTexture("/f4113n/Borderlands2Mod/textures/bullet.png");
+        this.loadTexture("/BL2/textures/bullet.png");
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
         GL11.glRotatef(par1EntityArrow.prevRotationYaw + (par1EntityArrow.rotationYaw - par1EntityArrow.prevRotationYaw) * par9 - 90.0F, 0.0F, 1.0F, 0.0F);
