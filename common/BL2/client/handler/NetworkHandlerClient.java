@@ -134,25 +134,29 @@ public class NetworkHandlerClient extends NetworkHandler
                         }
                     }
                 }
-                System.out.println(str.charge);
-                if(spawning){
-                	Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
-    				v.normalize();
-    				if(player == p)
-	                {
-    					for(int i = 0; i < 10; i++)//particles per tick
-    					{
-		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x, v.y-1.5, v.z, getColor(type));
-		                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
-    					}
-	                }
-	                else
-	                { 
-	                	for(int i = 0; i < 10; i++)//particles per tick
-    					{
-		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x, v.y, v.z, getColor(type));
-		                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
-    					}
+                if(true){
+	                if(spawning){
+	                	
+	    				if(player == p)
+		                {
+	    					for(int i = 0; i < 10; i++)//particles per tick
+	    					{
+	    						Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
+	    						v.normalize();
+			                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x * distance, v.y-1.5* distance, v.z* distance, getColor(type));
+			                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
+	    					}
+		                }
+		                else
+		                { 
+		                	for(int i = 0; i < 10; i++)//particles per tick
+	    					{
+		                		Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
+	    						v.normalize();
+			                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x* distance, v.y* distance, v.z* distance, getColor(type));
+			                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
+	    					}
+		                }
 	                }
                 }
         	}
