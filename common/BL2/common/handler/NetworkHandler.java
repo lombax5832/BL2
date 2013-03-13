@@ -23,9 +23,9 @@ public class NetworkHandler implements IPacketHandler
 {
 	public static final int particlePacketID = 0;
 	public static final int reloadPacketID = 1;
-	public static final int grenadePacketID = 2;
+	public static final int grenadePacketID = 5;
 	
-	public void sendParticlePacket(World world, double x, double y, double z, int playerID, int type, int inventoryIndex)
+	public void sendParticlePacket(World world, double distance, int playerID, int type, int inventoryIndex, boolean shouldRender)
 	{
 		try
         {
@@ -34,11 +34,10 @@ public class NetworkHandler implements IPacketHandler
             out.writeByte(particlePacketID);
             out.writeInt(world.provider.dimensionId);
             out.writeInt(inventoryIndex);
-            out.writeDouble(x);
-            out.writeDouble(y);
-            out.writeDouble(z);
             out.writeInt(playerID);
             out.writeInt(type);
+            out.writeDouble(distance);
+            out.writeBoolean(shouldRender);
             out.close();
             Packet250CustomPayload packet = new Packet250CustomPayload();
             packet.channel = "bl2";

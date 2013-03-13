@@ -23,6 +23,13 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	public static final String[] Companies = new String[] {"", 	"Tediore"			, "Pangolin"		, "Dahl"			, "Vladof"				, "Hyperion"};
 	
 	boolean isHit = false;
+	
+	boolean spawning = false;
+	int spawningSent = 0;
+	int playerID;
+	double distance = .75;//radius of particle circle
+	int o;
+	
 
 	public ItemArmorShield(int id, int renderindex, int armortype) 
 	{
@@ -65,7 +72,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 		        ShieldAtributes atr = new ShieldAtributes(stack);
 				if(j == 2){
 					atr.maxcharge = 400;
-					atr.rechargeDelay = 400;
+					atr.rechargeDelay = 20;
 					atr.chargeRate = 2;
 				}
 		        atr.rechargeTicker = 1;
@@ -109,20 +116,22 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 		if(atr.hitTicker > 0 || atr.charging == true)
 		{
 			atr.hitTicker--;
-			double distance = .75;//radius of particle circle
-			for(int i = 0; i < 10; i++)//particles per tick
+			
+			for(o = 0; o < 4; o++)
 			{
-				Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
-				v.normalize();
-				for(int o = 0; o < 4; o++)
+				if(ep.getCurrentArmor(o) == it)
 				{
-					if(ep.getCurrentArmor(o) == it)
-					{
-						int playerID = ep.entityId;
-						BL2Core.nethandler.sendParticlePacket(ep.worldObj,  v.x * distance, v.y * distance * 1.5, v.z * distance, playerID, it.getItemDamage(), o);
+					playerID = ep.entityId;
+					if(spawningSent == 0){
+						BL2Core.nethandler.sendParticlePacket(ep.worldObj, distance, playerID, it.getItemDamage(), o, true);
+						spawningSent++;
 					}
 				}
+			
 			}
+		}else if(spawningSent > 0){
+			BL2Core.nethandler.sendParticlePacket(ep.worldObj, distance, playerID, it.getItemDamage(), o, false);
+			spawningSent = 0;
 		}
 		if(atr.lastHit >= 0 && atr.lastHit < 5){
 			atr.lastHit++;

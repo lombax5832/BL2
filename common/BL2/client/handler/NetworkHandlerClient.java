@@ -11,12 +11,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.src.ModLoader;
+import BL2.BL2Core;
 import BL2.client.render.ShieldFX;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.handler.NetworkHandler;
+import BL2.common.item.ItemArmorShield.ShieldAtributes;
+import BL2.common.item.ItemArmorShield.Vector;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
@@ -94,72 +98,91 @@ public class NetworkHandlerClient extends NetworkHandler
 
         try
         {
+        	System.out.println(packet.data[0]);
+        	if(packet.data[0] == particlePacketID){
+        		//System.out.println("spawned");
+            	DataInputStream din = new DataInputStream(in);
+            	int dimention = din.readInt();
+            	int index = din.readInt();
+                int playerID = din.readInt();
+                int type = din.readInt();
+                double distance = din.readDouble();
+                boolean spawning = din.readBoolean();
+                WorldClient world = Minecraft.getMinecraft().theWorld;
+                ItemStack shield = null;
+                ShieldAtributes str = null;
 
-            switch (packet.data[0])
-            {
-                case NetworkHandler.particlePacketID:
+                if (world.provider.dimensionId != dimention)
                 {
-                	//System.out.println("spawned");
-                	DataInputStream din = new DataInputStream(in);
-                	int dimention = din.readInt();
-                	int index = din.readInt();
-                    double x = din.readDouble();
-                    double y = din.readDouble();
-                    double z = din.readDouble();
-                    int playerID = din.readInt();
-                    int type = din.readInt();
-                    WorldClient world = Minecraft.getMinecraft().theWorld;
-
-                    if (world.provider.dimensionId != dimention)
-                    {
-                        return;
-                    }
-                    if(player == null){
-                    	player = (EntityPlayer) world.getEntityByID(playerID);
-                    }
-                    
-                    if(player == p)
-                    {
-                    	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), x, y-1.5, z, getColor(type));
-                    	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
-                    }
-                    else
-                    {
-                    	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), x, y, z, getColor(type));
-                    	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
-                    }
-                    
+                    return;
                 }
-                case NetworkHandler.grenadePacketID:
-                {
-                	DataInputStream din = new DataInputStream(in);
-                	int dimention = din.readInt();
-                	
-                	WorldClient world = Minecraft.getMinecraft().theWorld;
-
-                    if (world.provider.dimensionId != dimention)
-                    {
-                        return;
-                    }
-                	
-                    int gid = din.readInt();
-                    EntityGrenade grenade = (EntityGrenade) world.getEntityByID(gid);
-                    if(grenade == null)
-                    {
-                    	return;
-                    }
+                if(player == null){
+                	player = (EntityPlayer) world.getEntityByID(playerID);
                     
-                    String var = din.readUTF();
-                    if(var.equals("parent"))
+                       
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    shield = player.inventory.armorItemInSlot(i);
+
+                    if (shield != null)
                     {
-                        grenade.stuckTo = (EntityLiving)world.getEntityByID(din.readInt());
-                    }else
-                    if(var.equals("homing"))
-                    {
-                        grenade.homing = din.readBoolean();
+                        if (shield.itemID == BL2Core.shield.itemID)
+                        {
+                        	str = new ShieldAtributes(shield);
+                        	
+                        }
                     }
                 }
-            }
+                System.out.println(str.charge);
+                if(spawning){
+                	Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
+    				v.normalize();
+    				if(player == p)
+	                {
+    					for(int i = 0; i < 10; i++)//particles per tick
+    					{
+		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x, v.y-1.5, v.z, getColor(type));
+		                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
+    					}
+	                }
+	                else
+	                { 
+	                	for(int i = 0; i < 10; i++)//particles per tick
+    					{
+		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x, v.y, v.z, getColor(type));
+		                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
+    					}
+	                }
+                }
+        	}
+        	else if(packet.data[0] == grenadePacketID){
+        		DataInputStream din = new DataInputStream(in);
+            	int dimention = din.readInt();
+            	WorldClient world = Minecraft.getMinecraft().theWorld;
+
+                if (world.provider.dimensionId != dimention)
+                {
+                    return;
+                }
+            	
+                int gid = din.readInt();
+                EntityGrenade grenade = (EntityGrenade) world.getEntityByID(gid);
+                if(grenade == null)
+                {
+                	return;
+                }
+                
+                String var = din.readUTF();
+                if(var.equals("parent"))
+                {
+                    grenade.stuckTo = (EntityLiving)world.getEntityByID(din.readInt());
+                }else
+                if(var.equals("homing"))
+                {
+                    grenade.homing = din.readBoolean();
+                }
+        	}
         }
         catch (IOException var22)
         {
