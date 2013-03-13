@@ -97,7 +97,6 @@ public class RenderShield extends GuiIngame{
 	
 	@SideOnly(Side.CLIENT)
 	public void renderGameOverlay(float par1, boolean par2, int par3, int par4){
-		System.out.println("lol");
 		ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
 		int height = res.getScaledHeight();
 		int width = res.getScaledWidth();

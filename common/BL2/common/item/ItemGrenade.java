@@ -24,7 +24,7 @@ public class ItemGrenade extends Item
 
     public void getSubItems(int i, CreativeTabs tabs, List l)
     {
-		for (int j = 1; j < 4; j++)
+		for (int j = 1; j < 5; j++)
         {
 			ItemStack stack = new ItemStack(this, 1, j);
 	        GrenadeAtributes atr = new GrenadeAtributes(stack);
