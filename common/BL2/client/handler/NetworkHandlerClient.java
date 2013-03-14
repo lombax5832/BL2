@@ -93,18 +93,19 @@ public class NetworkHandlerClient extends NetworkHandler
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player p)
     {
 		
-		 EntityPlayer player = null;
+		 
 		
 		//System.out.println("recieved packet");
         ByteArrayInputStream in = new ByteArrayInputStream(packet.data, 1, packet.data.length - 1);
 
         try
         {
+        	EntityPlayer player = null;
 //        	System.out.println(packet.data[0]);
         	if(packet.data[0] == particlePacketID){
         		//System.out.println("spawned");
             	DataInputStream din = new DataInputStream(in);
-            	int dimention = din.readInt();
+            	int dimension = din.readInt();
             	int index = din.readInt();
                 int playerID = din.readInt();
                 int type = din.readInt();
@@ -114,7 +115,7 @@ public class NetworkHandlerClient extends NetworkHandler
                 ItemStack shield = null;
                 ShieldAtributes str = null;
 
-                if (world.provider.dimensionId != dimention)
+                if (world.provider.dimensionId != dimension)
                 {
                     return;
                 }
@@ -136,29 +137,27 @@ public class NetworkHandlerClient extends NetworkHandler
                         }
                     }
                 }
-                if(true){
-	                if(spawnParts){
-	                	
-	    				if(player == p)
-		                {
-	    					for(int i = 0; i < 10; i++)//particles per tick
-	    					{
-	    						Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
-	    						v.normalize();
-			                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x * distance, v.y-1.5* distance, v.z* distance, getColor(type));
-			                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
-	    					}
-		                }
-		                else
-		                { 
-		                	for(int i = 0; i < 10; i++)//particles per tick
-	    					{
-		                		Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
-	    						v.normalize();
-			                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x* distance, v.y* distance, v.z* distance, getColor(type));
-			                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
-	    					}
-		                }
+                if(spawnParts){
+                	
+    				if(player == p)
+	                {
+    					for(int i = 0; i < 10; i++)//particles per tick
+    					{
+    						Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
+    						v.normalize();
+		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x * distance, v.y-2* distance, v.z* distance, getColor(type));
+		                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
+    					}
+	                }
+	                else
+	                { 
+	                	for(int i = 0; i < 10; i++)//particles per tick
+    					{
+	                		Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
+    						v.normalize();
+		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x* distance, v.y* distance, v.z* distance, getColor(type));
+		                	ModLoader.getMinecraftInstance().effectRenderer.addEffect(fx);
+    					}
 	                }
                 }
         	}
