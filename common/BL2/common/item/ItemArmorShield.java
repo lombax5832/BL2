@@ -122,10 +122,8 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 				if(ep.getCurrentArmor(o) == it)
 				{
 					playerID = ep.entityId;
-					if(spawningSent == 0){
-						BL2Core.nethandler.sendParticlePacket(ep.worldObj, distance, playerID, it.getItemDamage(), o, true);
-						spawningSent++;
-					}
+					BL2Core.nethandler.sendParticlePacket(ep.worldObj, distance, playerID, it.getItemDamage(), o, true);
+					spawningSent++;
 				}
 			
 			}
