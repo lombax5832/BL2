@@ -63,7 +63,7 @@ public class ShieldGUIHandler implements ITickHandler {
 //		            if (player.getCurrentEquippedItem().itemID == BL2Core.guns.shiftedIndex || player.getCurrentEquippedItem().itemID == BL2Core.grenade.shiftedIndex){
 
                 	
-                	    MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID, new RenderGunInHand());
+//                	    MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID, new RenderGunInHand());
 //                	    MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID, new RenderGrenadeInHand());
                 	
 //		            }
