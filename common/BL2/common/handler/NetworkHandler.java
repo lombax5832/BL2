@@ -29,6 +29,7 @@ public class NetworkHandler implements IPacketHandler
 	{
 		try
         {
+			System.out.println("Packet Sent");
 			ByteArrayOutputStream baout = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(baout);
             out.writeByte(particlePacketID);
