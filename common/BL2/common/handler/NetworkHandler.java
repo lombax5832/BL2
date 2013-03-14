@@ -128,7 +128,7 @@ public class NetworkHandler implements IPacketHandler
                     player = (EntityPlayer)p;
                     
                     ItemStack stack = player.getCurrentEquippedItem();
-                    if(stack.getItem() == BL2Core.guns)
+                    if(stack != null && stack.getItem() == BL2Core.guns)
                     {
                     	ItemGun.reload(stack);
                     }

@@ -32,10 +32,12 @@ public class ItemGun extends Item
     {
         for (int j = 1; j < 7; j++)
         {
-            ItemStack stack = new ItemStack(this, 1, j);
-            //GunAtributes atr = new GunAtributes(stack);
-            l.add(stack);
-            //atr.save(stack);
+        	if(j != 1 && j != 4 && j != 6){
+	            ItemStack stack = new ItemStack(this, 1, j);
+	            //GunAtributes atr = new GunAtributes(stack);
+	            l.add(stack);
+	            //atr.save(stack);
+        	}
         }
     }
 
@@ -577,11 +579,13 @@ public class ItemGun extends Item
     {
     	float g = (float) Math.random() * 100;
      	
-     	if(g < 50)
+     	if(g < 35)
      	{
      		genSMG(atr);
-     	}else{
+     	}else if(g < 70){
      		genAR(atr);
+     	}else{
+     		genSniper(atr);
      	}
     }
     

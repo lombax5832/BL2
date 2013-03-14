@@ -179,7 +179,6 @@ public class EntityBullet extends Entity implements IProjectile
 
         ++this.ticksInAir;
 
-        System.out.println(this.ticksExisted);
         if(this.ticksExisted >= 20){
         	this.setDead();
         }

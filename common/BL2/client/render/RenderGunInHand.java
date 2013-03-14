@@ -86,10 +86,10 @@ public class RenderGunInHand implements IItemRenderer {
             		renderSMG(0F, .5F, .4F);
         			break;
         		}else if(item.getItemDamage() == assaultId){
-        			renderAssault(1F, -0.4F, .6F);
+        			renderAssault(1F, -0.5F, .6F);
         			break;
         		}else if(item.getItemDamage() == sniperId){
-            		renderSniper(.6F, -0.85F, 0.65F);
+            		renderSniper(.6F, -1.4F, 0.65F);
                 	break;
             	}
             }
@@ -140,7 +140,7 @@ public class RenderGunInHand implements IItemRenderer {
         ForgeHooksClient.bindTexture("/BL2/textures/Guns/SniperModel.png", 0);
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
-        sniperModel.render(0.1F);
+        sniperModel.render(0.15F);
         GL11.glPopMatrix(); //end
     }
     
