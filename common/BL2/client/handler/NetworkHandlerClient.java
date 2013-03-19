@@ -100,9 +100,7 @@ public class NetworkHandlerClient extends NetworkHandler
 
         try
         {
-        	System.out.println("Packet Received");
         	EntityPlayer player = null;
-//        	System.out.println(packet.data[0]);
         	if(packet.data[0] == particlePacketID){
         		//System.out.println("spawned");
             	DataInputStream din = new DataInputStream(in);
@@ -144,7 +142,6 @@ public class NetworkHandlerClient extends NetworkHandler
 	                {
     					for(int i = 0; i < 10; i++)//particles per tick
     					{
-    						System.out.println("Packet Used: "+ i);
     						Vector v = new Vector((Math.random() * 2) - 1, (Math.random() * 2) - 1, (Math.random() * 2) - 1);
     						v.normalize();
 		                	ShieldFX fx = new ShieldFX(world, player, player.getCurrentArmor(index), v.x * distance, v.y-2* distance, v.z* distance, getColor(type));

@@ -76,7 +76,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 		        ShieldAtributes atr = new ShieldAtributes(stack);
 				if(j == 2){
 					atr.maxcharge = 400;
-					atr.rechargeDelay = 20;
+					atr.rechargeDelay = 400;
 					atr.chargeRate = 2;
 				}
 		        atr.rechargeTicker = 1;
@@ -90,8 +90,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	@Override
 	public void func_94581_a(IconRegister ir) {
 		for(int i = 1; i < 5; i++){
-			if(i != 3){
-				System.out.println("Shield"+(i));
+			if(i != 3){	
 				icons[i-1] = ir.func_94245_a("BL2:" + "Shield"+(i));
 			}
 		}	
@@ -361,7 +360,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	public String getArmorTextureFile(ItemStack itemstack) {	
 		int damVal = itemstack.getItemDamage();
 		if (itemstack.itemID == BL2Core.shield.itemID){
-			return "/BL2/textures/Armor/shield_"+ damVal +".png";
+			return "/mods/BL2/textures/Armor/shield_"+ damVal +".png";
 		}
 		return null;
 	}

@@ -120,7 +120,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/SMGModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/SMGModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         smgModel.render(0.1F);
@@ -131,7 +131,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/SMGModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/SMGModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         smgInv.render(0.094F);
@@ -142,7 +142,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/SniperModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/SniperModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         sniperModel.render(0.15F);
@@ -153,7 +153,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/SniperModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/SniperModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         sniperInv.render(.06F);
@@ -164,7 +164,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/PistolModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/PistolModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         pistolModel.render(0.1F);
@@ -175,7 +175,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/PistolModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/PistolModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         pistolInv.render(0.1F);
@@ -186,7 +186,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/AssaultRifleModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/AssaultRifleModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         assaultRifleModel.render(0.1F);
@@ -197,7 +197,7 @@ public class RenderGunInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/BL2/textures/Guns/AssaultRifleModel.png");
+        render.func_98187_b("/mods/BL2/textures/Guns/AssaultRifleModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         assaultRifleInv.render(0.07F);

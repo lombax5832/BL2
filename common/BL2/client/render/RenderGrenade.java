@@ -21,7 +21,7 @@ public class RenderGrenade extends Render{
 	
 	public void renderGrenade(EntityGrenade par1EntityArrow, double par2, double par4, double par6, float par8, float par9)
     {
-        this.loadTexture("/BL2/textures/TextureGrenade.png");
+        this.loadTexture("/mods/BL2/textures/TextureGrenade.png");
         GL11.glPushMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glTranslatef((float)par2, (float)par4 + 1.2F, (float)par6);

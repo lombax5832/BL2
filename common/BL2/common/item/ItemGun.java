@@ -47,7 +47,6 @@ public class ItemGun extends Item
     
     public void func_94581_a(IconRegister ir) {
 		for(int i = 1; i < 7; i++){
-			System.out.println(gunNames[i]);
 			icons[i-1] = ir.func_94245_a("BL2:" + gunNames[i]);
 		}
 			
@@ -104,6 +103,7 @@ public class ItemGun extends Item
     	par3List.add("DPS: " + getDPS(par1ItemStack, par2EntityPlayer) + " Hearts/second");
 		par3List.add("Ammo: " + getBulletsLeftInfo(par1ItemStack));
 		par3List.add("Consumes " + atr.ammoPerShot + " bullet"+s(atr.ammoPerShot)+" per shot.");
+		par3List.add("RPM: "+ (21 - atr.firetime)*60);
 		par3List.add("Reload: " + (float) (atr.reloadtime / 20) + " seconds");
 		if(atr.explosive == true){
 			par3List.add("Bullets explode on impact.");

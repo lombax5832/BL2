@@ -23,13 +23,12 @@ public class NetworkHandler implements IPacketHandler
 {
 	public static final int particlePacketID = 0;
 	public static final int reloadPacketID = 1;
-	public static final int grenadePacketID = 5;
+	public static final int grenadePacketID = 3;
 	
 	public void sendParticlePacket(World world, double distance, int playerID, int type, int inventoryIndex, boolean shouldRender)
 	{
 		try
         {
-			System.out.println("Packet Sent");
 			ByteArrayOutputStream baout = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(baout);
             out.writeByte(particlePacketID);

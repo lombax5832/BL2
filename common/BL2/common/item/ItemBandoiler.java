@@ -41,7 +41,6 @@ public class ItemBandoiler extends Item
 	
 	public void func_94581_a(IconRegister ir) {
 		for(int i = 1; i < 7; i++){
-			System.out.println(ammoTypes[i]+"Bandoiler");
 			icons[i-1] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Bandoiler");
 		}
 			
