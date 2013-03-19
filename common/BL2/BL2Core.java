@@ -87,12 +87,12 @@ public class BL2Core implements ITickHandler
     	EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this, 64, 10, true);
     	EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2, this, 64, 10, true);
     	
-        guns = new ItemGun(16000);
-        bullets = new ItemBullets(16001);
-        bandoiler = new ItemBandoiler(16002);
-        shield = new ItemArmorShield(16003, shieldrenderid, 1);
-        grenade = new ItemGrenade(16004);
-        temp = new ItemTemp(16005);
+        guns = new ItemGun(16000).setUnlocalizedName("Gun");
+        bullets = new ItemBullets(16001).setUnlocalizedName("Bullets");
+        bandoiler = new ItemBandoiler(16002).setUnlocalizedName("Bandoiler");
+        shield = new ItemArmorShield(16003, shieldrenderid, 1).setUnlocalizedName("ItemArmorShield");
+        grenade = new ItemGrenade(16004).setUnlocalizedName("Grenade");
+        temp = new ItemTemp(16005).setUnlocalizedName("Temp");
 //        eridiumFlowing = new BlockEridiumFlowing(2456);
 //        eridiumStill = new BlockEridiumStill(2457);
 //        refinedEridiumFlowing = new BlockRefinedEridiumFlowing(2458);
