@@ -29,7 +29,7 @@ public class RefinedEridiumBucketHelper {
 		if ((blockID == BL2Core.refinedEridiumStill.blockID || blockID == BL2Core.refinedEridiumFlowing.blockID)
 				&& world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 
-			world.setBlockWithNotify(pos.blockX, pos.blockY, pos.blockZ, 0);
+			world.setBlockAndMetadataWithNotify(pos.blockX, pos.blockY, pos.blockZ, 0, 0, 2);
 
 			return new ItemStack(BL2Core.bucketRefinedEridium);
 		} else

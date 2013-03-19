@@ -131,7 +131,7 @@ public class CustomExplosion
                     var19 /= var34;
                     double var33 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
                     double var35 = (1.0D - var13) * var33;
-                    var32.attackEntityFrom(DamageSource.explosion, (int)((var35 * var35 + var35) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
+                    var32.attackEntityFrom(DamageSource.generic, (int)((var35 * var35 + var35) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
                     double var36 = EnchantmentProtection.func_92092_a(var32, var35);
                     var32.motionX += var15 * var36;
                     var32.motionY += var17 * var36;

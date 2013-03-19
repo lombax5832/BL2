@@ -19,7 +19,6 @@ public class ItemGrenade extends Item
         maxStackSize = 16;
         this.setHasSubtypes(true);
         setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
-        setIconCoord(12, 0);
     }
 
     public void getSubItems(int i, CreativeTabs tabs, List l)

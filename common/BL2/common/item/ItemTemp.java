@@ -2,6 +2,7 @@ package BL2.common.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,8 +16,9 @@ public class ItemTemp extends Item{
         super(par1);
         this.maxStackSize = 1;
         this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
-        this.setIconIndex(48);
     }
+	
+	
 	
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	 {
@@ -26,16 +28,17 @@ public class ItemTemp extends Item{
 		 
 	 }
 	
+	public void func_94581_a(IconRegister par1IconRegister)
+    {
+        iconIndex = par1IconRegister.func_94245_a("BL2:Temp");
+    }
+	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
 		par3EntityPlayer.dropPlayerItem(ItemGun.getRandomGun());
 		par1ItemStack.stackSize = 0;
 		return par1ItemStack;
     }
-	
-	public String getTextureFile(){
-		return "/BL2/textures/items.png";
-	}
 	
 	public boolean isFull3D()
     {

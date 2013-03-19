@@ -36,17 +36,6 @@ public class BL2Client extends BL2Proxy{
     }
 	
 	@Override
-    public void initRenderingAndTextures() {
-		net.minecraft.client.renderer.RenderEngine renderEngine = FMLClientHandler.instance().getClient().renderEngine;
-		
-		renderEngine.registerTextureFX(new TextureEridiumFX());
-		renderEngine.registerTextureFX(new TextureEridiumFlowFX());
-        
-		renderEngine.registerTextureFX(new TextureRefinedEridiumFX());
-		renderEngine.registerTextureFX(new TextureRefinedEridiumFlowFX());
-	}
-	
-	@Override
 	public void registerItemRenderer() {
 		MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID, new RenderGunInHand());
 	    MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID, new RenderGrenadeInHand());

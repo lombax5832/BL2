@@ -31,7 +31,6 @@ import BL2.common.item.ItemGrenade;
 import BL2.common.item.ItemGun;
 import BL2.common.item.ItemTemp;
 import BL2.common.proxy.BL2Proxy;
-import buildcraft.api.recipes.RefineryRecipe;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -92,69 +91,66 @@ public class BL2Core implements ITickHandler
     	EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this, 64, 10, true);
     	EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2, this, 64, 10, true);
     	
-        guns = new ItemGun(16000);
+//        guns = new ItemGun(16000);
         bullets = new ItemBullets(16001);
         bandoiler = new ItemBandoiler(16002);
-        shield = new ItemArmorShield(16003, shieldrenderid, 1).setIconIndex(65);
-        grenade = new ItemGrenade(16004);
-        temp = new ItemTemp(16005);
-        eridiumFlowing = new BlockEridiumFlowing(2456);
-        eridiumStill = new BlockEridiumStill(2457);
-        refinedEridiumFlowing = new BlockRefinedEridiumFlowing(2458);
-        refinedEridiumStill = new BlockRefinedEridiumStill(2459);
+        shield = new ItemArmorShield(16003, shieldrenderid, 1);
+//        grenade = new ItemGrenade(16004);
+//        temp = new ItemTemp(16005);
+//        eridiumFlowing = new BlockEridiumFlowing(2456);
+//        eridiumStill = new BlockEridiumStill(2457);
+//        refinedEridiumFlowing = new BlockRefinedEridiumFlowing(2458);
+//        refinedEridiumStill = new BlockRefinedEridiumStill(2459);
         
         
         // Register Liquid Blocks
-        GameRegistry.registerBlock(eridiumStill, "eridiumStill");
-        LanguageRegistry.addName(eridiumStill, "Crude Eridium");
-        
-        GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
-        LanguageRegistry.addName(eridiumFlowing, "Crude Eridium (Flowing)");
-        
-        GameRegistry.registerBlock(refinedEridiumStill, "refinedEridiumStill");
-        LanguageRegistry.addName(refinedEridiumStill, "Refined Eridium");
-        
-        GameRegistry.registerBlock(refinedEridiumFlowing, "refinedEridiumFlowing");
-        LanguageRegistry.addName(refinedEridiumFlowing, "Refined Eridium (Flowing)");
+//        GameRegistry.registerBlock(eridiumStill, "eridiumStill");
+//        LanguageRegistry.addName(eridiumStill, "Crude Eridium");
+//        
+//        GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
+//        LanguageRegistry.addName(eridiumFlowing, "Crude Eridium (Flowing)");
+//        
+//        GameRegistry.registerBlock(refinedEridiumStill, "refinedEridiumStill");
+//        LanguageRegistry.addName(refinedEridiumStill, "Refined Eridium");
+//        
+//        GameRegistry.registerBlock(refinedEridiumFlowing, "refinedEridiumFlowing");
+//        LanguageRegistry.addName(refinedEridiumFlowing, "Refined Eridium (Flowing)");
         
         // Liquid Containers
-        bucketEridium = new ItemBucketEridium(16006).setIconIndex(5*16).setItemName("bucketEridium").setContainerItem(Item.bucketEmpty);
-		LanguageRegistry.addName(bucketEridium, "Crude Eridium Bucket");
-		
-		bucketRefinedEridium = new ItemBucketRefinedEridium(16007).setIconIndex((5*16)+1).setItemName("bucketRefinedEridium").setContainerItem(Item.bucketEmpty);
-		LanguageRegistry.addName(bucketRefinedEridium, "Refined Eridium Bucket");
+//        bucketEridium = new ItemBucketEridium(16006).setItemName("bucketEridium").setContainerItem(Item.bucketEmpty);
+//		LanguageRegistry.addName(bucketEridium, "Crude Eridium Bucket");
+//		
+//		bucketRefinedEridium = new ItemBucketRefinedEridium(16007).setItemName("bucketRefinedEridium").setContainerItem(Item.bucketEmpty);
+//		LanguageRegistry.addName(bucketRefinedEridium, "Refined Eridium Bucket");
 		
 		// Register Liquid API
-        eridiumLiquid = LiquidDictionary.getOrCreateLiquid("Eridium", new LiquidStack(eridiumStill, 1));
-        refinedEridiumLiquid = LiquidDictionary.getOrCreateLiquid("Refined Eridium", new LiquidStack(refinedEridiumStill, 1));
+//        eridiumLiquid = LiquidDictionary.getOrCreateLiquid("Eridium", new LiquidStack(eridiumStill, 1));
+//        refinedEridiumLiquid = LiquidDictionary.getOrCreateLiquid("Refined Eridium", new LiquidStack(refinedEridiumStill, 1));
         
         // Add Refinery API
-        RefineryRecipe.registerRefineryRecipe(new RefineryRecipe(LiquidDictionary.getLiquid("Eridium", 5), null, LiquidDictionary.getLiquid("Refined Eridium", 4), 70, 5));
+        //RefineryRecipe.registerRefineryRecipe(new RefineryRecipe(LiquidDictionary.getLiquid("Eridium", 5), null, LiquidDictionary.getLiquid("Refined Eridium", 4), 70, 5));
         
         //Register Liquid
-		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
-				bucketEridium), new ItemStack(Item.bucketEmpty)));
-		
-		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Refined Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
-				bucketRefinedEridium), new ItemStack(Item.bucketEmpty)));
+//		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
+//				bucketEridium), new ItemStack(Item.bucketEmpty)));
+//		
+//		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Refined Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
+//				bucketRefinedEridium), new ItemStack(Item.bucketEmpty)));
 		
 		
 		
 //        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(liquidstack, new ItemStack(bucket, 1, iter), new ItemStack(Item.bucketEmpty)));
 //        LiquidDictionary.getOrCreateLiquid("liquidEridium", null);
         
-		MinecraftForge.EVENT_BUS.register(new EridiumBucketHelper());
-		MinecraftForge.EVENT_BUS.register(new RefinedEridiumBucketHelper());
+//		MinecraftForge.EVENT_BUS.register(new EridiumBucketHelper());
+//		MinecraftForge.EVENT_BUS.register(new RefinedEridiumBucketHelper());
 		
         LanguageRegistry.addName(guns, "Gun");
-        guns.setItemName("stuff");
         //registerHandlers();
         TickRegistry.registerTickHandler(this, Side.SERVER);
         proxy.registerRenderTickHandler();
         proxy.registerItemRenderer();
 //        MinecraftForge.EVENT_BUS.register(new RenderShield());
-        
-        proxy.initRenderingAndTextures();
         
         GameRegistry.addRecipe(new ItemStack(temp), new Object[]
         		{

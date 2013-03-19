@@ -40,11 +40,6 @@ public class ItemGun extends Item
         	}
         }
     }
-
-    public int getIconFromDamage(int par1)
-    {
-        return par1 - 1;
-    }
     
     public float getDamageForItemStack(ItemStack stack)
     {

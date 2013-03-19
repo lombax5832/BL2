@@ -2,17 +2,21 @@ package BL2.common.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import BL2.BL2Core;
 
 public class ItemBandoiler extends Item
 {
 	public static final String[] ammoTypes = new String[] {"", "Pistol", "SMG", "Assault Rifle", "Rocket Launcher", "Sniper", "Shotgun"};
+	
+	Icon[] icons = new Icon[7];
 	
 	public ItemBandoiler(int id)
 	{
@@ -34,11 +38,18 @@ public class ItemBandoiler extends Item
 			stor.save(stack);
 		}
 	}
-
-	public int getIconFromDamage(int par1)
-    {
-		return 31 + par1;
-    }
+	
+	public void func_94581_a(IconRegister ir) {
+		for(int i = 1; i < 7; i++){
+			icons[i] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Bandoiler");
+		}
+			
+	}
+	
+	@Override
+	public Icon getIconFromDamage(int par1) {
+		return icons[par1];
+	}
 	
 	public float getDamageForItemStack(ItemStack stack)
     {

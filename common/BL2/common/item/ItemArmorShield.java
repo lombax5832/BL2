@@ -2,6 +2,7 @@ package BL2.common.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Icon;
 import net.minecraftforge.common.IArmorTextureProvider;
 import net.minecraftforge.common.ISpecialArmor;
 import BL2.BL2Core;
@@ -21,6 +23,8 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	
 	public static final String[] shieldNames = new String[] {"","Standard Shield"	, "Turtle Shield"	, "Booster Shield"	, "Absorption Shield"	, "Amp Shield"};
 	public static final String[] Companies = new String[] {"", 	"Tediore"			, "Pangolin"		, "Dahl"			, "Vladof"				, "Hyperion"};
+	
+	Icon[] icons = new Icon[5];
 	
 	boolean isHit = false;
 	
@@ -65,7 +69,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 	
 	public void getSubItems(int i, CreativeTabs tabs, List l)
     {
-		for (int j = 1; j < 6; j++)
+		for (int j = 1; j < 5; j++)
         {
 			if(j != 3){
 				ItemStack stack = new ItemStack(this, 1, j);
@@ -82,6 +86,18 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 			}
         }
     }
+	
+	public void func_94581_a(IconRegister ir) {
+		for(int i = 1; i < 5; i++){
+			icons[i] = ir.func_94245_a("BL2:" + "Shield"+i);
+		}
+			
+	}
+	
+	@Override
+	public Icon getIconFromDamage(int par1) {
+		return icons[par1];
+	}
 	
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -337,16 +353,6 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
 			return Math.sqrt((x * x) + (y * y) + (z * z));
 		}
 	}
-	
-	public String getTextureFile()
-    {
-        return "/BL2/textures/Shields.png";
-    }
-	
-	public int getIconFromDamage(int par1)
-    {
-        return par1 - 1;
-    }
 
 	@Override
 	public String getArmorTextureFile(ItemStack itemstack) {	

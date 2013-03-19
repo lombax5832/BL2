@@ -1,5 +1,6 @@
 package BL2.common.item;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import BL2.BL2Core;
@@ -8,7 +9,6 @@ public class ItemBucketEridium extends ItemBucket {
 
 	public ItemBucketEridium(int i) {
 		super(i, BL2Core.eridiumFlowing.blockID);
-		iconIndex = 0 * 16 + 1;
 		this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
 	}
 
@@ -18,9 +18,8 @@ public class ItemBucketEridium extends ItemBucket {
 	}
 
 	@Override
-	public String getTextureFile()
-    {
-        return "/BL2/textures/items.png";
-    }
+	public void func_94581_a(IconRegister ir) {
+		iconIndex = ir.func_94245_a("BL2:" + "EridiumBucket");
+	}
 
 }

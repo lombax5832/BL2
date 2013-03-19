@@ -27,11 +27,6 @@ public class BL2Proxy {
 		
 	}
 
-	public void initRenderingAndTextures() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void registerItemRenderer() {
 		// TODO Auto-generated method stub
 		
