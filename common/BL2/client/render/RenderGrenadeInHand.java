@@ -1,5 +1,7 @@
 package BL2.client.render;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -13,7 +15,7 @@ import BL2.client.model.ModelGrenadeInv;
 
 public class RenderGrenadeInHand implements IItemRenderer {
 
-    private ModelGrenadeHeld grenadeModel;
+    private static ModelGrenadeHeld grenadeModel;
     private ModelGrenadeInv grenadeInv;
 
     public RenderGrenadeInHand() {
@@ -56,10 +58,11 @@ public class RenderGrenadeInHand implements IItemRenderer {
 
     }
 
-    private void renderGrenade(float x, float y, float z) {
-
+    public static void renderGrenade(float x, float y, float z) {
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/TextureGrenade.png", 0);
+        render.func_98187_b("/BL2/textures/TextureGrenade.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         grenadeModel.render(.1F);
@@ -67,9 +70,10 @@ public class RenderGrenadeInHand implements IItemRenderer {
     }
     
     private void renderGrenadeInv(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/TextureGrenade.png", 0);
+        render.func_98187_b("/BL2/textures/TextureGrenade.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         grenadeInv.render(.29F);

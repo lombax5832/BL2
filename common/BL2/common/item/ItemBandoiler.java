@@ -16,7 +16,7 @@ public class ItemBandoiler extends Item
 {
 	public static final String[] ammoTypes = new String[] {"", "Pistol", "SMG", "Assault Rifle", "Rocket Launcher", "Sniper", "Shotgun"};
 	
-	Icon[] icons = new Icon[7];
+	Icon[] icons = new Icon[6];
 	
 	public ItemBandoiler(int id)
 	{
@@ -41,14 +41,15 @@ public class ItemBandoiler extends Item
 	
 	public void func_94581_a(IconRegister ir) {
 		for(int i = 1; i < 7; i++){
-			icons[i] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Bandoiler");
+			System.out.println(ammoTypes[i]+"Bandoiler");
+			icons[i-1] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Bandoiler");
 		}
 			
 	}
 	
 	@Override
 	public Icon getIconFromDamage(int par1) {
-		return icons[par1];
+		return icons[par1-1];
 	}
 	
 	public float getDamageForItemStack(ItemStack stack)

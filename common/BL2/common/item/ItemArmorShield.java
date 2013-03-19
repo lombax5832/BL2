@@ -87,16 +87,19 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
         }
     }
 	
+	@Override
 	public void func_94581_a(IconRegister ir) {
 		for(int i = 1; i < 5; i++){
-			icons[i] = ir.func_94245_a("BL2:" + "Shield"+i);
-		}
-			
+			if(i != 3){
+				System.out.println("Shield"+(i));
+				icons[i-1] = ir.func_94245_a("BL2:" + "Shield"+(i));
+			}
+		}	
 	}
 	
 	@Override
 	public Icon getIconFromDamage(int par1) {
-		return icons[par1];
+		return icons[par1-1];
 	}
 	
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)

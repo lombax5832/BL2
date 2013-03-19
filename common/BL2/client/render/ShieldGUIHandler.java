@@ -75,7 +75,7 @@ public class ShieldGUIHandler implements ITickHandler {
 	@Override
 	public EnumSet<TickType> ticks() {
 		// TODO Auto-generated method stub
-		return EnumSet.of(TickType.CLIENT, TickType.CLIENTGUI, TickType.RENDER);
+		return EnumSet.of(TickType.CLIENT, TickType.RENDER);
 	}
 
 	@Override

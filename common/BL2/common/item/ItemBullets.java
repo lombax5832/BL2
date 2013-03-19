@@ -45,7 +45,7 @@ public class ItemBullets extends Item
 
     public void func_94581_a(IconRegister ir) {
 		for(int i = 1; i < 7; i++){
-			icons[i] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Bandoiler");
+			icons[i] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Ammo");
 		}
 			
 	}

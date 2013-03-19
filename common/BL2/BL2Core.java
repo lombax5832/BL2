@@ -14,10 +14,6 @@ import net.minecraftforge.liquids.LiquidStack;
 import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
 import BL2.client.handler.RefinedEridiumBucketHelper;
-import BL2.common.block.BlockEridiumFlowing;
-import BL2.common.block.BlockEridiumStill;
-import BL2.common.block.BlockRefinedEridiumFlowing;
-import BL2.common.block.BlockRefinedEridiumStill;
 import BL2.common.entity.EntityBullet;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.handler.IItemTickListener;
@@ -91,12 +87,12 @@ public class BL2Core implements ITickHandler
     	EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this, 64, 10, true);
     	EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2, this, 64, 10, true);
     	
-//        guns = new ItemGun(16000);
+        guns = new ItemGun(16000);
         bullets = new ItemBullets(16001);
         bandoiler = new ItemBandoiler(16002);
         shield = new ItemArmorShield(16003, shieldrenderid, 1);
-//        grenade = new ItemGrenade(16004);
-//        temp = new ItemTemp(16005);
+        grenade = new ItemGrenade(16004);
+        temp = new ItemTemp(16005);
 //        eridiumFlowing = new BlockEridiumFlowing(2456);
 //        eridiumStill = new BlockEridiumStill(2457);
 //        refinedEridiumFlowing = new BlockRefinedEridiumFlowing(2458);
@@ -117,18 +113,18 @@ public class BL2Core implements ITickHandler
 //        LanguageRegistry.addName(refinedEridiumFlowing, "Refined Eridium (Flowing)");
         
         // Liquid Containers
-//        bucketEridium = new ItemBucketEridium(16006).setItemName("bucketEridium").setContainerItem(Item.bucketEmpty);
+//        bucketEridium = new ItemBucketEridium(16006).setUnlocalizedName("bucketEridium").setContainerItem(Item.bucketEmpty);
 //		LanguageRegistry.addName(bucketEridium, "Crude Eridium Bucket");
 //		
-//		bucketRefinedEridium = new ItemBucketRefinedEridium(16007).setItemName("bucketRefinedEridium").setContainerItem(Item.bucketEmpty);
+//		bucketRefinedEridium = new ItemBucketRefinedEridium(16007).setUnlocalizedName("bucketRefinedEridium").setContainerItem(Item.bucketEmpty);
 //		LanguageRegistry.addName(bucketRefinedEridium, "Refined Eridium Bucket");
-		
-		// Register Liquid API
+//		
+//		// Register Liquid API
 //        eridiumLiquid = LiquidDictionary.getOrCreateLiquid("Eridium", new LiquidStack(eridiumStill, 1));
 //        refinedEridiumLiquid = LiquidDictionary.getOrCreateLiquid("Refined Eridium", new LiquidStack(refinedEridiumStill, 1));
         
         // Add Refinery API
-        //RefineryRecipe.registerRefineryRecipe(new RefineryRecipe(LiquidDictionary.getLiquid("Eridium", 5), null, LiquidDictionary.getLiquid("Refined Eridium", 4), 70, 5));
+//        RefineryRecipe.registerRefineryRecipe(new RefineryRecipe(LiquidDictionary.getLiquid("Eridium", 5), null, LiquidDictionary.getLiquid("Refined Eridium", 4), 70, 5));
         
         //Register Liquid
 //		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
@@ -141,11 +137,9 @@ public class BL2Core implements ITickHandler
 		
 //        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(liquidstack, new ItemStack(bucket, 1, iter), new ItemStack(Item.bucketEmpty)));
 //        LiquidDictionary.getOrCreateLiquid("liquidEridium", null);
-        
+//        
 //		MinecraftForge.EVENT_BUS.register(new EridiumBucketHelper());
 //		MinecraftForge.EVENT_BUS.register(new RefinedEridiumBucketHelper());
-		
-        LanguageRegistry.addName(guns, "Gun");
         //registerHandlers();
         TickRegistry.registerTickHandler(this, Side.SERVER);
         proxy.registerRenderTickHandler();

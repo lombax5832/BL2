@@ -2,22 +2,26 @@ package BL2.common.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import BL2.BL2Core;
 import BL2.common.entity.EntityBullet;
 
 public class ItemGun extends Item
 {
-	private String itemName;
+	private String itemName = "Gun";
 	
 	public static final String[] gunNames = new String[] {"", "Pistol", "SMG", "Assault Rifle", "Rocket Launcher", "Sniper", "Shotgun"};
 	public static final String[] Companies = new String[] {"Dahl", "Tediore", "Jakobs", "Maliwan", "Bandit", "Hyperion", "Vladof", "Torgue"};
+	
+	Icon[] icons = new Icon[6];
 	
     public ItemGun(int par1)
     {
@@ -40,6 +44,19 @@ public class ItemGun extends Item
         	}
         }
     }
+    
+    public void func_94581_a(IconRegister ir) {
+		for(int i = 1; i < 7; i++){
+			System.out.println(gunNames[i]);
+			icons[i-1] = ir.func_94245_a("BL2:" + gunNames[i]);
+		}
+			
+	}
+	
+	@Override
+	public Icon getIconFromDamage(int par1) {
+		return icons[par1-1];
+	}
     
     public float getDamageForItemStack(ItemStack stack)
     {

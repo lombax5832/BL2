@@ -1,5 +1,7 @@
 package BL2.client.render;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -115,9 +117,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
 
     private void renderSMG(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SMGModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/SMGModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         smgModel.render(0.1F);
@@ -125,9 +128,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
     
     private void renderSMGForInventory(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SMGModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/SMGModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         smgInv.render(0.094F);
@@ -135,9 +139,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
     
     private void renderSniper(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SniperModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/SniperModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         sniperModel.render(0.15F);
@@ -145,9 +150,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
     
     private void renderSniperForInventory(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/SniperModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/SniperModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         sniperInv.render(.06F);
@@ -155,9 +161,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
     
     private void renderPistol(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/PistolModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/PistolModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         pistolModel.render(0.1F);
@@ -165,9 +172,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
     
     private void renderPistolForInventory(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/PistolModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/PistolModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         pistolInv.render(0.1F);
@@ -175,9 +183,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
 
     private void renderAssault(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/AssaultRifleModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/AssaultRifleModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         assaultRifleModel.render(0.1F);
@@ -185,9 +194,10 @@ public class RenderGunInHand implements IItemRenderer {
     }
     
     private void renderAssaultForInventory(float x, float y, float z) {
-
+    	Minecraft mc = Minecraft.getMinecraft();
+    	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        ForgeHooksClient.bindTexture("/BL2/textures/Guns/AssaultRifleModel.png", 0);
+        render.func_98187_b("/BL2/textures/Guns/AssaultRifleModel.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         assaultRifleInv.render(0.07F);
