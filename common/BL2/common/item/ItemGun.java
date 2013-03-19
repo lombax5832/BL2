@@ -103,7 +103,7 @@ public class ItemGun extends Item
     	par3List.add("DPS: " + getDPS(par1ItemStack, par2EntityPlayer) + " Hearts/second");
 		par3List.add("Ammo: " + getBulletsLeftInfo(par1ItemStack));
 		par3List.add("Consumes " + atr.ammoPerShot + " bullet"+s(atr.ammoPerShot)+" per shot.");
-		par3List.add("RPM: "+ (21 - atr.firetime)*60);
+		par3List.add("RPM: "+ (20/atr.firetime)*60);
 		par3List.add("Reload: " + (float) (atr.reloadtime / 20) + " seconds");
 		if(atr.explosive == true){
 			par3List.add("Bullets explode on impact.");
