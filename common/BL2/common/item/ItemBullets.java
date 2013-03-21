@@ -43,9 +43,9 @@ public class ItemBullets extends Item
         }
     }
 
-    public void func_94581_a(IconRegister ir) {
+    public void updateIcons(IconRegister ir) {
 		for(int i = 1; i < 7; i++){
-			icons[i] = ir.func_94245_a("BL2:" + ammoTypes[i]+"Ammo");
+			icons[i] = ir.registerIcon("BL2:" + ammoTypes[i]+"Ammo");
 		}
 			
 	}

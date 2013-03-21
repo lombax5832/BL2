@@ -88,10 +88,10 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor, IItemTi
     }
 	
 	@Override
-	public void func_94581_a(IconRegister ir) {
+	public void updateIcons(IconRegister ir) {
 		for(int i = 1; i < 5; i++){
 			if(i != 3){	
-				icons[i-1] = ir.func_94245_a("BL2:" + "Shield"+(i));
+				icons[i-1] = ir.registerIcon("BL2:" + "Shield"+(i));
 			}
 		}	
 	}

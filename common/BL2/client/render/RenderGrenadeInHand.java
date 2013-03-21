@@ -62,7 +62,7 @@ public class RenderGrenadeInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/mods/BL2/textures/TextureGrenade.png");
+        render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         grenadeModel.render(.1F);
@@ -73,7 +73,7 @@ public class RenderGrenadeInHand implements IItemRenderer {
     	Minecraft mc = Minecraft.getMinecraft();
     	RenderEngine render = mc.renderEngine;
         Tessellator tesselator = Tessellator.instance;
-        render.func_98187_b("/mods/BL2/textures/TextureGrenade.png");
+        render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
         GL11.glPushMatrix(); //start
         GL11.glTranslatef(x, y, z); //size
         grenadeInv.render(.29F);

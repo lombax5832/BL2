@@ -45,9 +45,9 @@ public class ItemGun extends Item
         }
     }
     
-    public void func_94581_a(IconRegister ir) {
+    public void updateIcons(IconRegister ir) {
 		for(int i = 1; i < 7; i++){
-			icons[i-1] = ir.func_94245_a("BL2:" + gunNames[i]);
+			icons[i-1] = ir.registerIcon("BL2:" + gunNames[i]);
 		}
 			
 	}

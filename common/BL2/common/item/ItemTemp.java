@@ -28,9 +28,9 @@ public class ItemTemp extends Item{
 		 
 	 }
 	
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
     {
-        iconIndex = par1IconRegister.func_94245_a("BL2:Temp");
+        iconIndex = par1IconRegister.registerIcon("BL2:Temp");
     }
 	
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)

@@ -18,8 +18,8 @@ public class ItemBucketEridium extends ItemBucket {
 	}
 
 	@Override
-	public void func_94581_a(IconRegister ir) {
-		iconIndex = ir.func_94245_a("BL2:" + "EridiumBucket");
+	public void updateIcons(IconRegister ir) {
+		iconIndex = ir.registerIcon("BL2:" + "EridiumBucket");
 	}
 
 }

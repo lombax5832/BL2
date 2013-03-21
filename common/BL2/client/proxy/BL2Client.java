@@ -20,10 +20,10 @@ public class BL2Client extends BL2Proxy{
 	@Override
     public void registerRenderInformation()
     {
-            RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
-            BL2Core.shieldrenderid = RenderingRegistry.addNewArmourRendererPrefix("/BL2/textures");
-            RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderGrenade());
-            //MinecraftForge.EVENT_BUS.register(new RenderShield());
+        RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new RenderBullet());
+        BL2Core.shieldrenderid = RenderingRegistry.addNewArmourRendererPrefix("/BL2/textures");
+        RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderGrenade());
+        //MinecraftForge.EVENT_BUS.register(new RenderShield());
     }
 	
 	@Override
