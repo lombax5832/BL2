@@ -6,22 +6,14 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.liquids.LiquidContainerData;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
-import BL2.client.handler.EridiumBucketHelper;
 import BL2.client.handler.NetworkHandlerClient;
-import BL2.client.handler.RefinedEridiumBucketHelper;
 import BL2.common.entity.EntityBullet;
 import BL2.common.entity.EntityGrenade;
 import BL2.common.handler.IItemTickListener;
 import BL2.common.handler.NetworkHandler;
 import BL2.common.item.ItemArmorShield;
 import BL2.common.item.ItemBandoiler;
-import BL2.common.item.ItemBucketEridium;
-import BL2.common.item.ItemBucketRefinedEridium;
 import BL2.common.item.ItemBullets;
 import BL2.common.item.ItemGrenade;
 import BL2.common.item.ItemGun;
@@ -36,21 +28,17 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "BL2", name = "Borderlands 2", version = "1.16 (1.5.1)")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, 
-clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandlerClient.class),
-serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = {"bl2"}, packetHandler = NetworkHandler.class))
-public class BL2Core implements ITickHandler
-{
-	public static Block eridiumStill;
-	public static Block eridiumFlowing;
-	public static Block refinedEridiumStill;
-	public static Block refinedEridiumFlowing;
-	
+@Mod(modid = "BL2", name = "Borderlands 2", version = "1.17 (1.5.1)")
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandlerClient.class), serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandler.class))
+public class BL2Core implements ITickHandler {
+    public static Block crudeEridiumStill;
+    public static Block crudeEridiumFlowing;
+    public static Block refinedEridiumStill;
+    public static Block refinedEridiumFlowing;
+
     public static Item guns;
     public static Item bullets;
     public static Item bandoiler;
@@ -59,145 +47,93 @@ public class BL2Core implements ITickHandler
     public static Item temp;
     public static Item bucketEridium;
     public static Item bucketRefinedEridium;
-    
+
     public static LiquidStack eridiumLiquid;
     public static LiquidStack refinedEridiumLiquid;
-    
-    public static int shieldrenderid = 0;
 
-    @SidedProxy(clientSide = "BL2.client.proxy.BL2Client", serverSide= "BL2.common.proxy.BL2Proxy")
+    public static int shieldrenderid = 0;
+    public static int crudeEridiumModel;
+    public static int refinedEridiumModel;
+
+    @SidedProxy(clientSide = "BL2.client.proxy.BL2Client", serverSide = "BL2.common.proxy.BL2Proxy")
     public static BL2Proxy proxy;
     @SidedProxy(clientSide = "BL2.client.handler.NetworkHandlerClient", serverSide = "BL2.common.handler.NetworkHandler")
     public static NetworkHandler nethandler;
-    
+
     @Mod.PreInit
-    public void preInt(FMLPreInitializationEvent event){
-		
+    public void preInt(FMLPreInitializationEvent event) {
+
     }
-    
+
     @Mod.Init
-    public void init(FMLInitializationEvent event)
-    {
-    	proxy.registerKeyBinding();
-    	
-    	proxy.registerRenderInformation();
-    	
-    	//LanguageRegistry.addName(new ItemStack(BuildCraftEnergy.engineBlock, 1, 3), "Eridium Engine");
-    	
-    	EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this, 64, 10, true);
-    	EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2, this, 64, 10, true);
-    	
+    public void init(FMLInitializationEvent event) {
+        proxy.registerKeyBinding();
+
+        proxy.registerRenderInformation();
+
+        // LanguageRegistry.addName(new ItemStack(BuildCraftEnergy.engineBlock,
+        // 1, 3), "Eridium Engine");
+
+        EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this,
+                64, 10, true);
+        EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2,
+                this, 64, 10, true);
+
         guns = new ItemGun(16000).setUnlocalizedName("Gun");
         bullets = new ItemBullets(16001).setUnlocalizedName("Bullets");
         bandoiler = new ItemBandoiler(16002).setUnlocalizedName("Bandoiler");
-        shield = new ItemArmorShield(16003, shieldrenderid, 1).setUnlocalizedName("ItemArmorShield");
+        shield = new ItemArmorShield(16003, shieldrenderid, 1)
+                .setUnlocalizedName("ItemArmorShield");
         grenade = new ItemGrenade(16004).setUnlocalizedName("Grenade");
         temp = new ItemTemp(16005).setUnlocalizedName("Temp");
-//        eridiumFlowing = new BlockEridiumFlowing(2456);
-//        eridiumStill = new BlockEridiumStill(2457);
-//        refinedEridiumFlowing = new BlockRefinedEridiumFlowing(2458);
-//        refinedEridiumStill = new BlockRefinedEridiumStill(2459);
-        
-        
-        // Register Liquid Blocks
-//        GameRegistry.registerBlock(eridiumStill, "eridiumStill");
-//        LanguageRegistry.addName(eridiumStill, "Crude Eridium");
-//        
-//        GameRegistry.registerBlock(eridiumFlowing, "eridiumFlowing");
-//        LanguageRegistry.addName(eridiumFlowing, "Crude Eridium (Flowing)");
-//        
-//        GameRegistry.registerBlock(refinedEridiumStill, "refinedEridiumStill");
-//        LanguageRegistry.addName(refinedEridiumStill, "Refined Eridium");
-//        
-//        GameRegistry.registerBlock(refinedEridiumFlowing, "refinedEridiumFlowing");
-//        LanguageRegistry.addName(refinedEridiumFlowing, "Refined Eridium (Flowing)");
-        
-        // Liquid Containers
-//        bucketEridium = new ItemBucketEridium(16006).setUnlocalizedName("bucketEridium").setContainerItem(Item.bucketEmpty);
-//		LanguageRegistry.addName(bucketEridium, "Crude Eridium Bucket");
-//		
-//		bucketRefinedEridium = new ItemBucketRefinedEridium(16007).setUnlocalizedName("bucketRefinedEridium").setContainerItem(Item.bucketEmpty);
-//		LanguageRegistry.addName(bucketRefinedEridium, "Refined Eridium Bucket");
-//		
-//		// Register Liquid API
-//        eridiumLiquid = LiquidDictionary.getOrCreateLiquid("Eridium", new LiquidStack(eridiumStill, 1));
-//        refinedEridiumLiquid = LiquidDictionary.getOrCreateLiquid("Refined Eridium", new LiquidStack(refinedEridiumStill, 1));
-        
-        // Add Refinery API
-//        RefineryRecipe.registerRefineryRecipe(new RefineryRecipe(LiquidDictionary.getLiquid("Eridium", 5), null, LiquidDictionary.getLiquid("Refined Eridium", 4), 70, 5));
-        
-        //Register Liquid
-//		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
-//				bucketEridium), new ItemStack(Item.bucketEmpty)));
-//		
-//		LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Refined Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
-//				bucketRefinedEridium), new ItemStack(Item.bucketEmpty)));
-		
-		
-		
-//        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(liquidstack, new ItemStack(bucket, 1, iter), new ItemStack(Item.bucketEmpty)));
-//        LiquidDictionary.getOrCreateLiquid("liquidEridium", null);
-//        
-//		MinecraftForge.EVENT_BUS.register(new EridiumBucketHelper());
-//		MinecraftForge.EVENT_BUS.register(new RefinedEridiumBucketHelper());
-        //registerHandlers();
         TickRegistry.registerTickHandler(this, Side.SERVER);
         proxy.registerRenderTickHandler();
         proxy.registerItemRenderer();
-//        MinecraftForge.EVENT_BUS.register(new RenderShield());
-        
-        GameRegistry.addRecipe(new ItemStack(temp), new Object[]
-        		{
-        	"IWI",
-        	"WGW",
-        	"IWI",
-        	'I', Item.ingotIron,
-        	'W', Block.planks,
-        	'G', Item.ingotGold
-        		});
-    }
-    
-    public void tickStart(EnumSet<TickType> var1, Object... var2)
-    {
-    	if(var1.contains(TickType.PLAYER))
-    	{
-    		EntityPlayer ep = (EntityPlayer)var2[0];
-    		
-    		if(ep.isDead)
-    		{
-    			return;
-    		}
-    		
-    		for(int i = 0; i < 4; i++)
-    		{
-    			if(ep.inventory.armorInventory[i] != null && ep.inventory.armorInventory[i].getItem() instanceof IItemTickListener)
-    			{
-	    			if(((IItemTickListener)ep.inventory.armorInventory[i].getItem()).onTick(ep, ep.inventory.armorInventory[i]))
-	    			{
-	    			}
-    			}
-    		}
-    		
-//    		if(update)
-//    		{
-//    			ep.openContainer.updateCraftingResults();
-//    		}
-    	}
+        proxy.initiateRendering();
+        // MinecraftForge.EVENT_BUS.register(new RenderShield());
+
+        GameRegistry.addRecipe(new ItemStack(temp), new Object[] { "IWI",
+                "WGW", "IWI", 'I', Item.ingotIron, 'W', Block.planks, 'G',
+                Item.ingotGold });
     }
 
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-		
-	}
+    @Override
+    public void tickStart(EnumSet<TickType> var1, Object... var2) {
+        if (var1.contains(TickType.PLAYER)) {
+            EntityPlayer ep = (EntityPlayer) var2[0];
 
-	@Override
-	public EnumSet<TickType> ticks() 
-	{
-		return EnumSet.of(TickType.PLAYER);
-	}
+            if (ep.isDead)
+                return;
 
-	@Override
-	public String getLabel() 
-	{
-		return "BL2";
-	}
+            for (int i = 0; i < 4; i++) {
+                if (ep.inventory.armorInventory[i] != null
+                        && ep.inventory.armorInventory[i].getItem() instanceof IItemTickListener) {
+                    if (((IItemTickListener) ep.inventory.armorInventory[i]
+                            .getItem()).onTick(ep,
+                            ep.inventory.armorInventory[i])) {
+                    }
+                }
+            }
+
+            // if(update)
+            // {
+            // ep.openContainer.updateCraftingResults();
+            // }
+        }
+    }
+
+    @Override
+    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+
+    }
+
+    @Override
+    public EnumSet<TickType> ticks() {
+        return EnumSet.of(TickType.PLAYER);
+    }
+
+    @Override
+    public String getLabel() {
+        return "BL2";
+    }
 }

@@ -19,17 +19,15 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
-public class NetworkHandler implements IPacketHandler
-{
-	public static final int particlePacketID = 0;
-	public static final int reloadPacketID = 1;
-	public static final int grenadePacketID = 3;
-	
-	public void sendParticlePacket(World world, double distance, int playerID, int type, int inventoryIndex, boolean shouldRender)
-	{
-		try
-        {
-			ByteArrayOutputStream baout = new ByteArrayOutputStream();
+public class NetworkHandler implements IPacketHandler {
+    public static final int particlePacketID = 0;
+    public static final int reloadPacketID = 1;
+    public static final int grenadePacketID = 3;
+
+    public void sendParticlePacket(World world, double distance, int playerID,
+            int type, int inventoryIndex, boolean shouldRender) {
+        try {
+            ByteArrayOutputStream baout = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(baout);
             out.writeByte(particlePacketID);
             out.writeInt(world.provider.dimensionId);
@@ -44,47 +42,41 @@ public class NetworkHandler implements IPacketHandler
             packet.isChunkDataPacket = false;
             packet.data = baout.toByteArray();
             packet.length = baout.size();
+            @SuppressWarnings("unchecked")
             Iterator<EntityPlayer> players = world.playerEntities.iterator();
 
-            while (players.hasNext())
-            {
+            while (players.hasNext()) {
                 EntityPlayer player = players.next();
-                
+
                 Entity hostPlayer = world.getEntityByID(playerID);
-                
-                if(player.getDistanceSqToEntity(hostPlayer) < 64.0D){
-                	PacketDispatcher.sendPacketToPlayer(packet, (Player)player);
+
+                if (player.getDistanceSqToEntity(hostPlayer) < 64.0D) {
+                    PacketDispatcher
+                            .sendPacketToPlayer(packet, (Player) player);
                 }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (Exception ex)
-        {
-        	ex.printStackTrace();
-        }
-	}
-	
-	public void sendReloaderPacket()
-	{
-		
-	}
-	
-	public void sendGrenadePacket(World world, EntityGrenade grenade, String var, Object arg)
-	{
-		try
-        {
-			ByteArrayOutputStream baout = new ByteArrayOutputStream();
+    }
+
+    public void sendReloaderPacket() {
+
+    }
+
+    public void sendGrenadePacket(World world, EntityGrenade grenade,
+            String var, Object arg) {
+        try {
+            ByteArrayOutputStream baout = new ByteArrayOutputStream();
             DataOutputStream out = new DataOutputStream(baout);
             out.writeByte(grenadePacketID);
             out.writeInt(world.provider.dimensionId);
             out.writeInt(grenade.entityId);
             out.writeUTF(var);
-            if(var.equals("parent"))
-            {
-            	 out.writeInt(((Entity)arg).entityId);
-            }else
-            if(var.equals("homing"))
-            {
-            	out.writeBoolean((Boolean)arg);
+            if (var.equals("parent")) {
+                out.writeInt(((Entity) arg).entityId);
+            } else if (var.equals("homing")) {
+                out.writeBoolean((Boolean) arg);
             }
             out.close();
             Packet250CustomPayload packet = new Packet250CustomPayload();
@@ -92,51 +84,45 @@ public class NetworkHandler implements IPacketHandler
             packet.isChunkDataPacket = false;
             packet.data = baout.toByteArray();
             packet.length = baout.size();
-            
+
+            @SuppressWarnings("unchecked")
             Iterator<EntityPlayer> players = world.playerEntities.iterator();
 
-            while (players.hasNext())
-            {
+            while (players.hasNext()) {
                 EntityPlayer player = players.next();
-                
-                if(player.getDistanceSqToEntity(grenade) < 64.0D)
-                {
-                	PacketDispatcher.sendPacketToPlayer(packet, (Player)player);
+
+                if (player.getDistanceSqToEntity(grenade) < 64.0D) {
+                    PacketDispatcher
+                            .sendPacketToPlayer(packet, (Player) player);
                 }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (Exception ex)
-        {
-        	ex.printStackTrace();
-        }
-	}
+    }
 
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player p) 
-	{
-		EntityPlayer player = null;
-		
-        ByteArrayInputStream in = new ByteArrayInputStream(packet.data, 1, packet.data.length - 1);
+    @Override
+    public void onPacketData(INetworkManager manager,
+            Packet250CustomPayload packet, Player p) {
+        EntityPlayer player = null;
 
-        try
-        {
-        	DataInputStream din = new DataInputStream(in);
-            switch (packet.data[0])
-            {
-                case NetworkHandler.reloadPacketID:
-                {
-                    player = (EntityPlayer)p;
-                    
+        ByteArrayInputStream in = new ByteArrayInputStream(packet.data, 1,
+                packet.data.length - 1);
+
+        try {
+            new DataInputStream(in);
+            switch (packet.data[0]) {
+                case NetworkHandler.reloadPacketID: {
+                    player = (EntityPlayer) p;
+
                     ItemStack stack = player.getCurrentEquippedItem();
-                    if(stack != null && stack.getItem() == BL2Core.guns)
-                    {
-                    	ItemGun.reload(stack);
+                    if (stack != null && stack.getItem() == BL2Core.guns) {
+                        ItemGun.reload(stack);
                     }
                 }
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-	}
+    }
 }

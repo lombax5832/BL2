@@ -26,10 +26,10 @@ public class EridiumBucketHelper {
 
 		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
 
-		if ((blockID == BL2Core.eridiumStill.blockID || blockID == BL2Core.eridiumFlowing.blockID)
+		if ((blockID == BL2Core.crudeEridiumStill.blockID || blockID == BL2Core.crudeEridiumFlowing.blockID)
 				&& world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 
-			world.setBlockMetadataWithNotify(pos.blockX, pos.blockY, pos.blockZ, 0, 2);
+			world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
 
 			return new ItemStack(BL2Core.bucketEridium);
 		} else

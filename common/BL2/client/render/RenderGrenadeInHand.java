@@ -2,16 +2,13 @@ package BL2.client.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderEngine;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
 import BL2.client.model.ModelGrenadeHeld;
 import BL2.client.model.ModelGrenadeInv;
-
 
 public class RenderGrenadeInHand implements IItemRenderer {
 
@@ -20,8 +17,8 @@ public class RenderGrenadeInHand implements IItemRenderer {
 
     public RenderGrenadeInHand() {
 
-    	grenadeModel = new ModelGrenadeHeld();
-    	grenadeInv = new ModelGrenadeInv();
+        grenadeModel = new ModelGrenadeHeld();
+        grenadeInv = new ModelGrenadeInv();
     }
 
     @Override
@@ -31,7 +28,8 @@ public class RenderGrenadeInHand implements IItemRenderer {
     }
 
     @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+            ItemRendererHelper helper) {
 
         return true;
     }
@@ -40,17 +38,17 @@ public class RenderGrenadeInHand implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
         switch (type) {
-        	case ENTITY: {
-        		renderGrenade(0F, -1.9F, 0F);
-        		break;
-        	}
+            case ENTITY: {
+                renderGrenade(0F, -1.9F, 0F);
+                break;
+            }
             case EQUIPPED: {
-            	renderGrenade(-.5F, -0.6F, .6F);
+                renderGrenade(-.5F, -0.6F, .6F);
                 break;
             }
             case INVENTORY: {
-        		renderGrenadeInv(.6F, -5.3F, 0.6F);
-            	break;
+                renderGrenadeInv(.6F, -5.3F, 0.6F);
+                break;
             }
             default:
                 break;
@@ -59,26 +57,23 @@ public class RenderGrenadeInHand implements IItemRenderer {
     }
 
     public static void renderGrenade(float x, float y, float z) {
-    	Minecraft mc = Minecraft.getMinecraft();
-    	RenderEngine render = mc.renderEngine;
-        Tessellator tesselator = Tessellator.instance;
+        Minecraft mc = Minecraft.getMinecraft();
+        RenderEngine render = mc.renderEngine;
         render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
-        GL11.glPushMatrix(); //start
-        GL11.glTranslatef(x, y, z); //size
+        GL11.glPushMatrix(); // start
+        GL11.glTranslatef(x, y, z); // size
         grenadeModel.render(.1F);
-        GL11.glPopMatrix(); //end
-    }
-    
-    private void renderGrenadeInv(float x, float y, float z) {
-    	Minecraft mc = Minecraft.getMinecraft();
-    	RenderEngine render = mc.renderEngine;
-        Tessellator tesselator = Tessellator.instance;
-        render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
-        GL11.glPushMatrix(); //start
-        GL11.glTranslatef(x, y, z); //size
-        grenadeInv.render(.29F);
-        GL11.glPopMatrix(); //end
+        GL11.glPopMatrix(); // end
     }
 
+    private void renderGrenadeInv(float x, float y, float z) {
+        Minecraft mc = Minecraft.getMinecraft();
+        RenderEngine render = mc.renderEngine;
+        render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
+        GL11.glPushMatrix(); // start
+        GL11.glTranslatef(x, y, z); // size
+        grenadeInv.render(.29F);
+        GL11.glPopMatrix(); // end
+    }
 
 }
