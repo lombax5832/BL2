@@ -71,9 +71,6 @@ public class BL2Core implements ITickHandler {
 
         proxy.registerRenderInformation();
 
-        // LanguageRegistry.addName(new ItemStack(BuildCraftEnergy.engineBlock,
-        // 1, 3), "Eridium Engine");
-
         EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this,
                 64, 10, true);
         EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2,

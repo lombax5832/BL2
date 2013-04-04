@@ -18,7 +18,7 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
     int numAdjacentSources = 0;
     boolean isOptimalFlowDirection[] = new boolean[4];
     int flowCost[] = new int[4];
-    
+
     public BlockCrudeEridiumFlowing(int i, Material material) {
         super(i, material);
 
@@ -67,7 +67,7 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
                 if (l < 0) {
                     world.setBlock(i, j, k, 0);
                 } else {
-                    world.setBlockMetadataWithNotify(i, j, k, l,1);
+                    world.setBlockMetadataWithNotify(i, j, k, l, 1);
                     world.scheduleBlockUpdate(i, j, k, blockID, tickRate(world));
                     world.notifyBlocksOfNeighborChange(i, j, k, blockID);
                 }
@@ -79,9 +79,9 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
         }
         if (liquidCanDisplaceBlock(world, i, j - 1, k)) {
             if (l >= 8) {
-                world.setBlock(i, j - 1, k, blockID, l,1);
+                world.setBlock(i, j - 1, k, blockID, l, 1);
             } else {
-                world.setBlock(i, j - 1, k, blockID, l + 8,1);
+                world.setBlock(i, j - 1, k, blockID, l + 8, 1);
             }
         } else if (l >= 0 && (l == 0 || blockBlocksFlow(world, i, j - 1, k))) {
             boolean aflag[] = getOptimalFlowDirections(world, i, j, k);
@@ -110,16 +110,19 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
         if (liquidCanDisplaceBlock(world, i, j, k)) {
             int i1 = world.getBlockId(i, j, k);
             if (i1 > 0) {
-                Block.blocksList[i1].dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
+                Block.blocksList[i1].dropBlockAsItem(world, i, j, k,
+                        world.getBlockMetadata(i, j, k), 0);
             }
-            world.setBlock(i, j, k, blockID, l,1);
+            world.setBlock(i, j, k, blockID, l, 1);
         }
     }
 
-    private int calculateFlowCost(World world, int i, int j, int k, int l, int i1) {
+    private int calculateFlowCost(World world, int i, int j, int k, int l,
+            int i1) {
         int j1 = 1000;
         for (int k1 = 0; k1 < 4; k1++) {
-            if (k1 == 0 && i1 == 1 || k1 == 1 && i1 == 0 || k1 == 2 && i1 == 3 || k1 == 3 && i1 == 2) {
+            if (k1 == 0 && i1 == 1 || k1 == 1 && i1 == 0 || k1 == 2 && i1 == 3
+                    || k1 == 3 && i1 == 2) {
                 continue;
             }
             int l1 = i;
@@ -137,7 +140,9 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
             if (k1 == 3) {
                 j2++;
             }
-            if (blockBlocksFlow(world, l1, i2, j2) || world.getBlockMaterial(l1, i2, j2) == blockMaterial && world.getBlockMetadata(l1, i2, j2) == 0) {
+            if (blockBlocksFlow(world, l1, i2, j2)
+                    || world.getBlockMaterial(l1, i2, j2) == blockMaterial
+                    && world.getBlockMetadata(l1, i2, j2) == 0) {
                 continue;
             }
             if (!blockBlocksFlow(world, l1, i2 - 1, j2))
@@ -172,7 +177,9 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
             if (l == 3) {
                 j2++;
             }
-            if (blockBlocksFlow(world, j1, i2, j2) || world.getBlockMaterial(j1, i2, j2) == blockMaterial && world.getBlockMetadata(j1, i2, j2) == 0) {
+            if (blockBlocksFlow(world, j1, i2, j2)
+                    || world.getBlockMaterial(j1, i2, j2) == blockMaterial
+                    && world.getBlockMetadata(j1, i2, j2) == 0) {
                 continue;
             }
             if (!blockBlocksFlow(world, j1, i2 - 1, j2)) {
@@ -198,7 +205,9 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
 
     private boolean blockBlocksFlow(World world, int i, int j, int k) {
         int l = world.getBlockId(i, j, k);
-        if (l == Block.doorWood.blockID || l == Block.doorSteel.blockID || l == Block.signPost.blockID || l == Block.ladder.blockID || l == Block.reed.blockID)
+        if (l == Block.doorWood.blockID || l == Block.doorSteel.blockID
+                || l == Block.signPost.blockID || l == Block.ladder.blockID
+                || l == Block.reed.blockID)
             return true;
         if (l == 0)
             return false;
@@ -251,11 +260,12 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
     public boolean isBlockReplaceable(World world, int i, int j, int k) {
         return true;
     }
-    
+
     @Override
-        @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister){
-        this.theIcon = new Icon[] {iconRegister.registerIcon("BL2:crude_eridium"), iconRegister.registerIcon("BL2:crude_eridium_flow")};
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister iconRegister) {
+        theIcon = new Icon[] { iconRegister.registerIcon("BL2:crude_eridium"),
+                iconRegister.registerIcon("BL2:crude_eridium_flow") };
     }
-    
+
 }

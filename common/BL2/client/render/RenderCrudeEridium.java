@@ -48,7 +48,8 @@ public class RenderCrudeEridium extends BlockStationary implements ILiquid {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        this.theIcon = new Icon[] { iconRegister.registerIcon("buildcraft:oil"), iconRegister.registerIcon("buildcraft:oil_flow") };
+        theIcon = new Icon[] { iconRegister.registerIcon("buildcraft:oil"),
+                iconRegister.registerIcon("buildcraft:oil_flow") };
     }
 
 }

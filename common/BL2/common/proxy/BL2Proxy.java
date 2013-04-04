@@ -31,6 +31,6 @@ public class BL2Proxy {
 
     public void initiateRendering() {
         // TODO Auto-generated method stub
-        
+
     }
 }

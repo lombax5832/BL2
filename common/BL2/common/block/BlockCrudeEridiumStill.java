@@ -47,7 +47,8 @@ public class BlockCrudeEridiumStill extends BlockStationary implements ILiquid {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister iconRegister) {
-        this.theIcon = new Icon[] {iconRegister.registerIcon("BL2:crude_eridium"), iconRegister.registerIcon("BL2:crude_eridium_flow")};
+        theIcon = new Icon[] { iconRegister.registerIcon("BL2:crude_eridium"),
+                iconRegister.registerIcon("BL2:crude_eridium_flow") };
     }
 
 }

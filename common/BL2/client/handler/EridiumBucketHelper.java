@@ -10,31 +10,31 @@ import BL2.BL2Core;
 
 public class EridiumBucketHelper {
 
-	@ForgeSubscribe
-	public void onBucketFill(FillBucketEvent event) {
+    @ForgeSubscribe
+    public void onBucketFill(FillBucketEvent event) {
 
-		ItemStack result = fillCustomBucket(event.world, event.target);
+        ItemStack result = fillCustomBucket(event.world, event.target);
 
-		if (result == null)
-			return;
+        if (result == null)
+            return;
 
-		event.result = result;
-		event.setResult(Result.ALLOW);
-	}
+        event.result = result;
+        event.setResult(Result.ALLOW);
+    }
 
-	public ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
+    public ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
 
-		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
+        int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
 
-		if ((blockID == BL2Core.crudeEridiumStill.blockID || blockID == BL2Core.crudeEridiumFlowing.blockID)
-				&& world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
+        if ((blockID == BL2Core.crudeEridiumStill.blockID || blockID == BL2Core.crudeEridiumFlowing.blockID)
+                && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 
-			world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
+            world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
 
-			return new ItemStack(BL2Core.bucketEridium);
-		} else
-			return null;
+            return new ItemStack(BL2Core.bucketEridium);
+        } else
+            return null;
 
-	}
+    }
 
 }

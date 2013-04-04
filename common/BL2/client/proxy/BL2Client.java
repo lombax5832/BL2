@@ -35,10 +35,11 @@ public class BL2Client extends BL2Proxy {
         MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID,
                 new RenderGrenadeInHand());
     }
-    
+
     @Override
     public void initiateRendering() {
-        BL2Core.crudeEridiumModel = RenderingRegistry.getNextAvailableRenderId();
+        BL2Core.crudeEridiumModel = RenderingRegistry
+                .getNextAvailableRenderId();
     }
 
     @Override
