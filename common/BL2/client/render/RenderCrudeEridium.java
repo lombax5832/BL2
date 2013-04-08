@@ -1,55 +1,35 @@
 package BL2.client.render;
 
-import net.minecraft.block.BlockStationary;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
-import net.minecraftforge.liquids.ILiquid;
-import buildcraft.BuildCraftCore;
-import buildcraft.BuildCraftEnergy;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
+import BL2.BL2Core;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class RenderCrudeEridium extends BlockStationary implements ILiquid {
+public class RenderCrudeEridium implements ISimpleBlockRenderingHandler {
 
-    public RenderCrudeEridium(int i, Material material) {
-        super(i, material);
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	}
 
-        setHardness(100F);
-        setLightOpacity(3);
-    }
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 
-    @Override
-    public int getRenderType() {
-        return BuildCraftCore.oilModel;
-    }
+		if (block.getRenderType() != BL2Core.crudeEridiumModel)
+			return true;
 
-    @Override
-    public int stillLiquidId() {
-        return BuildCraftEnergy.oilStill.blockID;
-    }
+		renderer.renderBlockFluids(block, x, y, z);
+		return true;
+	}
 
-    @Override
-    public boolean isMetaSensitive() {
-        return false;
-    }
+	@Override
+	public boolean shouldRender3DInInventory() {
+		return false;
+	}
 
-    @Override
-    public int stillLiquidMeta() {
-        return 0;
-    }
-
-    @Override
-    public boolean isBlockReplaceable(World world, int i, int j, int k) {
-        return true;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister iconRegister) {
-        theIcon = new Icon[] { iconRegister.registerIcon("buildcraft:oil"),
-                iconRegister.registerIcon("buildcraft:oil_flow") };
-    }
+	@Override
+	public int getRenderId() {
+		return BL2Core.crudeEridiumModel;
+	}
 
 }

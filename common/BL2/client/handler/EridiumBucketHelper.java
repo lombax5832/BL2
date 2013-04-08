@@ -31,7 +31,7 @@ public class EridiumBucketHelper {
 
             world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
 
-            return new ItemStack(BL2Core.bucketEridium);
+            return new ItemStack(BL2Core.bucketCrudeEridium);
         } else
             return null;
 

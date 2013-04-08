@@ -136,8 +136,8 @@ public class EntityGrenade extends EntityThrowable {
 
             @SuppressWarnings("unchecked")
             List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(
-                    this, AxisAlignedBB.getBoundingBox(posX - 10, posY - 10,
-                            posZ - 10, posX + 10, posY + 10, posZ + 10));
+                    this, AxisAlignedBB.getBoundingBox(posX - 20, posY - 20,
+                            posZ - 20, posX + 20, posY + 20, posZ + 20));
             EntityLiving current = null;
             double minDisSq = Integer.MAX_VALUE;
             if (list.isEmpty()) {
@@ -175,8 +175,8 @@ public class EntityGrenade extends EntityThrowable {
         } else if (homing) {
             @SuppressWarnings("unchecked")
             List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(
-                    this, AxisAlignedBB.getBoundingBox(posX - 10, posY - 10,
-                            posZ - 10, posX + 10, posY + 10, posZ + 10));
+                    this, AxisAlignedBB.getBoundingBox(posX - 20, posY - 20,
+                            posZ - 20, posX + 20, posY + 20, posZ + 20));
             EntityLiving current = null;
             double minDisSq = Integer.MAX_VALUE;
             for (Entity e : list) {

@@ -3,6 +3,7 @@ package BL2.client.proxy;
 import net.minecraftforge.client.MinecraftForgeClient;
 import BL2.BL2Core;
 import BL2.client.render.RenderBullet;
+import BL2.client.render.RenderCrudeEridium;
 import BL2.client.render.RenderGrenade;
 import BL2.client.render.RenderGrenadeInHand;
 import BL2.client.render.RenderGunInHand;
@@ -40,6 +41,8 @@ public class BL2Client extends BL2Proxy {
     public void initiateRendering() {
         BL2Core.crudeEridiumModel = RenderingRegistry
                 .getNextAvailableRenderId();
+        
+        RenderingRegistry.registerBlockHandler(new RenderCrudeEridium());
     }
 
     @Override

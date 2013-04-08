@@ -23,7 +23,9 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
         super(i, material);
 
         setHardness(100F);
-        setLightOpacity(3);
+        setLightOpacity(1);
+        
+        setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
     }
 
     @Override
