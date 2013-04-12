@@ -30,6 +30,8 @@ import BL2.BL2Core;
 import BL2.common.Reference;
 import BL2.common.item.ItemArmorShield;
 import BL2.common.item.ItemArmorShield.ShieldAtributes;
+import BL2.common.item.ItemGun;
+import BL2.common.item.ItemGun.GunAtributes;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -53,6 +55,10 @@ public class ShieldGUIHandler implements ITickHandler {
                 if (minecraft.inGameHasFocus && hasShield(player)) {
                     // System.out.println("works");
                     renderStoneHUD();
+                }
+                if (minecraft.inGameHasFocus && gunEquipped(player)) {
+                    // System.out.println("works");
+                    renderAmmoHUD();
                 }
                 if (player.isDead == false) {
                     // if (player.getCurrentEquippedItem().itemID ==
@@ -94,6 +100,15 @@ public class ShieldGUIHandler implements ITickHandler {
         }
         return false;
     }
+    
+    public boolean gunEquipped(EntityPlayer player) {
+        ItemStack stack = null;
+        stack = player.inventory.getCurrentItem();
+    
+        if (stack != null && stack.itemID == BL2Core.guns.itemID)
+            return true;
+        return false;
+    }
 
     public static int calcShield(EntityPlayer player) {
         ItemStack stack = null;
@@ -112,6 +127,27 @@ public class ShieldGUIHandler implements ITickHandler {
 
         return 0;
     }
+    
+    public static int calcAmmo(EntityPlayer player) {
+        ItemStack stack = null;
+        
+        stack = player.inventory.getCurrentItem();
+
+        if (stack != null) {
+            if (stack.itemID == BL2Core.guns.itemID) {
+                ItemGun.GunAtributes atr = new GunAtributes(
+                        stack);
+                if (atr.bulletsleft <= 1 && atr.reloadticker == 0)
+                    return 1;
+                else if (atr.reloadticker > 0)
+                    return (int) ((float)((atr.reloadtime - atr.reloadticker) / (float) atr.reloadtime)*80);
+                else if (atr.bulletsleft > 1)
+                    return (int) ((float)(atr.bulletsleft - 1) / (float)(atr.clipsize - 1)*80);
+                return 0;
+            }
+        }
+        return 0;
+    }
 
     public static ShieldAtributes getStr(EntityPlayer player) {
         ItemStack stack = null;
@@ -128,6 +164,41 @@ public class ShieldGUIHandler implements ITickHandler {
             }
         }
         return null;
+    }
+    
+    public static String AmmoString(GunAtributes atr){
+        if(atr.reloadticker > 0){
+            float currentReload = (float) atr.reloadticker/20;
+            float roundedReload = (float) ((double) Math.round(currentReload * 100) / 100);
+            String reload = ""+roundedReload;
+            if(reload.length() == 3)
+                reload+="0";
+            return reload;
+        }
+        return (atr.bulletsleft-1) + "/" + (atr.clipsize-1);
+    }
+    
+    private static void renderAmmoHUD() {
+        Minecraft mc = Minecraft.getMinecraft();
+        ScaledResolution res = new ScaledResolution(mc.gameSettings,
+                mc.displayWidth, mc.displayHeight);
+        int height = res.getScaledHeight();
+        int width = res.getScaledWidth();
+        mc.thePlayer.getHealth();
+        float ammo = calcAmmo(mc.thePlayer);
+        FontRenderer fr = mc.fontRenderer;
+        mc.playerController.shouldDrawHUD();
+        GunAtributes atr = new ItemGun.GunAtributes(mc.thePlayer.inventory.getCurrentItem());
+        Minecraft minecraft = FMLClientHandler.instance().getClient();
+        drawOutlinedBox(width / 2, height - 42, 80, 10, 0x6E7B8B);
+        drawSolidGradientRectAmmo(width / 2 - 90, height - 42, (int) ammo, 10,
+                Color.ORANGE, Color.ORANGE);
+        if (minecraft.inGameHasFocus) {
+            drawAmmoText(AmmoString(atr), height, width, fr);
+            // fr.drawStringWithShadow(ShieldString, (width / 2 -
+            // fr.getStringWidth(ShieldString) / 2) - 40, height - 60,
+            // 0xFFFFFF);
+        }
     }
 
     private static void renderStoneHUD() {
@@ -264,6 +335,40 @@ public class ShieldGUIHandler implements ITickHandler {
         glPopMatrix();
     }
 
+    public static void drawSolidGradientRectAmmo(int x, int y, int width,
+            int height, Color color1Color, Color color2Color) {
+        y -= 19;
+        drawSolidGradientRectAmmo0(x * 2, y * 2, (x + width) * 2, (y + height) * 2,
+                color1Color, color2Color);
+    }
+
+    public static void drawSolidGradientRectAmmo0(int vertex1, int vertex2,
+            int vertex3, int vertex4, Color color1Color, Color color2Color) {
+        glPushMatrix();
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        Color color3Color = new Color(0xffa900);
+        Color color4Color = new Color(0xf6bb48);
+        glScalef(0.5F, 0.5F, 0.5F);
+        glDisable(GL_TEXTURE_2D);
+        glDisable(GL_ALPHA_TEST);
+        glShadeModel(GL_SMOOTH);
+        Tessellator tess = Tessellator.instance;
+        tess.startDrawingQuads();
+        tess.setColorOpaque(color4Color.getRed(), color4Color.getGreen(),
+                color4Color.getBlue());
+        tess.addVertex(vertex1 + 180, vertex4, zLevel);
+        tess.addVertex(vertex3 + 180, vertex4, zLevel);
+        tess.setColorOpaque(color3Color.getRed(), color3Color.getGreen(),
+                color3Color.getBlue());
+        tess.addVertex(vertex3 + 220, vertex2, zLevel);
+        tess.addVertex(vertex1 + 220, vertex2, zLevel);
+        tess.draw();
+        glShadeModel(GL_FLAT);
+        glEnable(GL_ALPHA_TEST);
+        glEnable(GL_TEXTURE_2D);
+        glPopMatrix();
+    }
+    
     public static void drawSolidGradientRect(int x, int y, int width,
             int height, Color color1Color, Color color2Color) {
         y -= 19;
@@ -303,6 +408,15 @@ public class ShieldGUIHandler implements ITickHandler {
         glPushMatrix();
         fr.drawStringWithShadow(ShieldString,
                 width / 2 - fr.getStringWidth(ShieldString) / 2 - 40,
+                height - 60, 0xFFFFFF);
+        glPopMatrix();
+    }
+    
+    public static void drawAmmoText(String ShieldString, int height,
+            int width, FontRenderer fr) {
+        glPushMatrix();
+        fr.drawStringWithShadow(ShieldString,
+                width / 2 - fr.getStringWidth(ShieldString) / 2 + 50,
                 height - 60, 0xFFFFFF);
         glPopMatrix();
     }

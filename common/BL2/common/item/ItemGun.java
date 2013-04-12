@@ -27,7 +27,7 @@ public class ItemGun extends Item {
         maxStackSize = 1;
         this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
         this.setHasSubtypes(true);
-        this.setMaxDamage(100);
+        //this.setMaxDamage(100);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -54,19 +54,6 @@ public class ItemGun extends Item {
     @Override
     public Icon getIconFromDamage(int par1) {
         return icons[par1 - 1];
-    }
-
-    public float getDamageForItemStack(ItemStack stack) {
-        GunAtributes atr = new GunAtributes(stack);
-
-        if (atr.bulletsleft <= 1 && atr.reloadticker == 0)
-            return 1;
-        else if (atr.reloadticker > 0)
-            return atr.reloadticker / (float) atr.reloadtime;
-        else if (atr.bulletsleft > 1)
-            return (atr.clipsize - 1 - (atr.bulletsleft - 1))
-                    / ((float) atr.clipsize - 1);
-        return 0;
     }
 
     public String s(int par1) {
@@ -730,7 +717,7 @@ public class ItemGun extends Item {
 
         // System.out.println("comp:" + atr.Company);
         // System.out.println("type" +atr.guntype);
-
+        atr.bulletsleft = atr.clipsize;
         atr.save(re);
         re.setItemDamage(atr.guntype);
         return re;
