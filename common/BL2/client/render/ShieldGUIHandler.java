@@ -166,14 +166,17 @@ public class ShieldGUIHandler implements ITickHandler {
         return null;
     }
     
-    public static String AmmoString(GunAtributes atr){
+    public static String AmmoString(GunAtributes atr, EntityPlayer player){
+        if(player.capabilities.isCreativeMode){
+            return "Unlimited";
+        }
         if(atr.reloadticker > 0){
             float currentReload = (float) atr.reloadticker/20;
             float roundedReload = (float) ((double) Math.round(currentReload * 100) / 100);
             String reload = ""+roundedReload;
             if(reload.length() == 3)
                 reload+="0";
-            return reload;
+            return reload + " seconds";
         }
         return (atr.bulletsleft-1) + "/" + (atr.clipsize-1);
     }
@@ -194,7 +197,7 @@ public class ShieldGUIHandler implements ITickHandler {
         drawSolidGradientRectAmmo(width / 2 - 90, height - 42, (int) ammo, 10,
                 Color.ORANGE, Color.ORANGE);
         if (minecraft.inGameHasFocus) {
-            drawAmmoText(AmmoString(atr), height, width, fr);
+            drawAmmoText(AmmoString(atr, (EntityPlayer) mc.thePlayer), height, width, fr);
             // fr.drawStringWithShadow(ShieldString, (width / 2 -
             // fr.getStringWidth(ShieldString) / 2) - 40, height - 60,
             // 0xFFFFFF);

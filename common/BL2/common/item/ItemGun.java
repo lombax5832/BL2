@@ -240,6 +240,10 @@ public class ItemGun extends Item {
         if (atr.creator == "") {
             atr.creator = par3Entity.getEntityName();
         }
+
+        if(((EntityPlayer) par3Entity).capabilities.isCreativeMode)
+            atr.bulletsleft = atr.clipsize;
+        
         if (par3Entity instanceof EntityPlayer
                 && ((EntityPlayer) par3Entity).getHeldItem() == par1ItemStack) {
             try {
@@ -271,7 +275,6 @@ public class ItemGun extends Item {
                     || canReload((EntityPlayer) par3Entity,
                             ((EntityPlayer) par3Entity).getHeldItem()
                                     .getItemDamage(), par1ItemStack) == true) {
-
                 atr.reloadticker--;
 
                 if (atr.reloadticker <= 0) {
@@ -324,7 +327,8 @@ public class ItemGun extends Item {
                                            // par3EntityPlayer.inventory.hasItem(Item.arrow.shiftedIndex))
             {
                 atr.fireticker = 0;
-                atr.bulletsleft -= atr.ammoPerShot;
+                if(!var5)
+                    atr.bulletsleft -= atr.ammoPerShot;
 
                 for (int i = 0; i < atr.pellets; i++) {
 
