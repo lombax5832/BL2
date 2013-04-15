@@ -85,7 +85,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
     }
 
     @Override
-    public void updateIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir) {
         for (int i = 1; i < 6; i++) {
             if (i != 3) {
                 icons[i - 1] = ir.registerIcon("BL2:" + "Shield" + i);

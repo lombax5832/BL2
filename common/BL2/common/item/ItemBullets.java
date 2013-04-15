@@ -43,7 +43,7 @@ public class ItemBullets extends Item {
     }
 
     @Override
-    public void updateIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir) {
         for (int i = 1; i < 7; i++) {
             icons[i] = ir.registerIcon("BL2:" + ammoTypes[i] + "Ammo");
         }

@@ -9,7 +9,7 @@ import cpw.mods.fml.common.TickType;
 
 public class BL2KeyHandler extends KeyHandler {
     public static KeyBinding reloadKey = new KeyBinding("Reload", 19);
-
+    
     public BL2KeyHandler() {
         super(new KeyBinding[] { reloadKey });
     }

@@ -23,7 +23,6 @@ public class ItemBandoiler extends Item {
         maxStackSize = 1;
         this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
         this.setHasSubtypes(true);
-        this.setMaxDamage(100);
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -39,7 +38,7 @@ public class ItemBandoiler extends Item {
     }
 
     @Override
-    public void updateIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir) {
         for (int i = 1; i < 7; i++) {
             icons[i - 1] = ir.registerIcon("BL2:" + ammoTypes[i] + "Bandoiler");
         }

@@ -2,6 +2,9 @@ package BL2.common.item;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -27,7 +30,6 @@ public class ItemGun extends Item {
         maxStackSize = 1;
         this.setCreativeTab(BL2.common.CreativeTabBL2.tabBL2);
         this.setHasSubtypes(true);
-        //this.setMaxDamage(100);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -44,7 +46,7 @@ public class ItemGun extends Item {
     }
 
     @Override
-    public void updateIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir) {
         for (int i = 1; i < 7; i++) {
             icons[i - 1] = ir.registerIcon("BL2:" + gunNames[i]);
         }
@@ -232,6 +234,16 @@ public class ItemGun extends Item {
             return true;
         return false;
     }
+    
+    @SideOnly(Side.CLIENT)
+    public void sendReload(GunAtributes atr){
+        if ((atr.bulletsleft <= 1 && atr.reloadticker == 0) || BL2.client.handler.BL2KeyHandler.reloadKey.pressed && !fullAmmo(atr)) {
+            BL2Core.nethandler.sendReloaderPacket();
+            System.out.println("Attempting Reload");
+            //reload(par1ItemStack);
+            return;
+        }
+    }
 
     @Override
     public void onUpdate(ItemStack par1ItemStack, World par2World,
@@ -246,20 +258,7 @@ public class ItemGun extends Item {
         
         if (par3Entity instanceof EntityPlayer
                 && ((EntityPlayer) par3Entity).getHeldItem() == par1ItemStack) {
-            try {
-                Class.forName("net.minecraft.client.settings.KeyBinding");
-                // client
-                // System.out.println(BL2.client.BL2KeyHandler.reloadKey.pressed);
-                if (atr.bulletsleft <= 1 && atr.reloadticker == 0
-                        || BL2.client.handler.BL2KeyHandler.reloadKey.pressed
-                        && !fullAmmo(atr)) {
-                    BL2Core.nethandler.sendReloaderPacket();
-                    reload(par1ItemStack);
-                    return;
-                }
-            } catch (Exception ex) {
-                // server
-            }
+            sendReload(atr);
         }
 
         // System.out.println(canReload(((EntityPlayer)par3Entity),

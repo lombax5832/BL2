@@ -207,7 +207,7 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
 
     private boolean blockBlocksFlow(World world, int i, int j, int k) {
         int l = world.getBlockId(i, j, k);
-        if (l == Block.doorWood.blockID || l == Block.doorSteel.blockID
+        if (l == Block.doorWood.blockID
                 || l == Block.signPost.blockID || l == Block.ladder.blockID
                 || l == Block.reed.blockID)
             return true;
