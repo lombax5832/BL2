@@ -15,6 +15,7 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import BL2.client.handler.NetworkHandlerClient;
+import BL2.common.Constants;
 import BL2.common.block.BlockCrudeEridiumFlowing;
 import BL2.common.block.BlockCrudeEridiumStill;
 import BL2.common.entity.EntityBullet;
@@ -43,7 +44,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "BL2", name = "Borderlands 2", version = "1.21 (1.5.1)")
+@Mod(modid = "BL2", name = "Borderlands 2", version = "1.23 (1.5.1)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandlerClient.class), serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandler.class))
 public class BL2Core implements ITickHandler {
     public static Block crudeEridiumStill;
@@ -88,30 +89,30 @@ public class BL2Core implements ITickHandler {
         
         //Crude Eridium
         
-        crudeEridiumFlowing = (new BlockCrudeEridiumFlowing(1600, Material.water)).setUnlocalizedName("crudeEridium");
+        crudeEridiumFlowing = (new BlockCrudeEridiumFlowing(Constants.Eridium, Material.water)).setUnlocalizedName("crudeEridium");
         LanguageRegistry.addName(crudeEridiumFlowing.setUnlocalizedName("crudeEridiumFlowing"), "Crude Eridium");
         GameRegistry.registerBlock(crudeEridiumFlowing, "Crude Eridium Flowing");
         
-        crudeEridiumStill = (new BlockCrudeEridiumStill(1601, Material.water)).setUnlocalizedName("crudeEridium");
+        crudeEridiumStill = (new BlockCrudeEridiumStill(Constants.Eridium + 1, Material.water)).setUnlocalizedName("crudeEridium");
         LanguageRegistry.addName(crudeEridiumStill.setUnlocalizedName("crudeEridiumStill"), "Crude Eridium (Still)");
         GameRegistry.registerBlock(crudeEridiumStill, "Crude Eridium Still");
         
         
         
-        bucketCrudeEridium = (new ItemBucketEridium(16006)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
+        bucketCrudeEridium = (new ItemBucketEridium(Constants.crudeBucketId)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
         LanguageRegistry.addName(bucketCrudeEridium, "Crude Eridium Bucket");
         
         crudeEridiumLiquid = LiquidDictionary.getOrCreateLiquid("Crude Eridium", new LiquidStack(crudeEridiumStill, 1));
         LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Crude Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
                 bucketCrudeEridium), new ItemStack(Item.bucketEmpty)));
         //Crude Eridium END
-        guns = new ItemGun(16000).setUnlocalizedName("Gun");
-        bullets = new ItemBullets(16001).setUnlocalizedName("Bullets");
-        bandoiler = new ItemBandoiler(16002).setUnlocalizedName("Bandoiler");
-        shield = new ItemArmorShield(16003, shieldrenderid, 1)
+        guns = new ItemGun(Constants.gunId).setUnlocalizedName("Gun");
+        bullets = new ItemBullets(Constants.bulletId).setUnlocalizedName("Bullets");
+        bandoiler = new ItemBandoiler(Constants.bandoilerId).setUnlocalizedName("Bandoiler");
+        shield = new ItemArmorShield(Constants.shieldId, shieldrenderid, 1)
                 .setUnlocalizedName("ItemArmorShield");
-        grenade = new ItemGrenade(16004).setUnlocalizedName("Grenade");
-        temp = new ItemTemp(16005).setUnlocalizedName("Temp");
+        grenade = new ItemGrenade(Constants.grenadeId).setUnlocalizedName("Grenade");
+        temp = new ItemTemp(Constants.tempId).setUnlocalizedName("Temp");
         
         TickRegistry.registerTickHandler(this, Side.SERVER);
 
