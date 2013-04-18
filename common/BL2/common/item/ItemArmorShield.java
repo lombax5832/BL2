@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
@@ -12,13 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
-import net.minecraftforge.common.IArmorTextureProvider;
 import net.minecraftforge.common.ISpecialArmor;
 import BL2.BL2Core;
 import BL2.common.handler.IItemTickListener;
 
 public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
-        IItemTickListener, IArmorTextureProvider {
+        IItemTickListener {
     public static final String[] shieldNames = new String[] { "",
             "Standard Shield", "Turtle Shield", "Booster Shield",
             "Absorption Shield", "Amp Shield" };
@@ -126,9 +126,6 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
     @Override
     public boolean onTick(EntityPlayer ep, ItemStack it) {
         ShieldAtributes atr = new ShieldAtributes(it);
-        // System.out.println(atr.canHit);
-        // System.out.println(atr.rechargeDelay);
-        // System.out.println((float)atr.charge/atr.maxcharge);
         if (atr.hitTicker > 0 || atr.charging == true) {
             atr.hitTicker--;
 
@@ -331,11 +328,12 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
             return Math.sqrt(x * x + y * y + z * z);
         }
     }
-
+    
     @Override
-    public String getArmorTextureFile(ItemStack itemstack) {
-        int damVal = itemstack.getItemDamage();
-        if (itemstack.itemID == BL2Core.shield.itemID)
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)
+    {
+        int damVal = stack.getItemDamage();
+        if (stack.itemID == BL2Core.shield.itemID)
             return "/mods/BL2/textures/Armor/shield_" + damVal + ".png";
         return null;
     }

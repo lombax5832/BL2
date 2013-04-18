@@ -95,7 +95,7 @@ public class ItemGun extends Item {
         }
         par3List.add("Created by: " + atr.creator);
     }
-
+    
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void calcDmg(GunAtributes atr, boolean hasAmp, int Amp, List list) {
         String Damage = "Damage: ";
@@ -156,6 +156,12 @@ public class ItemGun extends Item {
         }
     }
 
+    /**
+     * Returns bullets left
+     * @param par1ItemStack Itemstack of gun that you're returning current ammo for
+     * @author lombax5832
+     * @
+     */
     public int getBulletsLeft(ItemStack par1ItemStack) {
         int Bulletsleft = new GunAtributes(par1ItemStack).bulletsleft - 1;
         if (Bulletsleft < 0)
@@ -261,10 +267,6 @@ public class ItemGun extends Item {
             sendReload(atr);
         }
 
-        // System.out.println(canReload(((EntityPlayer)par3Entity),
-        // ((EntityPlayer)par3Entity).getHeldItem().getItemDamage(),
-        // par1ItemStack) == true);
-
         if (par3Entity instanceof EntityPlayer
                 && ((EntityPlayer) par3Entity).getHeldItem() == par1ItemStack
                 && atr.reloadticker > 0) {
@@ -287,7 +289,6 @@ public class ItemGun extends Item {
                                         par1ItemStack)) {
                             atr.bulletsleft++;
                         }
-                        // atr.bulletsleft++;
                     }
                 }
             }
@@ -297,9 +298,6 @@ public class ItemGun extends Item {
             atr.reloadticker = 0;
             atr.save(par1ItemStack);
         }
-
-        // System.out.println(par3Entity instanceof EntityPlayer &&
-        // ((EntityPlayer)par3Entity).getHeldItem() == par1ItemStack);
 
         if (this.reloading(par1ItemStack) == false && atr.using
                 && System.currentTimeMillis() - atr.lasttick < 250
@@ -314,16 +312,10 @@ public class ItemGun extends Item {
                 return;
             }
 
-            // System.out.println(atr.bulletsleft);
             boolean var5 = ((EntityPlayer) par3Entity).capabilities.isCreativeMode;
-
-            // System.out.println(consumeBullet(((EntityPlayer)par3Entity), atr,
-            // par1ItemStack));
-
+            
             if (var5
-                    || consumeBullet((EntityPlayer) par3Entity, atr,
-                            par1ItemStack))// ||
-                                           // par3EntityPlayer.inventory.hasItem(Item.arrow.shiftedIndex))
+                    || consumeBullet((EntityPlayer) par3Entity, atr, par1ItemStack))
             {
                 atr.fireticker = 0;
                 if(!var5)
@@ -337,9 +329,6 @@ public class ItemGun extends Item {
                             atr.damage + ampDmg, atr.explosive,
                             atr.explosivepower, atr.accuracy, atr.knockback);
 
-                    // par2World.playSoundAtEntity(par3EntityPlayer,
-                    // "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F +
-                    // 1.2F) + 0.5F);
                     if (!par2World.isRemote) {
                         par2World.spawnEntityInWorld(var8);
                     }
@@ -354,17 +343,6 @@ public class ItemGun extends Item {
             atr.save(par1ItemStack);
         }
     }
-
-    // public boolean reload(EntityPlayer player, int type, ItemStack is){
-    // GunAtributes atr = new GunAtributes(is);
-    // int t = atr.clipsize - atr.bulletsleft;
-    // for(int i = 0; i < t; i++)
-    // {
-    // consumeBullet(player,atr,is);
-    // return true;
-    // }
-    // return false;
-    // }
 
     public int bulletsNeeded(ItemStack is) {
         GunAtributes atr = new GunAtributes(is);
@@ -472,35 +450,9 @@ public class ItemGun extends Item {
         return false;
     }
 
-    /*
-     * public boolean consumeBullet(EntityPlayer player, int type, ItemStack is)
-     * { ItemStack stack = null;
-     * 
-     * for (int i = 0; i < 36; i++) { stack =
-     * player.inventory.getStackInSlot(i);
-     * 
-     * if (stack != null && stack.getItemDamage() == type - 1) { if
-     * (stack.itemID == BL2Core.bandoiler.shiftedIndex) { ItemBandoiler.BandStor
-     * stor = new ItemBandoiler.BandStor(stack);
-     * 
-     * if (stor.bullets > 0) { stor.bullets--; stor.save(stack); return true; }
-     * } else if (stack.itemID == BL2Core.bullets.shiftedIndex) {
-     * stack.stackSize--;
-     * 
-     * if (stack.stackSize <= 0) { player.inventory.setInventorySlotContents(i,
-     * null); }
-     * 
-     * return true; } } }
-     * 
-     * return false; }
-     */
-
     public String getTextureFile() {
         return "/BL2/textures/Items.png";
     }
-
-    // pistol = 0, smg = 1, assault rifle = 2, rocket launcher = 3, sniper = 4,
-    // shotgun = 5
 
     public static void genAny(GunAtributes atr) {
         float g = (float) Math.random() * 100;
@@ -626,46 +578,6 @@ public class ItemGun extends Item {
             atr.ammoPerShot = 1;
             // chance = 100% - num x - 1
         }
-        /*
-         * if(atr.Company == 0) { float g = (float) Math.random() * 100;
-         * 
-         * if(g < 33) { genPistol(atr); } else if(g < 66) { genAR(atr); } else {
-         * genRocketLauncher(atr); } atr.clipsize = 3+1; atr.firetime = 1;
-         * atr.ammoPerShot = 1; atr.reloadtime = 20 + 1; } if(atr.Company == 1)
-         * { float g = (float) Math.random() * 100;
-         * 
-         * if(g < 33) { genPistol(atr); } else if(g < 66) { genShotgun(atr); }
-         * else { genRocketLauncher(atr); }
-         * 
-         * //atr.explosive = true; atr.throwtoreload = true; } if(atr.Company ==
-         * 2) { float g = (float) Math.random() * 100;
-         * 
-         * if(g < 25) { genPistol(atr); } else if(g < 50) { genShotgun(atr); }
-         * else if(g < 75) { genAR(atr); } else { genSniper(atr); } atr.damage
-         * *= 1.5; } if(atr.Company == 3) { genAny(atr); atr.damage *= .75;
-         * atr.reloadtime *= .5; } //Dahl = 0, Tediore = 1, Jakobs = 2, Maliwan
-         * = 3, Bandit = 4, Hyerion = 5, Vladof = 6, Torgue = 7 //pistol = 0,
-         * smg = 1, assault rifle = 2, rocket launcher = 3, sniper = 4, shotgun
-         * = 5 if(atr.Company == 4) { float g = (float) Math.random() * 100;
-         * 
-         * if(g < 25) { genPistol(atr); } else if(g < 50) { genSMG(atr); } else
-         * if(g < 75) { genAR(atr); } else { genRocketLauncher(atr); }
-         * 
-         * atr.clipsize *= 2; } if(atr.Company == 5) { float g = (float)
-         * Math.random() * 100;
-         * 
-         * if(g < 33) { genPistol(atr); } else if(g < 67) { genSMG(atr); } else
-         * { genSniper(atr); } atr.bulletspeed *= 1.5; } //Dahl = 0, Tediore =
-         * 1, Jakobs = 2, Maliwan = 3, Bandit = 4, Hyerion = 5, Vladof = 6,
-         * Torgue = 7 //pistol = 0, smg = 1, assault rifle = 2, rocket launcher
-         * = 3, sniper = 4, shotgun = 5 if(atr.Company == 6) { float g = (float)
-         * Math.random() * 100;
-         * 
-         * if(g < 25) { genPistol(atr); } else if(g < 50) { genSMG(atr); } else
-         * if(g < 75) { genAR(atr); } else { genSniper(atr); } atr.firetime = 1;
-         * atr.clipsize *= 1.25; atr.accuracy *= 0.75; } if(atr.Company == 7) {
-         * genAny(atr); atr.explosive = true; atr.bulletspeed *= .1; }
-         */
         if (atr.Company == 0) {
             genSmgAssault(atr);
             atr.clipsize = 3 + 1;
@@ -716,10 +628,6 @@ public class ItemGun extends Item {
             atr.explosive = true;
             atr.bulletspeed *= .1;
         }
-        // genSMG(atr);
-
-        // System.out.println("comp:" + atr.Company);
-        // System.out.println("type" +atr.guntype);
         atr.bulletsleft = atr.clipsize;
         atr.save(re);
         re.setItemDamage(atr.guntype);
