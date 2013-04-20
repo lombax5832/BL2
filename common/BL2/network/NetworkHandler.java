@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
-import BL2.BL2Core;
 import BL2.entity.EntityGrenade;
+import BL2.item.BL2Items;
 import BL2.item.ItemGun;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -116,7 +116,7 @@ public class NetworkHandler implements IPacketHandler {
                     player = (EntityPlayer) p;
 
                     ItemStack stack = player.getCurrentEquippedItem();
-                    if (stack != null && stack.getItem() == BL2Core.guns) {
+                    if (stack != null && stack.getItem() == BL2Items.guns) {
                         ItemGun.reload(stack);
                     }
                 }

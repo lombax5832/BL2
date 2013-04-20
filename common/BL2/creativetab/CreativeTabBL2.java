@@ -1,8 +1,8 @@
 package BL2.creativetab;
 
+import BL2.item.BL2Items;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import BL2.BL2Core;
 
 public class CreativeTabBL2 extends CreativeTabs {
 
@@ -14,7 +14,7 @@ public class CreativeTabBL2 extends CreativeTabs {
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(BL2Core.temp);
+        return new ItemStack(BL2Items.temp);
     }
 
     @Override

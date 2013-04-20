@@ -26,10 +26,10 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import BL2.BL2Core;
+import BL2.item.BL2Items;
 import BL2.item.ItemArmorShield;
-import BL2.item.ItemGun;
 import BL2.item.ItemArmorShield.ShieldAtributes;
+import BL2.item.ItemGun;
 import BL2.item.ItemGun.GunAtributes;
 import BL2.lib.Reference;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -40,38 +40,23 @@ public class ShieldGUIHandler implements ITickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-        // TODO Auto-generated method stub
         Minecraft minecraft = FMLClientHandler.instance().getClient();
         EntityPlayer player = minecraft.thePlayer;
         if (type.contains(TickType.RENDER)) {
             if (player != null) {
                 //
                 if (minecraft.inGameHasFocus && hasShield(player)) {
-                    // System.out.println("works");
                     renderStoneHUD();
                 }
                 if (minecraft.inGameHasFocus && gunEquipped(player)) {
-                    // System.out.println("works");
                     renderAmmoHUD();
                 }
                 if (player.isDead == false) {
-                    // if (player.getCurrentEquippedItem().itemID ==
-                    // BL2Core.guns.shiftedIndex ||
-                    // player.getCurrentEquippedItem().itemID ==
-                    // BL2Core.grenade.shiftedIndex){
-
-                    // MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID,
-                    // new RenderGunInHand());
-                    // MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID,
-                    // new RenderGrenadeInHand());
-
-                    // }
                 }
             }
         }
@@ -79,13 +64,11 @@ public class ShieldGUIHandler implements ITickHandler {
 
     @Override
     public EnumSet<TickType> ticks() {
-        // TODO Auto-generated method stub
         return EnumSet.of(TickType.CLIENT, TickType.RENDER);
     }
 
     @Override
     public String getLabel() {
-        // TODO Auto-generated method stub
         return Reference.MOD_NAME + ": " + this.getClass().getSimpleName();
     }
 
@@ -95,7 +78,7 @@ public class ShieldGUIHandler implements ITickHandler {
         for (int i = 0; i < 4; i++) {
             stack = player.inventory.armorItemInSlot(i);
 
-            if (stack != null && stack.itemID == BL2Core.shield.itemID)
+            if (stack != null && stack.itemID == BL2Items.shield.itemID)
                 return true;
         }
         return false;
@@ -105,7 +88,7 @@ public class ShieldGUIHandler implements ITickHandler {
         ItemStack stack = null;
         stack = player.inventory.getCurrentItem();
     
-        if (stack != null && stack.itemID == BL2Core.guns.itemID)
+        if (stack != null && stack.itemID == BL2Items.guns.itemID)
             return true;
         return false;
     }
@@ -117,7 +100,7 @@ public class ShieldGUIHandler implements ITickHandler {
             stack = player.inventory.armorItemInSlot(i);
 
             if (stack != null) {
-                if (stack.itemID == BL2Core.shield.itemID) {
+                if (stack.itemID == BL2Items.shield.itemID) {
                     ItemArmorShield.ShieldAtributes str = new ItemArmorShield.ShieldAtributes(
                             stack);
                     return (int) ((float) str.charge / str.maxcharge * 80);
@@ -134,7 +117,7 @@ public class ShieldGUIHandler implements ITickHandler {
         stack = player.inventory.getCurrentItem();
 
         if (stack != null) {
-            if (stack.itemID == BL2Core.guns.itemID) {
+            if (stack.itemID == BL2Items.guns.itemID) {
                 ItemGun.GunAtributes atr = new GunAtributes(
                         stack);
                 if (atr.bulletsleft <= 1 && atr.reloadticker == 0)
@@ -156,7 +139,7 @@ public class ShieldGUIHandler implements ITickHandler {
             stack = player.inventory.armorItemInSlot(i);
 
             if (stack != null) {
-                if (stack.itemID == BL2Core.shield.itemID) {
+                if (stack.itemID == BL2Items.shield.itemID) {
                     ItemArmorShield.ShieldAtributes str = new ItemArmorShield.ShieldAtributes(
                             stack);
                     return str;

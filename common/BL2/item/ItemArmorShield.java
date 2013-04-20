@@ -333,7 +333,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer)
     {
         int damVal = stack.getItemDamage();
-        if (stack.itemID == BL2Core.shield.itemID)
+        if (stack.itemID == BL2Items.shield.itemID)
             return "/mods/BL2/textures/Armor/shield_" + damVal + ".png";
         return null;
     }

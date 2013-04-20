@@ -2,9 +2,6 @@ package BL2.item;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -16,6 +13,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import BL2.BL2Core;
 import BL2.entity.EntityBullet;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemGun extends Item {
     public static final String[] gunNames = new String[] { "", "Pistol", "SMG",
@@ -361,13 +360,13 @@ public class ItemGun extends Item {
             stack = player.inventory.getStackInSlot(i);
 
             if (stack != null && stack.getItemDamage() == type) {
-                if (stack.itemID == BL2Core.bandoiler.itemID) {
+                if (stack.itemID == BL2Items.bandoiler.itemID) {
                     ItemBandoiler.BandStor stor = new ItemBandoiler.BandStor(
                             stack);
 
                     if (stor.bullets >= 1)
                         return true;
-                } else if (stack.itemID == BL2Core.bullets.itemID)
+                } else if (stack.itemID == BL2Items.bullets.itemID)
                     return true;
             }
         }
@@ -382,7 +381,7 @@ public class ItemGun extends Item {
             stack = player.inventory.armorItemInSlot(i);
 
             if (stack != null && stack.getItemDamage() == 5) {
-                if (stack.itemID == BL2Core.shield.itemID)
+                if (stack.itemID == BL2Items.shield.itemID)
                     return true;
             }
         }
@@ -397,7 +396,7 @@ public class ItemGun extends Item {
             stack = player.inventory.armorItemInSlot(i);
 
             if (stack != null && stack.getItemDamage() == 5) {
-                if (stack.itemID == BL2Core.shield.itemID) {
+                if (stack.itemID == BL2Items.shield.itemID) {
                     ItemArmorShield.ShieldAtributes str = new ItemArmorShield.ShieldAtributes(
                             stack);
 
@@ -420,7 +419,7 @@ public class ItemGun extends Item {
             stack = player.inventory.getStackInSlot(i);
 
             if (stack != null && stack.getItemDamage() == type) {
-                if (stack.itemID == BL2Core.bandoiler.itemID) {
+                if (stack.itemID == BL2Items.bandoiler.itemID) {
                     ItemBandoiler.BandStor stor = new ItemBandoiler.BandStor(
                             stack);
 
@@ -431,7 +430,7 @@ public class ItemGun extends Item {
                         atr.save(is);
                         return true;
                     }
-                } else if (stack.itemID == BL2Core.bullets.itemID) {
+                } else if (stack.itemID == BL2Items.bullets.itemID) {
                     stack.stackSize--;
                     atr.bulletsleft++;
                     atr.save(is);
@@ -543,7 +542,7 @@ public class ItemGun extends Item {
     }
 
     public static ItemStack getRandomGun() {
-        ItemStack re = new ItemStack(BL2Core.guns);
+        ItemStack re = new ItemStack(BL2Items.guns);
         GunAtributes atr = new GunAtributes(re);
         /*
          * set the random atributes here :D

@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import BL2.BL2Core;
 
 public class ItemBandoiler extends Item {
     public static final String[] ammoTypes = new String[] { "", "Pistol",
@@ -78,7 +77,7 @@ public class ItemBandoiler extends Item {
         ItemStack stack = null;
         for (int i = 0; i < 36; i++) {
             stack = player.inventory.getStackInSlot(i);
-            if (stack != null && stack.itemID == BL2Core.bullets.itemID
+            if (stack != null && stack.itemID == BL2Items.bullets.itemID
                     && stack.getItemDamage() == type)
                 return true;
         }
@@ -95,7 +94,7 @@ public class ItemBandoiler extends Item {
                 if (stor.bullets > 64) {
                     if (par3EntityPlayer.inventory
                             .addItemStackToInventory(new ItemStack(
-                                    BL2Core.bullets, 64, par1ItemStack
+                                    BL2Items.bullets, 64, par1ItemStack
                                             .getItemDamage()))) {
                         System.out.println(true);
                         stor.bullets -= 64;
@@ -105,7 +104,7 @@ public class ItemBandoiler extends Item {
                 } else {
                     if (par3EntityPlayer.inventory
                             .addItemStackToInventory(new ItemStack(
-                                    BL2Core.bullets, stor.bullets,
+                                    BL2Items.bullets, stor.bullets,
                                     par1ItemStack.getItemDamage()))) {
                         stor.bullets = 0;
                     }
@@ -119,7 +118,7 @@ public class ItemBandoiler extends Item {
                 if (stack != null
                         && stor.bullets < maxbullets[par1ItemStack
                                 .getItemDamage()]
-                        && stack.itemID == BL2Core.bullets.itemID
+                        && stack.itemID == BL2Items.bullets.itemID
                         && stack.getItemDamage() == par1ItemStack
                                 .getItemDamage()) {
                     int o = Math.min(stack.stackSize,

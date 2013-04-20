@@ -14,9 +14,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.src.ModLoader;
-import BL2.BL2Core;
 import BL2.client.render.ShieldFX;
 import BL2.entity.EntityGrenade;
+import BL2.item.BL2Items;
 import BL2.item.ItemArmorShield.ShieldAtributes;
 import BL2.item.ItemArmorShield.Vector;
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -108,7 +108,7 @@ public class NetworkHandlerClient extends NetworkHandler {
                     shield = player.inventory.armorItemInSlot(i);
 
                     if (shield != null) {
-                        if (shield.itemID == BL2Core.shield.itemID) {
+                        if (shield.itemID == BL2Items.shield.itemID) {
                             new ShieldAtributes(shield);
 
                         }

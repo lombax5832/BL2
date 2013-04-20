@@ -3,30 +3,19 @@ package BL2;
 import java.util.EnumSet;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.liquids.LiquidContainerData;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
-import BL2.block.BlockCrudeEridiumFlowing;
-import BL2.block.BlockCrudeEridiumStill;
+import BL2.block.BL2Blocks;
 import BL2.core.handlers.IItemTickListener;
 import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
-import BL2.item.ItemArmorShield;
-import BL2.item.ItemBandoiler;
-import BL2.item.ItemBucketEridium;
-import BL2.item.ItemBullets;
-import BL2.item.ItemGrenade;
-import BL2.item.ItemGun;
-import BL2.item.ItemTemp;
-import BL2.lib.Constants;
+import BL2.item.BL2Items;
+import BL2.liquid.BL2Liquid;
 import BL2.network.NetworkHandler;
 import BL2.network.NetworkHandlerClient;
 import BL2.proxy.BL2Proxy;
@@ -39,7 +28,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,26 +35,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = "BL2", name = "Borderlands 2", version = "1.23 (1.5.1)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandlerClient.class), serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandler.class))
 public class BL2Core implements ITickHandler {
-    public static Block crudeEridiumStill;
-    public static Block crudeEridiumFlowing;
-    public static Block refinedEridiumStill;
-    public static Block refinedEridiumFlowing;
 
-    public static Item guns;
-    public static Item bullets;
-    public static Item bandoiler;
-    public static Item shield;
-    public static Item grenade;
-    public static Item temp;
-    public static Item bucketCrudeEridium;
-    public static Item bucketRefinedEridium;
-
-    public static LiquidStack crudeEridiumLiquid;
-    public static LiquidStack refinedEridiumLiquid;
-
-    public static int shieldrenderid = 0;
     public static int crudeEridiumModel;
     public static int refinedEridiumModel;
+    public static int shieldModel;
 
     @SidedProxy(clientSide = "BL2.proxy.BL2ProxyClient", serverSide = "BL2.proxy.BL2Proxy")
     public static BL2Proxy proxy;
@@ -82,41 +54,23 @@ public class BL2Core implements ITickHandler {
     public void init(FMLInitializationEvent event) {
         proxy.registerKeyBinding();
         
+        //Initialize Blocks
+        BL2Blocks.initialize();
+        
+        //Initialize Items
+        BL2Items.initialize();
+        
+        //Initialize LiquidStacks
+        BL2Liquid.initialize();
+        
         EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this,
                 64, 10, true);
         EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2,
                 this, 64, 10, true);
         
-        //Crude Eridium
-        
-        crudeEridiumFlowing = (new BlockCrudeEridiumFlowing(Constants.Eridium, Material.water)).setUnlocalizedName("crudeEridium");
-        LanguageRegistry.addName(crudeEridiumFlowing.setUnlocalizedName("crudeEridiumFlowing"), "Crude Eridium");
-        GameRegistry.registerBlock(crudeEridiumFlowing, "Crude Eridium Flowing");
-        
-        crudeEridiumStill = (new BlockCrudeEridiumStill(Constants.Eridium + 1, Material.water)).setUnlocalizedName("crudeEridium");
-        LanguageRegistry.addName(crudeEridiumStill.setUnlocalizedName("crudeEridiumStill"), "Crude Eridium (Still)");
-        GameRegistry.registerBlock(crudeEridiumStill, "Crude Eridium Still");
-        
-        
-        
-        bucketCrudeEridium = (new ItemBucketEridium(Constants.crudeBucketId)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
-        LanguageRegistry.addName(bucketCrudeEridium, "Crude Eridium Bucket");
-        
-        crudeEridiumLiquid = LiquidDictionary.getOrCreateLiquid("Crude Eridium", new LiquidStack(crudeEridiumStill, 1));
-        LiquidContainerRegistry.registerLiquid(new LiquidContainerData(LiquidDictionary.getLiquid("Crude Eridium", LiquidContainerRegistry.BUCKET_VOLUME), new ItemStack(
-                bucketCrudeEridium), new ItemStack(Item.bucketEmpty)));
-        //Crude Eridium END
-        guns = new ItemGun(Constants.gunId).setUnlocalizedName("Gun");
-        bullets = new ItemBullets(Constants.bulletId).setUnlocalizedName("Bullets");
-        bandoiler = new ItemBandoiler(Constants.bandoilerId).setUnlocalizedName("Bandoiler");
-        shield = new ItemArmorShield(Constants.shieldId, shieldrenderid, 1)
-                .setUnlocalizedName("ItemArmorShield");
-        grenade = new ItemGrenade(Constants.grenadeId).setUnlocalizedName("Grenade");
-        temp = new ItemTemp(Constants.tempId).setUnlocalizedName("Temp");
-        
         TickRegistry.registerTickHandler(this, Side.SERVER);
 
-        GameRegistry.addRecipe(new ItemStack(temp), new Object[] { "IWI",
+        GameRegistry.addRecipe(new ItemStack(BL2Items.temp), new Object[] { "IWI",
                 "WGW", "IWI", 'I', Item.ingotIron, 'W', Block.planks, 'G',
                 Item.ingotGold });
         
@@ -150,7 +104,7 @@ public class BL2Core implements ITickHandler {
     @SideOnly(Side.CLIENT)
     public void textureHook(TextureStitchEvent.Post event) {
         if (event.map == Minecraft.getMinecraft().renderEngine.textureMapItems) {
-            LiquidDictionary.getCanonicalLiquid("Crude Eridium").setRenderingIcon(crudeEridiumStill.getBlockTextureFromSide(1)).setTextureSheet("/terrain.png");
+            LiquidDictionary.getCanonicalLiquid("Crude Eridium").setRenderingIcon(BL2Blocks.crudeEridiumStill.getBlockTextureFromSide(1)).setTextureSheet("/terrain.png");
         }
     }
 

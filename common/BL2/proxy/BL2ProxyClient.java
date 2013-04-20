@@ -10,6 +10,7 @@ import BL2.client.renderer.item.RenderGunInHand;
 import BL2.core.handlers.ShieldGUIHandler;
 import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
+import BL2.item.BL2Items;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -21,18 +22,17 @@ public class BL2ProxyClient extends BL2Proxy {
     public void registerRenderInformation() {
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class,
                 new RenderBullet());
-        BL2Core.shieldrenderid = RenderingRegistry
+        BL2Core.shieldModel = RenderingRegistry
                 .addNewArmourRendererPrefix("/BL2/textures");
         RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class,
                 new RenderGrenade());
-        // MinecraftForge.EVENT_BUS.register(new RenderShield());
     }
 
     @Override
     public void registerItemRenderer() {
-        MinecraftForgeClient.registerItemRenderer(BL2Core.guns.itemID,
+        MinecraftForgeClient.registerItemRenderer(BL2Items.guns.itemID,
                 new RenderGunInHand());
-        MinecraftForgeClient.registerItemRenderer(BL2Core.grenade.itemID,
+        MinecraftForgeClient.registerItemRenderer(BL2Items.grenade.itemID,
                 new RenderGrenadeInHand());
     }
 
@@ -41,16 +41,19 @@ public class BL2ProxyClient extends BL2Proxy {
         BL2Core.crudeEridiumModel = RenderingRegistry
                 .getNextAvailableRenderId();
         
+        BL2Core.shieldModel = RenderingRegistry
+                .getNextAvailableRenderId();
+        
         RenderingRegistry.registerBlockHandler(new RenderCrudeEridium());
     }
 
     @Override
     public void initItemRenderer(int itemID) {
-        if (itemID == BL2Core.guns.itemID) {
+        if (itemID == BL2Items.guns.itemID) {
             MinecraftForgeClient.registerItemRenderer(itemID,
                     new RenderGunInHand());
         }
-        if (itemID == BL2Core.grenade.itemID) {
+        if (itemID == BL2Items.grenade.itemID) {
             MinecraftForgeClient.registerItemRenderer(itemID,
                     new RenderGrenadeInHand());
         }

@@ -6,7 +6,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import BL2.BL2Core;
+import BL2.block.BL2Blocks;
+import BL2.item.BL2Items;
 
 public class EridiumBucketHelper {
 
@@ -26,12 +27,12 @@ public class EridiumBucketHelper {
 
         int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
 
-        if ((blockID == BL2Core.crudeEridiumStill.blockID || blockID == BL2Core.crudeEridiumFlowing.blockID)
+        if ((blockID == BL2Blocks.crudeEridiumStill.blockID || blockID == BL2Blocks.crudeEridiumFlowing.blockID)
                 && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 
             world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
 
-            return new ItemStack(BL2Core.bucketCrudeEridium);
+            return new ItemStack(BL2Items.bucketCrudeEridium);
         } else
             return null;
 

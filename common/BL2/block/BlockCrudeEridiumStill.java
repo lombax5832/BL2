@@ -28,7 +28,7 @@ public class BlockCrudeEridiumStill extends BlockStationary implements ILiquid {
 
     @Override
     public int stillLiquidId() {
-        return BL2Core.crudeEridiumStill.blockID;
+        return BL2Blocks.crudeEridiumStill.blockID;
     }
 
     @Override

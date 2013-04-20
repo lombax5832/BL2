@@ -3,12 +3,12 @@ package BL2.item;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import BL2.BL2Core;
+import BL2.block.BL2Blocks;
 
 public class ItemBucketEridium extends ItemBucket {
 
     public ItemBucketEridium(int i) {
-        super(i, BL2Core.crudeEridiumFlowing.blockID);
+        super(i, BL2Blocks.crudeEridiumFlowing.blockID);
         this.setCreativeTab(BL2.creativetab.CreativeTabBL2.tabBL2);
     }
 

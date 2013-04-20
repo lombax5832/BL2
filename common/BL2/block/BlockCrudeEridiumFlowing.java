@@ -245,7 +245,7 @@ public class BlockCrudeEridiumFlowing extends BlockFluid implements ILiquid {
 
     @Override
     public int stillLiquidId() {
-        return BL2Core.crudeEridiumStill.blockID;
+        return BL2Blocks.crudeEridiumStill.blockID;
     }
 
     @Override
