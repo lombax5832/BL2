@@ -14,22 +14,22 @@ import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
-import BL2.client.handler.NetworkHandlerClient;
-import BL2.common.Constants;
-import BL2.common.block.BlockCrudeEridiumFlowing;
-import BL2.common.block.BlockCrudeEridiumStill;
-import BL2.common.entity.EntityBullet;
-import BL2.common.entity.EntityGrenade;
-import BL2.common.handler.IItemTickListener;
-import BL2.common.handler.NetworkHandler;
-import BL2.common.item.ItemArmorShield;
-import BL2.common.item.ItemBandoiler;
-import BL2.common.item.ItemBucketEridium;
-import BL2.common.item.ItemBullets;
-import BL2.common.item.ItemGrenade;
-import BL2.common.item.ItemGun;
-import BL2.common.item.ItemTemp;
-import BL2.common.proxy.BL2Proxy;
+import BL2.block.BlockCrudeEridiumFlowing;
+import BL2.block.BlockCrudeEridiumStill;
+import BL2.core.handlers.IItemTickListener;
+import BL2.entity.EntityBullet;
+import BL2.entity.EntityGrenade;
+import BL2.item.ItemArmorShield;
+import BL2.item.ItemBandoiler;
+import BL2.item.ItemBucketEridium;
+import BL2.item.ItemBullets;
+import BL2.item.ItemGrenade;
+import BL2.item.ItemGun;
+import BL2.item.ItemTemp;
+import BL2.lib.Constants;
+import BL2.network.NetworkHandler;
+import BL2.network.NetworkHandlerClient;
+import BL2.proxy.BL2Proxy;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -68,9 +68,9 @@ public class BL2Core implements ITickHandler {
     public static int crudeEridiumModel;
     public static int refinedEridiumModel;
 
-    @SidedProxy(clientSide = "BL2.client.proxy.BL2Client", serverSide = "BL2.common.proxy.BL2Proxy")
+    @SidedProxy(clientSide = "BL2.proxy.BL2ProxyClient", serverSide = "BL2.proxy.BL2Proxy")
     public static BL2Proxy proxy;
-    @SidedProxy(clientSide = "BL2.client.handler.NetworkHandlerClient", serverSide = "BL2.common.handler.NetworkHandler")
+    @SidedProxy(clientSide = "BL2.network.NetworkHandlerClient", serverSide = "BL2.network.NetworkHandler")
     public static NetworkHandler nethandler;
 
     @Mod.PreInit

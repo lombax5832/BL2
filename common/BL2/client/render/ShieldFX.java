@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import BL2.common.item.ItemArmorShield.Vector;
+import BL2.item.ItemArmorShield.Vector;
 
 public class ShieldFX extends EntityFX {
     private Entity parent;
