@@ -8,9 +8,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.liquids.LiquidDictionary;
 import BL2.block.BL2Blocks;
+import BL2.core.handlers.EntityLivingHandler;
 import BL2.core.handlers.IItemTickListener;
 import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
@@ -62,6 +64,9 @@ public class BL2Core implements ITickHandler {
         
         //Initialize LiquidStacks
         BL2Liquid.initialize();
+        
+        //EntityLivingHandler
+        MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
         
         EntityRegistry.registerModEntity(EntityBullet.class, "Bullet", 1, this,
                 64, 10, true);

@@ -19,11 +19,15 @@ public class BL2Items {
     public static void initialize() {
         
         guns = new ItemGun(Constants.gunId).setUnlocalizedName("Gun");
+        
         bullets = new ItemBullets(Constants.bulletId).setUnlocalizedName("Bullets");
+        
         bandoiler = new ItemBandoiler(Constants.bandoilerId).setUnlocalizedName("Bandoiler");
-        shield = new ItemArmorShield(Constants.shieldId, 0, 1)
-                .setUnlocalizedName("ItemArmorShield");
+        
+        shield = new ItemArmorShield(Constants.shieldId, 0, 1).setUnlocalizedName("ItemArmorShield");
+        
         grenade = new ItemGrenade(Constants.grenadeId).setUnlocalizedName("Grenade");
+        
         temp = new ItemTemp(Constants.tempId).setUnlocalizedName("Temp");
         
         bucketCrudeEridium = (new ItemBucketEridium(Constants.crudeBucketId)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
