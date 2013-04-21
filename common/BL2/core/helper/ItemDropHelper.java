@@ -24,7 +24,7 @@ public class ItemDropHelper {
             
             if(random < 0d){
                 
-                entity.entityDropItem(ItemGun.getRandomGun(), 1);
+                entity.entityDropItem(ItemGun.getRandomGun().copy(), 0);
                 
             }
         }
@@ -45,8 +45,8 @@ public class ItemDropHelper {
                 System.out.println(ammoNum);
                 
                 
-                for(int x = 0; x < ammoNum; x++){
-                    entity.entityDropItem(ammoType, 1);
+                for(int x = 1; x < ammoNum; x++){
+                    entity.entityDropItem(ammoType.copy(), 0);
                     System.out.println(x);
                 }
             }
