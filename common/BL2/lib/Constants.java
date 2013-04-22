@@ -12,4 +12,14 @@ public class Constants {
     
     //Blocks
     public final static int Eridium = 1600;
+    
+    //Version
+    public final static String VERSION = "1.24";
+    public final static String MINECRAFT_VERSION = "1.5.1";
+    public final static String VERSION_LONG = VERSION+" ("+MINECRAFT_VERSION+")";
+    
+    //Mod Name
+    public final static String MOD_NAME = "Borderlands 2";
+    public final static String MOD_ID = "BL2";
+    
 }
