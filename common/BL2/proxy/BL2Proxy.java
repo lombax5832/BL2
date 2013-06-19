@@ -33,4 +33,8 @@ public class BL2Proxy {
         // TODO Auto-generated method stub
 
     }
+    
+    public boolean isClient(){
+        return false;
+    }
 }

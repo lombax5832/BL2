@@ -70,4 +70,9 @@ public class BL2ProxyClient extends BL2Proxy {
         KeyBindingRegistry
                 .registerKeyBinding(new BL2.core.handlers.BL2KeyHandler());
     }
+    
+    @Override
+    public boolean isClient() {
+        return true;
+    }
 }

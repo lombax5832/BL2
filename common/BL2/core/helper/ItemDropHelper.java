@@ -22,7 +22,7 @@ public class ItemDropHelper {
         if(GenericMethods.isHostileEntity(entity)){
             random = Math.random();
             
-            if(random < 0d){
+            if(random < 0.05d){
                 
                 entity.entityDropItem(ItemGun.getRandomGun().copy(), 0);
                 
@@ -37,7 +37,7 @@ public class ItemDropHelper {
             
             System.out.println(random);
             
-            if(random < 1d){
+            if(random < 0.3d){
                 
                 ItemStack ammoType = AmmoDropHelper.ammoDrop();
                 int ammoNum = AmmoDropHelper.ammoAmmount(ammoType);

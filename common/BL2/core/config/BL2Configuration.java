@@ -18,6 +18,4 @@ public class BL2Configuration extends Configuration{
         versionProp.set(Constants.VERSION);
         super.save();
     }
-    
-
 }

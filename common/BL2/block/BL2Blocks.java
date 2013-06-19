@@ -13,6 +13,7 @@ public class BL2Blocks {
     public static Block crudeEridiumFlowing;
     public static Block refinedEridiumStill;
     public static Block refinedEridiumFlowing;
+    public static Block ammoCrafter;
     
     public static void initialize(){
         crudeEridiumFlowing = (new BlockCrudeEridiumFlowing(Constants.Eridium, Material.water)).setUnlocalizedName("crudeEridium");

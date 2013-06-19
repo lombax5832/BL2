@@ -1,8 +1,8 @@
 package BL2.item;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import BL2.lib.Constants;
 import net.minecraft.item.Item;
+import BL2.lib.ItemIds;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class BL2Items {
     
@@ -18,19 +18,19 @@ public class BL2Items {
     
     public static void initialize() {
         
-        guns = new ItemGun(Constants.gunId).setUnlocalizedName("Gun");
+        guns = new ItemGun(ItemIds.GUN_ID).setUnlocalizedName("Gun");
         
-        bullets = new ItemBullets(Constants.bulletId).setUnlocalizedName("Bullets");
+        bullets = new ItemBullets(ItemIds.BULLET_ID).setUnlocalizedName("Bullets");
         
-        bandoiler = new ItemBandoiler(Constants.bandoilerId).setUnlocalizedName("Bandoiler");
+        bandoiler = new ItemBandoiler(ItemIds.BANDOLIER_ID).setUnlocalizedName("Bandoiler");
         
-        shield = new ItemArmorShield(Constants.shieldId, 0, 1).setUnlocalizedName("ItemArmorShield");
+        shield = new ItemArmorShield(ItemIds.SHIELD_ID, 0, 1).setUnlocalizedName("ItemArmorShield");
         
-        grenade = new ItemGrenade(Constants.grenadeId).setUnlocalizedName("Grenade");
+        grenade = new ItemGrenade(ItemIds.GRENADE_ID).setUnlocalizedName("Grenade");
         
-        temp = new ItemTemp(Constants.tempId).setUnlocalizedName("Temp");
+        temp = new ItemTemp(ItemIds.TEMP_ID).setUnlocalizedName("Temp");
         
-        bucketCrudeEridium = (new ItemBucketEridium(Constants.crudeBucketId)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
+        bucketCrudeEridium = (new ItemBucketEridium(ItemIds.CRUDE_BUCKET_ID)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
         LanguageRegistry.addName(bucketCrudeEridium, "Crude Eridium Bucket");
     }
 }

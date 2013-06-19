@@ -31,7 +31,7 @@ public class RenderGunInHand implements IItemRenderer {
     private ModelPistolInv pistolInv;
     private ModelSMGInv smgInv;
     private ModelAssaultRifleInv assaultRifleInv;
-
+    
     private int pistolId = 1;
     private int smgId = 2;
     private int assaultId = 3;
@@ -69,31 +69,46 @@ public class RenderGunInHand implements IItemRenderer {
         switch (type) {
             case ENTITY: {
                 if (item.getItemDamage() == pistolId) {
-                    renderPistol(0F, -1.4F, 0F);
+                    renderPistol(0F, -1.4F, 0F, 0, 0, 0, 0);
                     break;
                 } else if (item.getItemDamage() == smgId) {
-                    renderSMG(0F, 0F, 0F);
+                    renderSMG(0F, 0F, 0F, 0, 0, 0, 0);
                     break;
                 } else if (item.getItemDamage() == assaultId) {
-                    renderAssault(1F, -0.8F, .6F);
+                    renderAssault(1F, -0.8F, .6F, 0, 0, 0, 0);
                     break;
                 } else if (item.getItemDamage() == sniperId) {
-                    renderSniper(-.5F, -1.4F, 0F);
+                    renderSniper(-.5F, -1.4F, 0F, 0, 0, 0, 0);
+                    break;
+                }
+            }
+            case EQUIPPED_FIRST_PERSON: {
+                if (item.getItemDamage() == pistolId) {
+                    renderPistol(0F, -0.5F, .8F, 1, 1, 0, 0);
+                    break;
+                } else if (item.getItemDamage() == smgId) {
+                    renderSMG(0.1F, .5F, 0.2F, 1, 1, 0, 0);
+                    break;
+                } else if (item.getItemDamage() == assaultId) {
+                    renderAssault(1F, -0.5F, .6F, 1, 1, 0, 0);
+                    break;
+                } else if (item.getItemDamage() == sniperId) {
+                    renderSniper(.6F, -1.4F, 0.65F, 1, 1, 0, 0);
                     break;
                 }
             }
             case EQUIPPED: {
                 if (item.getItemDamage() == pistolId) {
-                    renderPistol(0F, -0.5F, .8F);
+                    renderPistol(0F, -0.5F, .8F, 100, 0, 1, 0);
                     break;
                 } else if (item.getItemDamage() == smgId) {
-                    renderSMG(0F, .5F, .4F);
+                    renderSMG(0.3F, .5F, .4F, 100, 0, 1, 0);
                     break;
                 } else if (item.getItemDamage() == assaultId) {
-                    renderAssault(1F, -0.5F, .6F);
+                    renderAssault(0.4F, -0.5F, -0.6F, 100, 0, 1, 0);
                     break;
                 } else if (item.getItemDamage() == sniperId) {
-                    renderSniper(.6F, -1.4F, 0.65F);
+                    renderSniper(-0.2F, -1.4F, 0F, 85, 0, 1, 0);
                     break;
                 }
             }
@@ -118,12 +133,13 @@ public class RenderGunInHand implements IItemRenderer {
 
     }
 
-    private void renderSMG(float x, float y, float z) {
+    private void renderSMG(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
         RenderEngine render = mc.renderEngine;
         render.bindTexture("/mods/BL2/textures/Guns/SMGModel.png");
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
+        GL11.glRotatef(angle, rotX, rotY, rotZ);
         smgModel.render(0.1F);
         GL11.glPopMatrix(); // end
     }
@@ -138,12 +154,13 @@ public class RenderGunInHand implements IItemRenderer {
         GL11.glPopMatrix(); // end
     }
 
-    private void renderSniper(float x, float y, float z) {
+    private void renderSniper(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
         RenderEngine render = mc.renderEngine;
         render.bindTexture("/mods/BL2/textures/Guns/SniperModel.png");
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
+        GL11.glRotatef(angle, rotX, rotY, rotZ);
         sniperModel.render(0.15F);
         GL11.glPopMatrix(); // end
     }
@@ -158,16 +175,17 @@ public class RenderGunInHand implements IItemRenderer {
         GL11.glPopMatrix(); // end
     }
 
-    private void renderPistol(float x, float y, float z) {
+    private void renderPistol(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
         RenderEngine render = mc.renderEngine;
         render.bindTexture("/mods/BL2/textures/Guns/PistolModel.png");
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
+        GL11.glRotatef(angle, rotX, rotY, rotZ);
         pistolModel.render(0.1F);
         GL11.glPopMatrix(); // end
     }
-
+    
     private void renderPistolForInventory(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
         RenderEngine render = mc.renderEngine;
@@ -178,12 +196,13 @@ public class RenderGunInHand implements IItemRenderer {
         GL11.glPopMatrix(); // end
     }
 
-    private void renderAssault(float x, float y, float z) {
+    private void renderAssault(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
         RenderEngine render = mc.renderEngine;
         render.bindTexture("/mods/BL2/textures/Guns/AssaultRifleModel.png");
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
+        GL11.glRotatef(angle, rotX, rotY, rotZ);
         assaultRifleModel.render(0.1F);
         GL11.glPopMatrix(); // end
     }

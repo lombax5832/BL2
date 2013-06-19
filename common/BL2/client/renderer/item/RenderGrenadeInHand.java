@@ -43,6 +43,10 @@ public class RenderGrenadeInHand implements IItemRenderer {
                 break;
             }
             case EQUIPPED: {
+                renderGrenade(0.8F, -1.2F, 0.6F);
+                break;
+            }
+            case EQUIPPED_FIRST_PERSON: {
                 renderGrenade(-.5F, -0.6F, .6F);
                 break;
             }
