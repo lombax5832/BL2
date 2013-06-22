@@ -14,6 +14,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import BL2.BL2Core;
 import BL2.entity.EntityBullet;
+import BL2.lib.Colors;
 
 public class ItemGun extends Item {
     public static final String[] gunNames = new String[] { "", "Pistol", "SMG",
@@ -75,10 +76,18 @@ public class ItemGun extends Item {
         } else {
         }
         String gunName = new StringBuilder().append("\u00a76")
-                .append(gunNames[par1ItemStack.getItemDamage()]).toString();
+                .append(par1ItemStack.getDisplayName()).toString();
         // par3List.add(gunNames[par1ItemStack.getItemDamage()]);
         par3List.add(gunName);
-        par3List.add("\u00a72" + Companies[atr.Company]);
+        if(atr.incendiary){
+            String incendiary = new StringBuilder().append(Colors.COLOR_RED).append("Incendiary").toString();
+            par3List.add(incendiary);
+        }
+        if(atr.cryo){
+            String cryo = new StringBuilder().append(Colors.COLOR_CYAN).append("Cryogenic").toString();
+            par3List.add(cryo);
+        }
+        par3List.add(Companies[atr.Company]);
         calcDmg(atr, hasAmp, Amp, par3List);
         par3List.add("DPS: " + getDPS(par1ItemStack, par2EntityPlayer)
                 + " Hearts/second");
@@ -274,6 +283,11 @@ public class ItemGun extends Item {
     {
         return EnumAction.bow;
     }
+    
+    @Override
+    public String getItemDisplayName(ItemStack par1ItemStack){
+        return gunNames[par1ItemStack.getItemDamage()];
+    }
 
     @Override
     public void onUpdate(ItemStack par1ItemStack, World par2World,
@@ -352,7 +366,7 @@ public class ItemGun extends Item {
                     EntityBullet var8 = new EntityBullet(par2World,
                             (EntityPlayer) par3Entity, atr.bulletspeed,
                             atr.damage + ampDmg, atr.explosive,
-                            atr.explosivepower, atr.accuracy, atr.knockback);
+                            atr.explosivepower, atr.accuracy, atr.knockback, atr.incendiary, atr.cryo);
 
                     if (!par2World.isRemote) {
                         par2World.spawnEntityInWorld(var8);
@@ -572,6 +586,8 @@ public class ItemGun extends Item {
     public static ItemStack getRandomGun() {
         ItemStack re = new ItemStack(BL2Items.guns);
         GunAtributes atr = new GunAtributes(re);
+        atr.incendiary = false;
+        atr.cryo = false;
         /*
          * set the random atributes here :D
          * 
@@ -593,7 +609,14 @@ public class ItemGun extends Item {
         atr.reloadtime = (int) (Math.random() * (100 - 40) + 40) + 1;
         // atr.ammoPerShot = (int) ((Math.random() * (3 - 1)) + 1);
         atr.damage = (int) (Math.random() * (6 - 2) + 2) + 1;
-
+        
+        float f = (float) Math.random() * 100;
+        if (f<20){
+            atr.incendiary = true;
+        }else if(f<40){
+            atr.cryo = true;            
+        }
+        
         float i = (float) Math.random() * 100;
 
         if (i < 30) {
@@ -690,6 +713,9 @@ public class ItemGun extends Item {
 
         public boolean using;
         public long lasttick;
+        
+        public boolean incendiary;
+        public boolean cryo;
 
         public GunAtributes(ItemStack it) {
             load(it);
@@ -725,6 +751,9 @@ public class ItemGun extends Item {
 
             tag.setBoolean("using", using);
             tag.setLong("lasttick", lasttick);
+            
+            tag.setBoolean("incendiary", incendiary);
+            tag.setBoolean("cryo", cryo);
             if (newTag) {
                 it.setTagCompound(tag);
             }
@@ -759,6 +788,9 @@ public class ItemGun extends Item {
 
             using = tag.getBoolean("using");
             lasttick = tag.getLong("lasttick");
+            
+            incendiary = tag.getBoolean("incendiary");
+            cryo = tag.getBoolean("cryo");
         }
     }
 }

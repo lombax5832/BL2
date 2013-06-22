@@ -7,6 +7,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
@@ -31,6 +33,9 @@ public class EntityBullet extends Entity implements IProjectile {
     public float explosivepower;
     public int damage;
     public boolean explosive;
+    
+    public boolean incendiary;
+    public boolean frost;
 
     public EntityBullet(World world) {
         super(world);
@@ -70,9 +75,12 @@ public class EntityBullet extends Entity implements IProjectile {
     }
 
     public EntityBullet(World world, EntityLiving el, float par3, int dam,
-            boolean ex, float expwr, float accuracy, int knockback) {
+            boolean ex, float expwr, float accuracy, int knockback, boolean incend, boolean cryo) {
         super(world);
         // for;
+        incendiary = incend;
+        frost = cryo;
+        
         explosive = ex;
         explosivepower = expwr;
         damage = dam;
@@ -258,8 +266,14 @@ public class EntityBullet extends Entity implements IProjectile {
                     var4.entityHit.hurtResistantTime = 0;
                 }
 
-                if (this.isBurning()) {
+                if (this.isBurning()||this.incendiary) {
                     var4.entityHit.setFire(5);
+                }
+                if (this.frost && var4.entityHit instanceof EntityLiving && shootingEntity instanceof EntityLiving){
+                    EntityLiving EntityHit = (EntityLiving) var4.entityHit;
+                    if(EntityHit != this.shootingEntity){
+                        EntityHit.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 2));
+                    }
                 }
 
                 if (var4.entityHit.attackEntityFrom(var22, var24)) {
@@ -443,5 +457,5 @@ public class EntityBullet extends Entity implements IProjectile {
     public boolean getIsCritical() {
         byte var1 = dataWatcher.getWatchableObjectByte(16);
         return (var1 & 1) != 0;
-    }
+    }   
 }

@@ -19,9 +19,8 @@ public class ItemBullets extends Item {
     @Override
     public void addInformation(ItemStack par1ItemStack,
             EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.clear();
-
-        par3List.add(ammoTypes[par1ItemStack.getItemDamage()] + " Ammo");
+       
+        par3List.add("Have them in your inventory to reload");
 
     }
 
@@ -40,6 +39,11 @@ public class ItemBullets extends Item {
             ItemStack stack = new ItemStack(this, 64, j);
             l.add(stack);
         }
+    }
+    
+    @Override
+    public String getItemDisplayName(ItemStack par1ItemStack){
+        return ammoTypes[par1ItemStack.getItemDamage()] + " Ammo";
     }
 
     @Override

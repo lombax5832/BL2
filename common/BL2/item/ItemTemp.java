@@ -1,7 +1,5 @@
 package BL2.item;
 
-import java.util.List;
-
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -13,19 +11,16 @@ public class ItemTemp extends Item {
     public ItemTemp(int par1) {
         super(par1);
         maxStackSize = 1;
+        this.setUnlocalizedName("Temp");
         this.setCreativeTab(BL2.creativetab.CreativeTabBL2.tabBL2);
+        
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void addInformation(ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.clear();
-
-        par3List.add("Temp");
-
+    public String getItemDisplayName(ItemStack par1ItemStack){
+        return "Temp";
     }
-
+    
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         itemIcon = par1IconRegister.registerIcon("BL2:Temp");
