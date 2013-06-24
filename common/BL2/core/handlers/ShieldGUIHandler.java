@@ -51,12 +51,13 @@ public class ShieldGUIHandler implements ITickHandler {
             if (player != null) {
                 //
                 if (minecraft.inGameHasFocus && hasShield(player)) {
-                    renderStoneHUD();
+                    renderStoneHUD(player);
                 }
                 if (minecraft.inGameHasFocus && gunEquipped(player)) {
-                    renderAmmoHUD();
+                    renderAmmoHUD(player);
                 }
                 if (player.isDead == false) {
+                       
                 }
             }
         }
@@ -164,35 +165,45 @@ public class ShieldGUIHandler implements ITickHandler {
         return (atr.bulletsleft-1) + "/" + (atr.clipsize-1);
     }
     
-    private static void renderAmmoHUD() {
+    private static void renderAmmoHUD(EntityPlayer player) {
         Minecraft mc = Minecraft.getMinecraft();
         ScaledResolution res = new ScaledResolution(mc.gameSettings,
                 mc.displayWidth, mc.displayHeight);
         int height = res.getScaledHeight();
         int width = res.getScaledWidth();
+        int offsetX = 0;
+        int offsetY = -10;
+        if (player.capabilities.isCreativeMode){
+            offsetY = 0;
+        }
         mc.thePlayer.getHealth();
         float ammo = calcAmmo(mc.thePlayer);
         FontRenderer fr = mc.fontRenderer;
         mc.playerController.shouldDrawHUD();
         GunAtributes atr = new ItemGun.GunAtributes(mc.thePlayer.inventory.getCurrentItem());
         Minecraft minecraft = FMLClientHandler.instance().getClient();
-        drawOutlinedBox(width / 2, height - 42, 80, 10, 0x6E7B8B);
+        drawOutlinedBox(width / 2, height - 42, 80, 10, 0x6E7B8B, offsetX, offsetY);
         drawSolidGradientRectAmmo(width / 2 - 90, height - 42, (int) ammo, 10,
-                Color.ORANGE, Color.ORANGE);
+                Color.ORANGE, Color.ORANGE, offsetX, offsetY);
         if (minecraft.inGameHasFocus) {
-            drawAmmoText(AmmoString(atr, (EntityPlayer) mc.thePlayer), height, width, fr);
+            drawAmmoText(AmmoString(atr, (EntityPlayer) mc.thePlayer), height, width, fr, offsetX, offsetY);
             // fr.drawStringWithShadow(ShieldString, (width / 2 -
             // fr.getStringWidth(ShieldString) / 2) - 40, height - 60,
             // 0xFFFFFF);
         }
     }
 
-    private static void renderStoneHUD() {
+    private static void renderStoneHUD(EntityPlayer player) {
         Minecraft mc = Minecraft.getMinecraft();
         ScaledResolution res = new ScaledResolution(mc.gameSettings,
                 mc.displayWidth, mc.displayHeight);
         int height = res.getScaledHeight();
         int width = res.getScaledWidth();
+        int offsetX = 0;
+        int offsetY = -10;
+        if (player.capabilities.isCreativeMode){
+            offsetY = 0;
+        }        
         mc.thePlayer.getHealth();
         float shield = calcShield(mc.thePlayer);
         FontRenderer fr = mc.fontRenderer;
@@ -200,11 +211,11 @@ public class ShieldGUIHandler implements ITickHandler {
         ShieldAtributes str = getStr(mc.thePlayer);
         String ShieldString = str.charge + "/" + str.maxcharge;
         Minecraft minecraft = FMLClientHandler.instance().getClient();
-        drawOutlinedBox(width / 2 - 90, height - 42, 80, 10, 0x6E7B8B);
+        drawOutlinedBox(width / 2 - 90, height - 42, 80, 10, 0x6E7B8B, offsetX, offsetY);
         drawSolidGradientRect(width / 2 - 90, height - 42, (int) shield, 10,
-                Color.CYAN, Color.CYAN);
+                Color.CYAN, Color.CYAN, offsetX, offsetY);
         if (minecraft.inGameHasFocus) {
-            drawShieldText(ShieldString, height, width, fr);
+            drawShieldText(ShieldString, height, width, fr, offsetX, offsetY);
             // fr.drawStringWithShadow(ShieldString, (width / 2 -
             // fr.getStringWidth(ShieldString) / 2) - 40, height - 60,
             // 0xFFFFFF);
@@ -214,9 +225,10 @@ public class ShieldGUIHandler implements ITickHandler {
     static float zLevel = -90.0F;
 
     public static void drawOutlinedBox(int x, int y, int width, int height,
-            int outlineColorHex) {
+            int outlineColorHex, int offX, int offY) {
         Color outlineColor = new Color(outlineColorHex);
         glPushMatrix();
+        GL11.glTranslatef(offX, offY, 0);
         y -= 19;
         glScalef(0.5F, 0.5F, 0.5F);
         drawLeftSide(x * 2 - 1 - 2, y * 2 - 2, x * 2 + 2, (y + height) * 2 + 2,
@@ -322,15 +334,16 @@ public class ShieldGUIHandler implements ITickHandler {
     }
 
     public static void drawSolidGradientRectAmmo(int x, int y, int width,
-            int height, Color color1Color, Color color2Color) {
+            int height, Color color1Color, Color color2Color, int offX, int offY) {
         y -= 19;
         drawSolidGradientRectAmmo0(x * 2, y * 2, (x + width) * 2, (y + height) * 2,
-                color1Color, color2Color);
+                color1Color, color2Color, offX, offY);
     }
 
     public static void drawSolidGradientRectAmmo0(int vertex1, int vertex2,
-            int vertex3, int vertex4, Color color1Color, Color color2Color) {
+            int vertex3, int vertex4, Color color1Color, Color color2Color, int x, int y) {
         glPushMatrix();
+        GL11.glTranslatef(x, y, 0);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Color color3Color = new Color(0xffa900);
         Color color4Color = new Color(0xf6bb48);
@@ -356,15 +369,16 @@ public class ShieldGUIHandler implements ITickHandler {
     }
     
     public static void drawSolidGradientRect(int x, int y, int width,
-            int height, Color color1Color, Color color2Color) {
+            int height, Color color1Color, Color color2Color, int offX, int offY) {
         y -= 19;
         drawSolidGradientRect0(x * 2, y * 2, (x + width) * 2, (y + height) * 2,
-                color1Color, color2Color);
+                color1Color, color2Color, offX, offY);
     }
 
     public static void drawSolidGradientRect0(int vertex1, int vertex2,
-            int vertex3, int vertex4, Color color1Color, Color color2Color) {
+            int vertex3, int vertex4, Color color1Color, Color color2Color, int x, int y) {
         glPushMatrix();
+        GL11.glTranslatef(x, y, 0);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Color color3Color = new Color(0x00FFFF);
         Color color4Color = new Color(0x009ACD);
@@ -390,20 +404,28 @@ public class ShieldGUIHandler implements ITickHandler {
     }
 
     public static void drawShieldText(String ShieldString, int height,
-            int width, FontRenderer fr) {
+            int width, FontRenderer fr, int x, int y) {
         glPushMatrix();
+        GL11.glTranslatef(x,y,-1);
         fr.drawStringWithShadow(ShieldString,
                 width / 2 - fr.getStringWidth(ShieldString) / 2 - 40,
                 height - 60, 0xFFFFFF);
+        glShadeModel(GL_FLAT);
+        glEnable(GL_ALPHA_TEST);
+        glEnable(GL_TEXTURE_2D);
         glPopMatrix();
     }
     
     public static void drawAmmoText(String ShieldString, int height,
-            int width, FontRenderer fr) {
+            int width, FontRenderer fr, int x, int y) {
         glPushMatrix();
+        GL11.glTranslatef(x,y,-1);
         fr.drawStringWithShadow(ShieldString,
                 width / 2 - fr.getStringWidth(ShieldString) / 2 + 50,
                 height - 60, 0xFFFFFF);
+        glShadeModel(GL_FLAT);
+        glEnable(GL_ALPHA_TEST);
+        glEnable(GL_TEXTURE_2D);
         glPopMatrix();
     }
 }

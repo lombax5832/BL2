@@ -15,6 +15,7 @@ import BL2.block.BL2Blocks;
 import BL2.core.config.BL2MainConfig;
 import BL2.core.handlers.EntityLivingHandler;
 import BL2.core.handlers.IItemTickListener;
+import BL2.core.helper.LogHelper;
 import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
 import BL2.item.BL2Items;
@@ -23,11 +24,13 @@ import BL2.liquid.BL2Liquid;
 import BL2.network.NetworkHandler;
 import BL2.network.NetworkHandlerClient;
 import BL2.proxy.BL2Proxy;
+import BL2.recipe.GT_Recipes;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -39,7 +42,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_LONG)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandlerClient.class), serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandler.class))
 public class BL2Core implements ITickHandler {
-
+    
     public static int crudeEridiumModel;
     public static int refinedEridiumModel;
     public static int shieldModel;
@@ -51,6 +54,11 @@ public class BL2Core implements ITickHandler {
 
     @Mod.PreInit
     public void preInt(FMLPreInitializationEvent event) {
+        
+        //Initializer the Log Helper
+        LogHelper.init();
+        
+        //Load Configs
         BL2MainConfig.loadConfig(event);
     }
 
@@ -76,15 +84,24 @@ public class BL2Core implements ITickHandler {
                 this, 64, 10, true);
         
         TickRegistry.registerTickHandler(this, Side.SERVER);
-
-        GameRegistry.addRecipe(new ItemStack(BL2Items.temp), new Object[] { "IWI",
-                "WGW", "IWI", 'I', Item.ingotIron, 'W', Block.planks, 'G',
-                Item.ingotGold });
         
         proxy.registerRenderInformation();
         proxy.registerRenderTickHandler();
         proxy.registerItemRenderer();
         proxy.initiateRendering();
+    }
+    
+    @Mod.PostInit
+    public void postInit(FMLPostInitializationEvent event){
+            GameRegistry.addRecipe(new ItemStack(BL2Items.temp), new Object[] { 
+                "IWI",
+                "WGW", 
+                "IWI", 
+                'I', Item.ingotIron, 
+                'W', Block.planks, 
+                'G', Item.ingotGold });
+            
+            GT_Recipes.addGTRecipes();
     }
 
     @Override
