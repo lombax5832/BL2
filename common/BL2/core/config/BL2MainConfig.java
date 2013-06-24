@@ -30,6 +30,7 @@ public class BL2MainConfig {
             ItemIds.GRENADE_ID = mainConfig.getItem("Grenade", ItemIds.GRENADE_DEFAULT).getInt();
             ItemIds.TEMP_ID = mainConfig.getItem("Temp", ItemIds.TEMP_DEFAULT).getInt();
             ItemIds.CRUDE_BUCKET_ID = mainConfig.getItem("Crude_Bucket", ItemIds.CRUDE_BUCKET_DEFAULT).getInt();
+            ItemIds.COMPONENTS_ID = mainConfig.getItem("Component_Ids", ItemIds.COMPONENTS_DEFAULT).getInt();
         } finally {
             if (mainConfig.hasChanged()) {
                 mainConfig.save();

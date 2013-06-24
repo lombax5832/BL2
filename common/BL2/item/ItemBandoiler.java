@@ -41,7 +41,6 @@ public class ItemBandoiler extends Item {
         for (int i = 1; i < 7; i++) {
             icons[i - 1] = ir.registerIcon("BL2:" + ammoTypes[i] + "Bandoiler");
         }
-
     }
 
     @Override
