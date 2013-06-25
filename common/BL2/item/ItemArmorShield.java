@@ -40,7 +40,11 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
         this.setMaxStackSize(1);
         this.setCreativeTab(BL2.creativetab.CreativeTabBL2.tabBL2);
         this.setHasSubtypes(true);
-        this.setMaxDamage(100);
+    }
+    
+    @Override
+    public String getItemDisplayName(ItemStack par1ItemStack){
+        return shieldNames[par1ItemStack.getItemDamage()];
     }
 
     public boolean getHit(ShieldAtributes atr, double damage) {
@@ -105,7 +109,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
         ShieldAtributes atr = new ShieldAtributes(par1ItemStack);
 
         par3List.clear();
-        par3List.add(shieldNames[par1ItemStack.getItemDamage()]);
+        par3List.add(par1ItemStack.getDisplayName());
         par3List.add("Charge: " + atr.charge + "/" + atr.maxcharge);
         par3List.add("Recharge Delay: " + atr.rechargeDelay / 20 + " Seconds");
         par3List.add("Recharge Rate: " + atr.chargeRate * 20 + " Per Second");
@@ -113,14 +117,6 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
             par3List.add("Amp Damage: " + (float) atr.amp / 2
                     + " Hearts while shield is full");
         }
-    }
-
-    public float getDamageForItemStack(ItemStack it) {
-        // System.out.println("yes");
-        ShieldAtributes atr = new ShieldAtributes(it);
-        float damage = (float) atr.charge / atr.maxcharge;
-        // System.out.println((float)atr.charge/atr.maxcharge);
-        return 1 - damage;
     }
 
     @Override
@@ -233,12 +229,6 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
         return 0;
     }
 
-    @Override
-    public void damageArmor(EntityLiving entity, ItemStack stack,
-            DamageSource source, int damage, int slot) {
-
-    }
-
     public static class ShieldAtributes {
         public int company;
         public int maxcharge = 50;
@@ -336,5 +326,10 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
         if (stack.itemID == BL2Items.shield.itemID)
             return "/mods/BL2/textures/Armor/shield_" + damVal + ".png";
         return null;
+    }
+
+    @Override
+    public void damageArmor(EntityLiving entity, ItemStack stack,
+            DamageSource source, int damage, int slot) {
     }
 }

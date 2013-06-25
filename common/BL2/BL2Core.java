@@ -24,7 +24,7 @@ import BL2.liquid.BL2Liquid;
 import BL2.network.NetworkHandler;
 import BL2.network.NetworkHandlerClient;
 import BL2.proxy.BL2Proxy;
-import BL2.recipe.GT_Recipes;
+import BL2.recipe.ModRecipes;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -101,7 +101,7 @@ public class BL2Core implements ITickHandler {
                 'W', Block.planks, 
                 'G', Item.ingotGold });
             
-            GT_Recipes.addGTRecipes();
+            ModRecipes.addModRecipes();
     }
 
     @Override
