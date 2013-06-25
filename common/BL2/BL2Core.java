@@ -14,25 +14,30 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import BL2.block.BL2Blocks;
 import BL2.core.config.BL2MainConfig;
 import BL2.core.handlers.EntityLivingHandler;
+import BL2.core.handlers.GUIHandler;
 import BL2.core.handlers.IItemTickListener;
 import BL2.core.helper.LogHelper;
 import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
 import BL2.item.BL2Items;
+import BL2.lib.AmmoOutputs;
 import BL2.lib.Constants;
 import BL2.liquid.BL2Liquid;
 import BL2.network.NetworkHandler;
 import BL2.network.NetworkHandlerClient;
 import BL2.proxy.BL2Proxy;
 import BL2.recipe.ModRecipes;
+import BL2.tile.TileEntityAmmoCrafter;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
@@ -42,6 +47,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION_LONG)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandlerClient.class), serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { "bl2" }, packetHandler = NetworkHandler.class))
 public class BL2Core implements ITickHandler {
+
+    @Instance("BL2")
+    public static BL2Core instance;
     
     public static int crudeEridiumModel;
     public static int refinedEridiumModel;
@@ -75,6 +83,9 @@ public class BL2Core implements ITickHandler {
         //Initialize LiquidStacks
         BL2Liquid.initialize();
         
+        //Initialize AmmoOutputs
+        AmmoOutputs.addOutputs();
+        
         //EntityLivingHandler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());
         
@@ -82,6 +93,10 @@ public class BL2Core implements ITickHandler {
                 64, 10, true);
         EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2,
                 this, 64, 10, true);
+        
+        GameRegistry.registerTileEntity(TileEntityAmmoCrafter.class, "tileAmmoCrafter");
+        
+        NetworkRegistry.instance().registerGuiHandler(this, new GUIHandler());
         
         TickRegistry.registerTickHandler(this, Side.SERVER);
         

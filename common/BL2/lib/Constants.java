@@ -14,7 +14,7 @@ public class Constants {
     public final static int Eridium = 1600;
     
     //Version
-    public final static String VERSION = "1.29";
+    public final static String VERSION = "1.30";
     public final static String MINECRAFT_VERSION = "1.5.2";
     public final static String VERSION_LONG = VERSION+" ("+MINECRAFT_VERSION+")";
     

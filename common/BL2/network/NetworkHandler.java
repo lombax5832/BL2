@@ -11,8 +11,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import BL2.entity.EntityGrenade;
+import BL2.inventory.BL2Inventory;
 import BL2.item.BL2Items;
 import BL2.item.ItemGun;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -22,6 +25,7 @@ import cpw.mods.fml.common.network.Player;
 public class NetworkHandler implements IPacketHandler {
     public static final int particlePacketID = 0;
     public static final int reloadPacketID = 1;
+    public static final int craftingPacketID = 4;
     public static final int grenadePacketID = 3;
 
     public void sendParticlePacket(World world, double distance, int playerID,
@@ -108,9 +112,10 @@ public class NetworkHandler implements IPacketHandler {
 
         ByteArrayInputStream in = new ByteArrayInputStream(packet.data, 1,
                 packet.data.length - 1);
+        
+        DataInputStream inputStream = new DataInputStream(in);
 
         try {
-            new DataInputStream(in);
             switch (packet.data[0]) {
                 case NetworkHandler.reloadPacketID: {
                     player = (EntityPlayer) p;
@@ -118,6 +123,22 @@ public class NetworkHandler implements IPacketHandler {
                     ItemStack stack = player.getCurrentEquippedItem();
                     if (stack != null && stack.getItem() == BL2Items.guns) {
                         ItemGun.reload(stack);
+                    }
+                }
+                case NetworkHandler.craftingPacketID: {
+                    int dimension = inputStream.readInt();
+                    World world = DimensionManager.getWorld(dimension);
+                    int x = inputStream.readInt();
+                    int y = inputStream.readInt();
+                    int z = inputStream.readInt();
+                    TileEntity te = world.getBlockTileEntity(x, y, z);
+
+                    Short itemID = inputStream.readShort();
+                    Short itemDamage = inputStream.readShort();
+                    Short itemAmt = inputStream.readShort();
+                    if (te instanceof BL2Inventory)
+                    {
+                        ((BL2Inventory) te).setInventorySlotContents(1, new ItemStack(itemID, itemAmt, itemDamage));
                     }
                 }
             }
