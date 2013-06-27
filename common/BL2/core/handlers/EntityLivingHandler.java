@@ -64,5 +64,24 @@ public class EntityLivingHandler {
             }
         }
         //End Ammo Drops
+        
+        //Eridium Drops
+        if (event.source.getDamageType().equals("player")) {
+            ItemDropHelper.dropEridium((EntityPlayer) event.source.getSourceOfDamage(), event.entityLiving);
+        }
+        if (event.source.getSourceOfDamage() instanceof EntityArrow) {
+            if (((EntityArrow) event.source.getSourceOfDamage()).shootingEntity != null) {
+                if (((EntityArrow) event.source.getSourceOfDamage()).shootingEntity instanceof EntityPlayer) {
+                    ItemDropHelper.dropEridium((EntityPlayer) ((EntityArrow) event.source.getSourceOfDamage()).shootingEntity, event.entityLiving);
+                }
+            }
+        }
+        if (event.source.getSourceOfDamage() instanceof EntityBullet) {
+            if (((EntityBullet) event.source.getSourceOfDamage()).shootingEntity != null) {
+                if (((EntityBullet) event.source.getSourceOfDamage()).shootingEntity instanceof EntityPlayer) {
+                    ItemDropHelper.dropEridium((EntityPlayer) ((EntityBullet) event.source.getSourceOfDamage()).shootingEntity, event.entityLiving);
+                }
+            }
+        }
     }
 }
