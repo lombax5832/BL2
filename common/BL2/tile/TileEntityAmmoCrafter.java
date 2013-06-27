@@ -16,27 +16,33 @@ import BL2.lib.AmmoOutputs;
 import buildcraft.api.power.IPowerProvider;
 import buildcraft.api.power.IPowerReceptor;
 
-public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInventory, IPowerReceptor, BL2.tile.IMachine{
+public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInventory, IPowerReceptor, IMachine{
 
     public IPowerProvider powerProvider;
     
+    //Drawing power
     public boolean isWorking = true;
     
-    public int MaxMJStored = 4000;
+    //Doing work
+    public boolean active = false;
+    public boolean activeNextTick = false;
     
-    public float MJStored;
+    //mj per tick, and mj per cycle
+    public final int MJPerCycle = 400;
+    public int MJPerTick = 10;
+    
+    public final int MaxMJStored = 4000;
     
     public int progress = 0;
     
-    public int maxProgress = 200;
+    public final int maxProgress = MJPerCycle;
     
-    public int loseMJTick = 20;
-    public int loseMJTicker = 0;
-    public int MJToLose = 10;
+    //MJ that client sees
+    protected int MJToDisplay;
     
     public TileEntityAmmoCrafter()
     {
-        super(3);
+        super(6);
         powerProvider = new PowerProviderAdvanced();
         powerProvider.configure(20, 25, 100, 25, MaxMJStored);
     }
@@ -61,17 +67,48 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
     public void updateEntity() {
         if(true){
             super.updateEntity();
-            this.MJStored = powerProvider.getEnergyStored();
-//            this.powerProvider.update(this);
-            if(loseMJTicker >= loseMJTick){
-                this.getPowerProvider().update(this);
+            
+            if(activeNextTick){
+                activeNextTick = false;
+                inventory[3]=decrStackSize(0, 1);
             }
-            loseMJTicker++;
+            
+            setEnergy(Math.min(getEnergy(), MaxMJStored));
+            
+            if(worldObj.isRemote)
+            {
+                return;
+            }
+            
+            if(getPowerProvider() != null)
+            {
+                getPowerProvider().update(this);
+                
+                if(canCraft())
+                {
+                    active = true;
+                    activeNextTick = true;
+                }
+                
+            }
+            if(active){
+                progress += (int)(getPowerProvider().useEnergy(1, MJPerTick, true));
+                if(progress>=maxProgress){
+                    ItemStack stack = inventory[2].copy();
+                    stack.stackSize = AmmoOutputs.ammoOutputsAmt[AmmoOutputs.ammoDmgVals[inventory[2].getItemDamage()]];
+                    this.setInventorySlotContents(1, stack);
+                    this.setInventorySlotContents(3, null);
+                    progress=0;
+                    active=false;
+                }
+            }
+            this.MJToDisplay = (int) this.powerProvider.getEnergyStored();
+//            System.out.println(this.canCraft());
         }
     }
     
     public boolean canCraft(){
-        if(inventory[0] != null && inventory[0].getItem() == new ItemStack(Item.ingotIron).getItem())
+        if(inventory[0] != null && inventory[2] != null && inventory[3]==null && inventory[1] == null && inventory[0].getItem() == new ItemStack(Item.ingotIron).getItem() && getEnergy() >= MJPerCycle && !active)
             return true;
         return false;
     }
@@ -80,8 +117,22 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
         this.powerProvider.useEnergy(0, value, false);
     }
     
+    //Getting and setting the displayed Energy
     public int getEnergy(){
-        return (int) this.MJStored;
+        return this.MJToDisplay;
+    }
+    
+    public void setEnergy(int value){
+        this.MJToDisplay = value;
+    }
+    
+    //Getting and Setting the progress/work
+    public int getProgress(){
+        return this.progress;
+    }
+    
+    public void setProgress(int value){
+        this.progress = value;
     }
     
     @Override
@@ -89,13 +140,6 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
     {
         if (inventory[2] == null){
             this.setInventorySlotContents(2, AmmoOutputs.ammoOutputs[getCrafting()].copy());
-        }
-        if (inventory[0] != null && inventory[0].getItem() == new ItemStack(Item.ingotIron).getItem()){
-            ItemStack stack = inventory[2].copy();
-            stack.stackSize = AmmoOutputs.ammoOutputsAmt[AmmoOutputs.ammoDmgVals[inventory[2].getItemDamage()]];
-            this.setInventorySlotContents(1, stack);
-        }else{
-            this.setInventorySlotContents(1, null);
         }
         if(crafting == 10){
             crafting = AmmoOutputs.ammoDmgVals[inventory[2].getItemDamage()];
@@ -117,21 +161,21 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
     @Override
     public ItemStack decrStackSize(int slot, int quantity)
     {
-        if (slot == 1)
-        {
-            super.decrStackSize(0, 1);
-            if (inventory[0] == null)
-                return super.decrStackSize(slot, quantity);
-            else
-                return inventory[1].copy();
-        }
-        else
-        {
+//        if (slot == 1)
+//        {
+//            super.decrStackSize(0, 1);
+//            if (inventory[0] == null)
+//                return super.decrStackSize(slot, quantity);
+//            else
+//                return inventory[1].copy();
+//        }
+//        else
+//        {
             ItemStack ret = super.decrStackSize(slot, quantity);
-            if (inventory[0] == null)
-                super.decrStackSize(1, 64);
+//            if (inventory[0] == null)
+//                super.decrStackSize(1, 64);
             return ret;
-        }
+//        }
     }
     
     @SuppressWarnings("unused")
@@ -157,10 +201,11 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
     @Override
     public boolean canDropInventorySlot(int slot)
     {
-        if (slot == 0)
-            return true;
-        else
-            return false;
+        switch(slot){
+            case 0: return true;
+            case 1: return true;
+        }
+        return false;
     }
     
     @Override
@@ -182,7 +227,7 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
     @Override
     public boolean canExtractItem (int i, ItemStack itemstack, int j)
     {
-        if(i==2)
+        if(i==1)
             return true;
         return false;
     }
@@ -193,7 +238,7 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
         super.readFromNBT(tags);
         
         powerProvider.readFromNBT(tags);
-        powerProvider.configure(25, 10, 10, 1, this.MaxMJStored);
+        powerProvider.configure(20, 25, Integer.MAX_VALUE, 25, MaxMJStored);
         
         this.invName = tags.getString("InvName");
         NBTTagList nbttaglist = tags.getTagList("Items");
@@ -210,7 +255,7 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
         mode=tags.getInteger("Mode");
         if(mode==0)
             mode=2;
-        MJStored = Math.min(tags.getInteger("energyStored"), this.MaxMJStored);
+        active=tags.getBoolean("Active");
     }
 
     @Override
@@ -239,7 +284,7 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
         }else{
             tags.setInteger("Mode", mode);
         }
-        tags.setInteger("energyStored", (int) MJStored);
+        tags.setBoolean("Active", active);
     }
 
     @Override
@@ -287,11 +332,11 @@ public class TileEntityAmmoCrafter extends BL2Inventory implements ISidedInvento
     }
     
     public int getMJLeftScaled(int scale){
-//        System.out.println(this.MJStored);
-//        System.out.println((int) ((float)(this.MJStored) / (float)(this.MaxMJStored)*scale));
-//        if(BL2Core.proxy.isClient()){
-//        }
-        return (int) ((float)(this.MJStored) / (float)(this.MaxMJStored)*scale);
+        return (int) ((float)(this.getEnergy()) / (float)(this.MaxMJStored)*scale);
     }
+    
+    public int getWorkLeftScaled(int scale){
+      return (int) ((float)(this.getProgress()) / (float)(this.maxProgress)*scale);
+  }
 
 }

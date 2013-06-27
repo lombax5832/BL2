@@ -47,10 +47,11 @@ public class GuiAmmoCrafter extends GuiContainer{
         //draws "Inventory" or your regional equivalent
         fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
         
-        if(inventory.MJStored != 0)
-            prevMJ = (int) inventory.MJStored;
-        drawBar(8, 69, inventory.MaxMJStored, prevMJ, barColor1, barColor2);
-//        System.out.println(inventory.MJStored);
+//        if(inventory.MJStored != 0)
+        prevMJ = inventory.getEnergy();
+//        System.out.println(prevMJ);
+        //drawBar(8, 69, inventory.MaxMJStored, prevMJ, barColor1, barColor2);
+//        System.out.println(inventory.);
     }
     
     @Override
@@ -67,6 +68,12 @@ public class GuiAmmoCrafter extends GuiContainer{
             List<String> lines = new ArrayList<String>();
             lines.add("Energy");
             lines.add((int)prevMJ+"/"+inventory.MaxMJStored+" MJ");
+            drawTooltip(lines, mouseX, mouseY);
+        }else if(isPointInRegion(66, 39, 33, 8, mouseX, mouseY))
+        {
+            List<String> lines = new ArrayList<String>();
+            lines.add("Work");
+            lines.add((int)inventory.getProgress()+"/"+inventory.maxProgress);
             drawTooltip(lines, mouseX, mouseY);
         }
     }
@@ -89,10 +96,15 @@ public class GuiAmmoCrafter extends GuiContainer{
         int y = (height - ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         
-        int i1;
+        int i12;
+        int i13;
         
-//        i1 = inventory.getMJLeftScaled(52);
-//        this.drawTexturedModalRect(x + 8, y + 17 + 52 - i1, 176, 52 - i1, 16, i1);
+        i12 = inventory.getMJLeftScaled(52);
+        i13 = inventory.getWorkLeftScaled(31);
+//        System.out.println(i12);
+        this.drawTexturedModalRect(x + 8, y + 17 + 52 - i12, 176, 52 - i12, 16, i12);
+        
+        this.drawTexturedModalRect(x + 67, y + 40, 176, 52, i13, 16);
     }
     
     @SuppressWarnings("unchecked")

@@ -10,11 +10,11 @@ import net.minecraft.util.Icon;
 
 public class ItemComponents extends Item{
 
-    public static final String[] itemNames = new String[] { "Shield Core" };
-    public static final int[] itemMeta = new int[] { 0 };
-    public static final int[] itemStackSizes = new int[] { 64 };
+    public static final String[] itemNames = new String[] { "Shield Core" , "Eridium Ingot", "Eridium Plate"};
+    public static final int[] itemMeta = new int[] { 0 , 1, 2};
+    public static final int[] itemStackSizes = new int[] { 64, 64, 64, 64 };
     
-    Icon[] icons = new Icon[1];
+    Icon[] icons = new Icon[itemNames.length];
     
     public ItemComponents(int id) {
         super(id);
@@ -44,7 +44,7 @@ public class ItemComponents extends Item{
     
     @Override
     public void registerIcons(IconRegister ir) {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < itemNames.length; i++) {
             icons[i] = ir.registerIcon("BL2:" + itemNames[i]);
         }
     }

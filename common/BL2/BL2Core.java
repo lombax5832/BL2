@@ -11,6 +11,8 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import BL2.block.BL2Blocks;
 import BL2.core.config.BL2MainConfig;
 import BL2.core.handlers.EntityLivingHandler;
@@ -81,6 +83,11 @@ public class BL2Core implements ITickHandler {
         
         //Initialize LiquidStacks
         BL2Liquid.initialize();
+        
+        //Oredictionary
+        for(int i=1;i<7;i++){
+            OreDictionary.registerOre("bullet", new ItemStack(BL2Items.bullets,1,i));
+        }
         
         //EntityLivingHandler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());

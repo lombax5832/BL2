@@ -26,6 +26,12 @@ public class ContainerAmmoCrafter extends Container{
         addSlotToContainer(new SlotOnlyTake(tileEntity, 1, 106, 35));
         
         addSlotToContainer(new SlotOnlyDisplay(tileEntity, 2, 75, 18));
+        
+//        addSlotToContainer(new SlotOnlyDisplay(tileEntity, 3, 75, 51));
+        
+        addSlotToContainer(new Slot(tileEntity, 4, 48, 17));
+        
+        addSlotToContainer(new Slot(tileEntity, 5, 48, 53));
 
         //commonly used vanilla code that adds the player's inventory
         bindPlayerInventory(inventoryPlayer);
@@ -35,15 +41,6 @@ public class ContainerAmmoCrafter extends Container{
     public boolean canInteractWith(EntityPlayer player) {
             return true;
     }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int var, int value)
-    {
-        super.updateProgressBar(var, value);
-        
-//        System.out.println(value);
-        if(var == 0) tileEntity.MJStored = value;
-    }
     
     @Override
     public void detectAndSendChanges()
@@ -51,7 +48,20 @@ public class ContainerAmmoCrafter extends Container{
         super.detectAndSendChanges();
         for(int i = 0; i < crafters.size(); i++)
         {
-            ((ICrafting)crafters.get(i)).sendProgressBarUpdate(this, 0, (int) ((TileEntityAmmoCrafter) tileEntity).powerProvider.getEnergyStored());
+            ((ICrafting)crafters.get(i)).sendProgressBarUpdate(this, 0, (int) ((TileEntityAmmoCrafter) tileEntity).getEnergy());
+            ((ICrafting)crafters.get(i)).sendProgressBarUpdate(this, 1, (int) ((TileEntityAmmoCrafter) tileEntity).getProgress());
+        }
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int var, int value)
+    {
+        super.updateProgressBar(var, value);
+        
+        switch(var){
+            case 0: tileEntity.setEnergy(value);
+            case 1: tileEntity.setProgress(value);
         }
     }
     
