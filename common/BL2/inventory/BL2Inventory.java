@@ -15,6 +15,7 @@ implements IInventory
 {
 protected ItemStack[] inventory;
 protected String invName;
+public int mode;
 
 public BL2Inventory(int invSize)
 {
@@ -59,6 +60,11 @@ public void setInventorySlotContents(int slot, ItemStack itemstack)
     }
 }
 
+public ItemStack getInventorySlotContents(int slot)
+{
+    return inventory[slot].copy();
+}
+
 @Override
 public ItemStack decrStackSize(int slot, int quantity)
 {
@@ -81,6 +87,14 @@ public ItemStack decrStackSize(int slot, int quantity)
     {
         return null;
     }
+}
+
+public void setMode(int mode){
+    this.mode = mode;
+}
+
+public int getMode(){
+    return this.mode;
 }
 
 @Override
@@ -112,6 +126,9 @@ public void readFromNBT(NBTTagCompound tags)
             inventory[slotID] = ItemStack.loadItemStackFromNBT(tagList);
         }
     }
+    mode=tags.getInteger("Mode");
+    if(mode==0)
+        mode=2;
 }
 
 @Override
@@ -131,8 +148,12 @@ public void writeToNBT(NBTTagCompound tags)
             nbttaglist.appendTag(tagList);
         }
     }
-
     tags.setTag("Items", nbttaglist);
+    if(mode==0){
+        tags.setInteger("Mode", 2);
+    }else{
+        tags.setInteger("Mode", mode);
+    }
 }
 
 public ItemStack getStackInSlotOnClosing (int slot) { return null; }

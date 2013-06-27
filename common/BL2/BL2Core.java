@@ -20,7 +20,6 @@ import BL2.core.helper.LogHelper;
 import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
 import BL2.item.BL2Items;
-import BL2.lib.AmmoOutputs;
 import BL2.lib.Constants;
 import BL2.liquid.BL2Liquid;
 import BL2.network.NetworkHandler;
@@ -82,9 +81,6 @@ public class BL2Core implements ITickHandler {
         
         //Initialize LiquidStacks
         BL2Liquid.initialize();
-        
-        //Initialize AmmoOutputs
-        AmmoOutputs.addOutputs();
         
         //EntityLivingHandler
         MinecraftForge.EVENT_BUS.register(new EntityLivingHandler());

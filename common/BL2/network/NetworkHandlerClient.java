@@ -36,7 +36,7 @@ public class NetworkHandlerClient extends NetworkHandler {
      */
 
     boolean spawnParts = false;
-
+    
     @Override
     public void sendReloaderPacket() {
         try {

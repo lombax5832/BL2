@@ -27,7 +27,13 @@ public class BlockAmmoCrafter extends BlockContainer{
 
     Icon blockTextureTop;
     Icon blockTextureSide;
-    Icon blockTextureFront;
+    Icon blockTextureFront[] = new Icon[7];
+    public int mode = 3;
+    World world;
+    int thisx;
+    int thisy;
+    int thisz;
+    boolean onGround = false;
     
     public BlockAmmoCrafter(int par1, Material par2Material) {
         super(par1, Material.rock);
@@ -41,10 +47,14 @@ public class BlockAmmoCrafter extends BlockContainer{
     public boolean onBlockActivated(World world, int x, int y, int z,
                     EntityPlayer player, int idk, float what, float these, float are) {
             TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+            
+            this.world = world;
+            thisx = x;
+            thisy = y;
+            thisz = z;
             if (tileEntity == null || player.isSneaking()) {
                     return false;
             }
-            //code to open gui explained later
             player.openGui(BL2Core.instance, 0, world, x, y, z);
             return true;
     }
@@ -57,18 +67,32 @@ public class BlockAmmoCrafter extends BlockContainer{
     
     @Override
     public Icon getIcon(int i, int j) {
+//        if(this.onGround){
+//            TileEntity tile = world.getBlockTileEntity(thisx, thisy, thisz);
+//            if(tile != null){
+//                if (j == 0 && i == 3)
+//                    return blockTextureFront[((BL2Inventory)tile).getMode()];
+//        
+//                if (i == j)
+//                    return blockTextureFront[((BL2Inventory)tile).getMode()];
+//            }
+//        }else{
         if (j == 0 && i == 3)
-            return blockTextureFront;
+            return blockTextureFront[6];
 
         if (i == j)
-            return blockTextureFront;
-
+            return blockTextureFront[6];
+//        }
         switch (i) {
         case 1:
             return blockTextureTop;
         default:
             return blockTextureSide;
         }
+    }
+    
+    public void setMode(int toMode){
+        this.mode = toMode;
     }
     
     private void dropItems(World world, int x, int y, int z){
@@ -109,6 +133,7 @@ public class BlockAmmoCrafter extends BlockContainer{
         ForgeDirection orientation = Orientation.get2dOrientation(new Position(entityliving.posX, entityliving.posY, entityliving.posZ), new Position(i, j, k));
 
         world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(),1);
+        this.onGround = true;
     }
     
     @Override
@@ -122,6 +147,9 @@ public class BlockAmmoCrafter extends BlockContainer{
     {
         blockTextureTop = par1IconRegister.registerIcon("BL2:ammoCrafter_top");
         blockTextureSide = par1IconRegister.registerIcon("BL2:ammoCrafter_side");
-        blockTextureFront = par1IconRegister.registerIcon("BL2:ammoCrafter_front");
+        
+        for(int i=1;i<7;i++){
+            blockTextureFront[i] = par1IconRegister.registerIcon("BL2:ammoCrafter_front_"+i);
+        }
     }
 }

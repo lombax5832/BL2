@@ -8,8 +8,10 @@ import java.util.Iterator;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -26,8 +28,21 @@ public class NetworkHandler implements IPacketHandler {
     public static final int particlePacketID = 0;
     public static final int reloadPacketID = 1;
     public static final int craftingPacketID = 4;
+    public static final int syncCrafterID = 5;
     public static final int grenadePacketID = 3;
 
+    public void sendToPlayers(Packet packet, World world, int x, int y, int z, int maxDistance) {
+        if (packet != null) {
+            for (int j = 0; j < world.playerEntities.size(); j++) {
+                EntityPlayerMP player = (EntityPlayerMP) world.playerEntities.get(j);
+
+                if (Math.abs(player.posX - x) <= maxDistance && Math.abs(player.posY - y) <= maxDistance && Math.abs(player.posZ - z) <= maxDistance) {
+                    player.playerNetServerHandler.sendPacketToPlayer(packet);
+                }
+            }
+        }
+    }
+    
     public void sendParticlePacket(World world, double distance, int playerID,
             int type, int inventoryIndex, boolean shouldRender) {
         try {
@@ -135,10 +150,11 @@ public class NetworkHandler implements IPacketHandler {
 
                     Short itemID = inputStream.readShort();
                     Short itemDamage = inputStream.readShort();
-                    Short itemAmt = inputStream.readShort();
                     if (te instanceof BL2Inventory)
                     {
-                        ((BL2Inventory) te).setInventorySlotContents(1, new ItemStack(itemID, itemAmt, itemDamage));
+                        ((BL2Inventory) te).setInventorySlotContents(2, new ItemStack(itemID, 1, itemDamage));
+                        ((BL2Inventory) te).onInventoryChanged();
+                        ((BL2Inventory) te).setMode(itemDamage);
                     }
                 }
             }

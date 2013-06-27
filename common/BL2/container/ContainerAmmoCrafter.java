@@ -3,16 +3,18 @@ package BL2.container;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import BL2.inventory.SlotOnlyDisplay;
 import BL2.inventory.SlotOnlyTake;
 import BL2.tile.TileEntityAmmoCrafter;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerAmmoCrafter extends Container{
 
     protected TileEntityAmmoCrafter tileEntity;
-    
-    //private int inventorySize=2;
     
     public ContainerAmmoCrafter (InventoryPlayer inventoryPlayer, TileEntityAmmoCrafter tileEntityAmmoCrafter){
         tileEntity = tileEntityAmmoCrafter;
@@ -22,6 +24,8 @@ public class ContainerAmmoCrafter extends Container{
         addSlotToContainer(new Slot(tileEntity, 0, 48, 35));
         
         addSlotToContainer(new SlotOnlyTake(tileEntity, 1, 106, 35));
+        
+        addSlotToContainer(new SlotOnlyDisplay(tileEntity, 2, 75, 18));
 
         //commonly used vanilla code that adds the player's inventory
         bindPlayerInventory(inventoryPlayer);
@@ -30,6 +34,25 @@ public class ContainerAmmoCrafter extends Container{
     @Override
     public boolean canInteractWith(EntityPlayer player) {
             return true;
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int var, int value)
+    {
+        super.updateProgressBar(var, value);
+        
+//        System.out.println(value);
+        if(var == 0) tileEntity.MJStored = value;
+    }
+    
+    @Override
+    public void detectAndSendChanges()
+    {
+        super.detectAndSendChanges();
+        for(int i = 0; i < crafters.size(); i++)
+        {
+            ((ICrafting)crafters.get(i)).sendProgressBarUpdate(this, 0, (int) ((TileEntityAmmoCrafter) tileEntity).powerProvider.getEnergyStored());
+        }
     }
     
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -49,37 +72,37 @@ public class ContainerAmmoCrafter extends Container{
     public ItemStack transferStackInSlot(EntityPlayer player, int slotID)
     {
         return null;
-        /*ItemStack stack = null;
-        Slot slot = (Slot)this.inventorySlots.get(slotID);
-
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack slotStack = slot.getStack();
-            stack = slotStack.copy();
-
-            if (slotID < logic.getSizeInventory())
-            {
-                if (!this.mergeItemStack(slotStack, logic.getSizeInventory(), this.inventorySlots.size(), true))
-                {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(slotStack, 0, logic.getSizeInventory()-1, false))
-            {
-                return null;
-            }
-
-            if (slotStack.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
-        }
-
-        return stack;*/
+//        ItemStack stack = null;
+//        Slot slot = (Slot)this.inventorySlots.get(slotID);
+//
+//        if (slot != null && slot.getHasStack())
+//        {
+//            ItemStack slotStack = slot.getStack();
+//            stack = slotStack.copy();
+//
+//            if (slotID < tileEntity.getSizeInventory())
+//            {
+//                if (!this.mergeItemStack(slotStack, tileEntity.getSizeInventory(), this.inventorySlots.size(), true))
+//                {
+//                    return null;
+//                }
+//            }
+//            else if (!this.mergeItemStack(slotStack, 0, tileEntity.getSizeInventory()-1, false))
+//            {
+//                return null;
+//            }
+//
+//            if (slotStack.stackSize == 0)
+//            {
+//                slot.putStack((ItemStack)null);
+//            }
+//            else
+//            {
+//                slot.onSlotChanged();
+//            }
+//        }
+//
+//        return stack;
     }
 
 }

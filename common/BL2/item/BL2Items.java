@@ -44,4 +44,11 @@ public class BL2Items {
         
         return stack;
     }
+    
+    public static ItemStack getItemStack(Item item,  int meta){
+        
+        ItemStack stack = new ItemStack(item, 1, meta);
+        
+        return stack;
+    }
 }

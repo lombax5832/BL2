@@ -4,28 +4,15 @@ import BL2.item.BL2Items;
 import net.minecraft.item.ItemStack;
 
 public class AmmoOutputs {
-
-    public static ItemStack[] ammoOutputs;
-    public static int[] ammoOutputsAmt;
-    public static ItemStack pistol;
-    public static ItemStack smg;
-    public static ItemStack assaultRifle;
-    public static ItemStack rocketLauncher;
-    public static ItemStack sniper;
-    public static ItemStack shotgun;
+    public static final ItemStack pistol = BL2Items.getItemStack(BL2Items.bullets, 1);
+    public static final ItemStack smg = BL2Items.getItemStack(BL2Items.bullets, 2);
+    public static final ItemStack assaultRifle = BL2Items.getItemStack(BL2Items.bullets, 3);
+    public static final ItemStack rocketLauncher = BL2Items.getItemStack(BL2Items.bullets, 4);
+    public static final ItemStack sniper = BL2Items.getItemStack(BL2Items.bullets, 5);
+    public static final ItemStack shotgun = BL2Items.getItemStack(BL2Items.bullets, 6);
     
-    public static void addOutputs(){
-        
-        pistol = BL2Items.getItemStack(BL2Items.bullets, 1, 1);
-        smg = BL2Items.getItemStack(BL2Items.bullets, 24, 2);
-        assaultRifle = BL2Items.getItemStack(BL2Items.bullets, 32, 3);
-        rocketLauncher = BL2Items.getItemStack(BL2Items.bullets, 1, 4);
-        sniper = BL2Items.getItemStack(BL2Items.bullets, 8, 5);
-        shotgun = BL2Items.getItemStack(BL2Items.bullets, 1, 6);
-        
-        ammoOutputs = new ItemStack[] {smg, assaultRifle, sniper};
-        ammoOutputsAmt = new int[] {24, 32, 8};
-        
-    }
+    public static final ItemStack[] ammoOutputs= new ItemStack[] {smg, assaultRifle, sniper};
+    public static final int[] ammoDmgVals = new int[] {0, 0, 0, 1, 0, 2};
+    public static final int[] ammoOutputsAmt = new int[] {24, 32, 8};
     
 }
