@@ -12,7 +12,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import BL2.block.BL2Blocks;
 import BL2.core.config.BL2MainConfig;
 import BL2.core.handlers.EntityLivingHandler;

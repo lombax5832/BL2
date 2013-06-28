@@ -1,11 +1,10 @@
 package BL2.core.helper;
 
-import BL2.core.math.RandomRange;
-import BL2.item.BL2Items;
-import BL2.item.ItemGun;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import BL2.item.BL2Items;
+import BL2.item.ItemGun;
 
 /**
  * Borderlands 2

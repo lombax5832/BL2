@@ -3,8 +3,8 @@ package BL2.core.handlers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import BL2.client.gui.GuiAmmoCrafter;
 import BL2.container.ContainerAmmoCrafter;
-import BL2.gui.GuiAmmoCrafter;
 import BL2.tile.TileEntityAmmoCrafter;
 import cpw.mods.fml.common.network.IGuiHandler;
 

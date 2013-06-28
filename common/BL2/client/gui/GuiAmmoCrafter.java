@@ -1,4 +1,4 @@
-package BL2.gui;
+package BL2.client.gui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
