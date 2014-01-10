@@ -43,10 +43,6 @@ public class ContainerBL2Inventory extends Container{
     public void detectAndSendChanges(){
         
         super.detectAndSendChanges();
-        
-        for(int i = 0; i < crafters.size(); i++){
-            
-        }
     }
     
     @Override

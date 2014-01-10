@@ -7,13 +7,13 @@ import buildcraft.api.power.IPowerProvider;
 import buildcraft.api.power.IPowerReceptor;
 
 public abstract class TileEntityBL2Powered extends TileEntityBL2Inventory implements IPowerReceptor{
-    private int energyStored;
+    protected int energyStored;
     protected int energyActivation;
     
     private int progress;
     
     //Buildcraft
-    private IPowerProvider powerProvider;
+    protected IPowerProvider powerProvider;
     
     protected TileEntityBL2Powered(int activationEnergy){
         super();
@@ -25,10 +25,10 @@ public abstract class TileEntityBL2Powered extends TileEntityBL2Inventory implem
     public void updateEntity(){
         super.updateEntity();
         
-        energyStored = Math.min(energyStored, getEnergyStoredMax());
-        
         if(worldObj.isRemote)
             return;
+        
+        energyStored = Math.min((int)powerProvider.getEnergyStored(), getEnergyStoredMax());
         
         if(getPowerProvider() != null){
             getPowerProvider().update(this);
@@ -98,4 +98,9 @@ public abstract class TileEntityBL2Powered extends TileEntityBL2Inventory implem
     
     @Override
     public final void doWork(){}
+
+    //Returns the energy left relative to the scale
+    public int getEnergyLeftScaled(int scale){
+        return (int) ((float)(energyStored) / (float)(this.getEnergyStoredMax())*scale);
+    }
 }

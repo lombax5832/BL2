@@ -3,7 +3,6 @@ package BL2.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import BL2.lib.ItemIds;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class BL2Items {
     
@@ -34,8 +33,8 @@ public class BL2Items {
         
         components = new ItemComponents(ItemIds.COMPONENTS_ID).setUnlocalizedName("components");
         
-        bucketCrudeEridium = (new ItemBucketEridium(ItemIds.CRUDE_BUCKET_ID)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
-        LanguageRegistry.addName(bucketCrudeEridium, "Crude Eridium Bucket");
+//        bucketCrudeEridium = (new ItemBucketEridium(ItemIds.CRUDE_BUCKET_ID)).setUnlocalizedName("bucketCrudeEridium").setContainerItem(Item.bucketEmpty);
+//        LanguageRegistry.addName(bucketCrudeEridium, "Crude Eridium Bucket");
     }
     
     public static ItemStack getItemStack(Item item, int amount, int meta){

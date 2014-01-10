@@ -13,6 +13,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.oredict.OreDictionary;
 import BL2.block.BL2Blocks;
+import BL2.client.gui.BL2GuiHandler;
 import BL2.core.config.BL2MainConfig;
 import BL2.core.handlers.EntityLivingHandler;
 import BL2.core.handlers.GUIHandler;
@@ -22,12 +23,11 @@ import BL2.entity.EntityBullet;
 import BL2.entity.EntityGrenade;
 import BL2.item.BL2Items;
 import BL2.lib.Constants;
-import BL2.liquid.BL2Liquid;
 import BL2.network.NetworkHandler;
 import BL2.network.NetworkHandlerClient;
 import BL2.proxy.BL2Proxy;
 import BL2.recipe.ModRecipes;
-import BL2.tile.TileEntityAmmoCrafter;
+import BL2.tile.BL2Tiles;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -60,7 +60,7 @@ public class BL2Core implements ITickHandler {
     @SidedProxy(clientSide = "BL2.network.NetworkHandlerClient", serverSide = "BL2.network.NetworkHandler")
     public static NetworkHandler nethandler;
 
-    @Mod.PreInit
+    @Mod.EventHandler
     public void preInt(FMLPreInitializationEvent event) {
         
         //Initializer the Log Helper
@@ -70,7 +70,7 @@ public class BL2Core implements ITickHandler {
         BL2MainConfig.loadConfig(event);
     }
 
-    @Mod.Init
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.registerKeyBinding();
         
@@ -81,7 +81,7 @@ public class BL2Core implements ITickHandler {
         BL2Items.initialize();
         
         //Initialize LiquidStacks
-        BL2Liquid.initialize();
+        //BL2Liquid.initialize();
         
         //Oredictionary
         for(int i=1;i<7;i++){
@@ -96,7 +96,7 @@ public class BL2Core implements ITickHandler {
         EntityRegistry.registerModEntity(EntityGrenade.class, "Grenade", 2,
                 this, 64, 10, true);
         
-        GameRegistry.registerTileEntity(TileEntityAmmoCrafter.class, "tileAmmoCrafter");
+        BL2Tiles.registerTiles();
         
         NetworkRegistry.instance().registerGuiHandler(this, new GUIHandler());
         
@@ -106,9 +106,11 @@ public class BL2Core implements ITickHandler {
         proxy.registerRenderTickHandler();
         proxy.registerItemRenderer();
         proxy.initiateRendering();
+        
+        NetworkRegistry.instance().registerGuiHandler(this, new BL2GuiHandler());
     }
     
-    @Mod.PostInit
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event){
             GameRegistry.addRecipe(new ItemStack(BL2Items.temp), new Object[] { 
                 "IWI",
@@ -138,14 +140,6 @@ public class BL2Core implements ITickHandler {
                     }
                 }
             }
-        }
-    }
-    
-    @ForgeSubscribe
-    @SideOnly(Side.CLIENT)
-    public void textureHook(TextureStitchEvent.Post event) {
-        if (event.map == Minecraft.getMinecraft().renderEngine.textureMapItems) {
-            LiquidDictionary.getCanonicalLiquid("Crude Eridium").setRenderingIcon(BL2Blocks.crudeEridiumStill.getBlockTextureFromSide(1)).setTextureSheet("/terrain.png");
         }
     }
 

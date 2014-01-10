@@ -22,4 +22,8 @@ public class Constants {
     public final static String MOD_NAME = "Borderlands 2";
     public final static String MOD_ID = "BL2";
     
+    //TileEntities
+    public final static String TILE_NEW_AMMO_CRAFTER_NAME = "tileEntityNewAmmoCrafter";
+    public final static String TILE_AMMO_CRAFTER_NAME = "tileAmmoCrafter";
+    
 }
