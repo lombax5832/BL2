@@ -2,10 +2,12 @@ package BL2.client.renderer.item;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import BL2.Utils.BL2Texture;
 import BL2.client.model.ModelGrenade;
 import BL2.entity.EntityGrenade;
 
@@ -21,7 +23,7 @@ public class RenderGrenade extends Render {
 
     public void renderGrenade(EntityGrenade par1EntityArrow, double par2,
             double par4, double par6, float par8, float par9) {
-        this.loadTexture("/mods/BL2/textures/TextureGrenade.png");
+        //this.bindTexture(BL2Texture.BL2ResourceLocation("TextureGrenade.png"));
         GL11.glPushMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glTranslatef((float) par2, (float) par4 + 1.2F, (float) par6);
@@ -37,5 +39,10 @@ public class RenderGrenade extends Render {
         GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return BL2Texture.BL2ResourceLocation("textures/items/TextureGrenade.png");
+	}
 
 }

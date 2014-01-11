@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
@@ -92,7 +93,7 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
     public void registerIcons(IconRegister ir) {
         for (int i = 1; i < 6; i++) {
             if (i != 3) {
-                icons[i - 1] = ir.registerIcon("BL2:" + "Shield" + i);
+                icons[i - 1] = ir.registerIcon("bl2:" + "Shield" + i);
             }
         }
     }
@@ -168,8 +169,8 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
     }
 
     @Override
-    public ArmorProperties getProperties(EntityLiving player, ItemStack armor,
-            DamageSource source, double damage, int slot) {
+    public ArmorProperties getProperties(EntityLivingBase player,
+			ItemStack armor, DamageSource source, double damage, int slot) {
         // if(true)//shield activated
         // {
 
@@ -324,12 +325,13 @@ public class ItemArmorShield extends ItemArmor implements ISpecialArmor,
     {
         int damVal = stack.getItemDamage();
         if (stack.itemID == BL2Items.shield.itemID)
-            return "/mods/BL2/textures/Armor/shield_" + damVal + ".png";
+            return "bl2:textures/Armor/shield_" + damVal + ".png";
         return null;
     }
 
-    @Override
-    public void damageArmor(EntityLiving entity, ItemStack stack,
-            DamageSource source, int damage, int slot) {
-    }
+	@Override
+	public void damageArmor(EntityLivingBase entity, ItemStack stack,
+			DamageSource source, int damage, int slot) {
+		
+	}
 }

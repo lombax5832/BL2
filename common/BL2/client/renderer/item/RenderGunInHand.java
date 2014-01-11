@@ -1,12 +1,13 @@
 package BL2.client.renderer.item;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderEngine;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import BL2.Utils.BL2Texture;
 import BL2.client.model.ModelAssaultRifle;
 import BL2.client.model.ModelAssaultRifleInv;
 import BL2.client.model.ModelPistol;
@@ -135,8 +136,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderSMG(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/SMGModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/SMGModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         GL11.glRotatef(angle, rotX, rotY, rotZ);
@@ -146,8 +147,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderSMGForInventory(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/SMGModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/SMGModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         smgInv.render(0.094F);
@@ -156,8 +157,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderSniper(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/SniperModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/SniperModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         GL11.glRotatef(angle, rotX, rotY, rotZ);
@@ -167,8 +168,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderSniperForInventory(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/SniperModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/SniperModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         sniperInv.render(.06F);
@@ -177,8 +178,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderPistol(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/PistolModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/PistolModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         GL11.glRotatef(angle, rotX, rotY, rotZ);
@@ -188,8 +189,8 @@ public class RenderGunInHand implements IItemRenderer {
     
     private void renderPistolForInventory(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/PistolModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/PistolModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         pistolInv.render(0.1F);
@@ -198,8 +199,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderAssault(float x, float y, float z, float angle, float rotX, float rotY, float rotZ) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/AssaultRifleModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/AssaultRifleModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         GL11.glRotatef(angle, rotX, rotY, rotZ);
@@ -209,8 +210,8 @@ public class RenderGunInHand implements IItemRenderer {
 
     private void renderAssaultForInventory(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/Guns/AssaultRifleModel.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/AssaultRifleModel.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         assaultRifleInv.render(0.07F);

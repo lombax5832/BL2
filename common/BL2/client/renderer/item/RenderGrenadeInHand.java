@@ -1,12 +1,13 @@
 package BL2.client.renderer.item;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderEngine;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
+import BL2.Utils.BL2Texture;
 import BL2.client.model.ModelGrenadeHeld;
 import BL2.client.model.ModelGrenadeInv;
 
@@ -62,8 +63,8 @@ public class RenderGrenadeInHand implements IItemRenderer {
 
     public static void renderGrenade(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/TextureGrenade.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         grenadeModel.render(.1F);
@@ -72,8 +73,8 @@ public class RenderGrenadeInHand implements IItemRenderer {
 
     private void renderGrenadeInv(float x, float y, float z) {
         Minecraft mc = Minecraft.getMinecraft();
-        RenderEngine render = mc.renderEngine;
-        render.bindTexture("/mods/BL2/textures/TextureGrenade.png");
+        TextureManager render = mc.renderEngine;
+        render.bindTexture(BL2Texture.BL2ResourceLocation("textures/items/TextureGrenade.png"));
         GL11.glPushMatrix(); // start
         GL11.glTranslatef(x, y, z); // size
         grenadeInv.render(.29F);

@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -364,7 +365,7 @@ public class ItemGun extends Item {
 
                     int ampDmg = calcAmp((EntityPlayer) par3Entity);
                     EntityBullet var8 = new EntityBullet(par2World,
-                            (EntityPlayer) par3Entity, atr.bulletspeed,
+                            par3Entity, atr.bulletspeed,
                             atr.damage + ampDmg, atr.explosive,
                             atr.explosivepower, atr.accuracy, atr.knockback, atr.incendiary, atr.cryo);
 

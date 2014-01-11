@@ -3,10 +3,12 @@ package BL2.client.renderer.item;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import BL2.Utils.BL2Texture;
 import BL2.entity.EntityBullet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderBullet extends Render {
     public void renderBullet(EntityBullet par1EntityArrow, double par2,
             double par4, double par6, float par8, float par9) {
-        this.loadTexture("/BL2/textures/bullet.png");
         GL11.glPushMatrix();
         GL11.glTranslatef((float) par2, (float) par4, (float) par6);
         GL11.glRotatef(
@@ -86,4 +87,9 @@ public class RenderBullet extends Render {
         this.renderBullet((EntityBullet) par1Entity, par2, par4, par6, par8,
                 par9);
     }
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return BL2Texture.BL2ResourceLocation("bullet");
+	}
 }

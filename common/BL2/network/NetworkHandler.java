@@ -13,11 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import BL2.entity.EntityGrenade;
-import BL2.inventory.BL2Inventory;
 import BL2.item.BL2Items;
 import BL2.item.ItemGun;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -140,23 +137,23 @@ public class NetworkHandler implements IPacketHandler {
                         ItemGun.reload(stack);
                     }
                 }
-                case NetworkHandler.craftingPacketID: {
-                    int dimension = inputStream.readInt();
-                    World world = DimensionManager.getWorld(dimension);
-                    int x = inputStream.readInt();
-                    int y = inputStream.readInt();
-                    int z = inputStream.readInt();
-                    TileEntity te = world.getBlockTileEntity(x, y, z);
-
-                    Short itemID = inputStream.readShort();
-                    Short itemDamage = inputStream.readShort();
-                    if (te instanceof BL2Inventory)
-                    {
-                        ((BL2Inventory) te).setInventorySlotContents(2, new ItemStack(itemID, 1, itemDamage));
-                        ((BL2Inventory) te).onInventoryChanged();
-                        ((BL2Inventory) te).setMode(itemDamage);
-                    }
-                }
+//                case NetworkHandler.craftingPacketID: {
+//                    int dimension = inputStream.readInt();
+//                    World world = DimensionManager.getWorld(dimension);
+//                    int x = inputStream.readInt();
+//                    int y = inputStream.readInt();
+//                    int z = inputStream.readInt();
+//                    TileEntity te = world.getBlockTileEntity(x, y, z);
+//
+//                    Short itemID = inputStream.readShort();
+//                    Short itemDamage = inputStream.readShort();
+//                    if (te instanceof BL2Inventory)
+//                    {
+//                        ((BL2Inventory) te).setInventorySlotContents(2, new ItemStack(itemID, 1, itemDamage));
+//                        ((BL2Inventory) te).onInventoryChanged();
+//                        ((BL2Inventory) te).setMode(itemDamage);
+//                    }
+//                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

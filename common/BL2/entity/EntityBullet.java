@@ -28,7 +28,7 @@ public class EntityBullet extends Entity implements IProjectile {
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
 
-    public EntityLiving shootingEntity;
+    public Entity shootingEntity;
 
     public float explosivepower;
     public int damage;
@@ -74,7 +74,7 @@ public class EntityBullet extends Entity implements IProjectile {
         }
     }
 
-    public EntityBullet(World world, EntityLiving el, float par3, int dam,
+    public EntityBullet(World world, Entity par3Entity, float par3, int dam,
             boolean ex, float expwr, float accuracy, int knockback, boolean incend, boolean cryo) {
         super(world);
         // for;
@@ -85,13 +85,13 @@ public class EntityBullet extends Entity implements IProjectile {
         explosivepower = expwr;
         damage = dam;
         knockbackStrength = knockback;
-        shootingEntity = el;
+        shootingEntity = par3Entity;
 
         this.setSize(0.5F, 0.5F);
-        this.setLocationAndAngles(el.posX, el.posY + el.getEyeHeight(),
-                el.posZ, el.rotationYaw + ((float) Math.random() - .5F) * 6
+        this.setLocationAndAngles(par3Entity.posX, par3Entity.posY + par3Entity.getEyeHeight(),
+                par3Entity.posZ, par3Entity.rotationYaw + ((float) Math.random() - .5F) * 6
                         * (1F / accuracy),
-                el.rotationPitch + ((float) Math.random() - .5F) * 6
+                par3Entity.rotationPitch + ((float) Math.random() - .5F) * 6
                         * (1F / accuracy));
         posX -= MathHelper.cos(rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
         posY -= 0.10000000149011612D;

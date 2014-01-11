@@ -25,9 +25,9 @@ public class EntityGrenade extends EntityThrowable {
         super(world);
     }
 
-    public EntityGrenade(World world, EntityLiving el, boolean isSticky,
+    public EntityGrenade(World world, EntityPlayer player, boolean isSticky,
             boolean isHoming) {
-        super(world, el);
+        super(world, player);
         sticky = isSticky;
         homing = isHoming;
         hackySack = false;
