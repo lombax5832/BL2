@@ -31,9 +31,9 @@ public class BL2Blocks {
 //        MinecraftForge.setBlockHarvestLevel(ammoCrafter, "pickaxe", 2);
 //        GameRegistry.registerBlock(ammoCrafter, "blockAmmoCrafter");
 //        
-//        ammoCrafterNew = (new BlockNewAmmoCrafter(Constants.Eridium+3)).setUnlocalizedName("blockAmmoCrafterNew");
-//        LanguageRegistry.addName(ammoCrafterNew, "New Ammo Crafter");
-//        MinecraftForge.setBlockHarvestLevel(ammoCrafterNew, "pickaxe", 2);
-//        GameRegistry.registerBlock(ammoCrafterNew, "blockAmmoCrafterNew");
+        ammoCrafterNew = (new BlockNewAmmoCrafter(Constants.Eridium+3)).setUnlocalizedName("blockAmmoCrafterNew");
+        LanguageRegistry.addName(ammoCrafterNew, "New Ammo Crafter");
+        MinecraftForge.setBlockHarvestLevel(ammoCrafterNew, "pickaxe", 2);
+        GameRegistry.registerBlock(ammoCrafterNew, "blockAmmoCrafterNew");
     }
 }
